@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -93,15 +93,17 @@
 
 
 
-<meta name="description" content="why you need to do it all by yourself? when right besides you there&apos;s a hand that could help">
-<meta property="og:type" content="website">
-<meta property="og:title" content="vdapeng&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/maven/index.html">
+<meta name="description" content="如何在 Linux 中清除缓存（Cache）？每个 Linux 系统有三种选项来清除缓存而不需要中断任何进程或服务。  （LCTT 译注：Cache，译作“缓存”，指 CPU 和内存之间高速缓存。Buffer，译作“缓冲区”，指在写入磁盘前的存储再内存中的内容。在本文中，Buffer 和 Cache 有时候会通指。）   仅清除页面缓存（PageCache）  sync; echo 1 &amp;gt;">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在 Linux 中清除缓存（Cache）？">
+<meta property="og:url" content="http://yoursite.com/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/index.html">
 <meta property="og:site_name" content="vdapeng&#39;s blog">
-<meta property="og:description" content="why you need to do it all by yourself? when right besides you there&apos;s a hand that could help">
+<meta property="og:description" content="如何在 Linux 中清除缓存（Cache）？每个 Linux 系统有三种选项来清除缓存而不需要中断任何进程或服务。  （LCTT 译注：Cache，译作“缓存”，指 CPU 和内存之间高速缓存。Buffer，译作“缓冲区”，指在写入磁盘前的存储再内存中的内容。在本文中，Buffer 和 Cache 有时候会通指。）   仅清除页面缓存（PageCache）  sync; echo 1 &amp;gt;">
+<meta property="og:updated_time" content="2017-08-12T07:41:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vdapeng&#39;s blog">
-<meta name="twitter:description" content="why you need to do it all by yourself? when right besides you there&apos;s a hand that could help">
+<meta name="twitter:title" content="如何在 Linux 中清除缓存（Cache）？">
+<meta name="twitter:description" content="如何在 Linux 中清除缓存（Cache）？每个 Linux 系统有三种选项来清除缓存而不需要中断任何进程或服务。  （LCTT 译注：Cache，译作“缓存”，指 CPU 和内存之间高速缓存。Buffer，译作“缓冲区”，指在写入磁盘前的存储再内存中的内容。在本文中，Buffer 和 Cache 有时候会通指。）   仅清除页面缓存（PageCache）  sync; echo 1 &amp;gt;">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/maven/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/"/>
 
 
 
 
 
-  <title>分类: maven | vdapeng's blog</title>
+  <title>如何在 Linux 中清除缓存（Cache）？ | vdapeng's blog</title>
   
 
 
@@ -160,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,45 +266,199 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>maven<small>分类</small>
-      </h1>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/11/Maven/" itemprop="url">
-              
-                <span itemprop="name">maven</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-11T09:31:00+08:00"
-              content="2017-07-11" >
-          07-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
 
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何在 Linux 中清除缓存（Cache）？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:49:00+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/" class="leancloud_visitors" data-flag-title="如何在 Linux 中清除缓存（Cache）？">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="如何在-Linux-中清除缓存（Cache）？"><a href="#如何在-Linux-中清除缓存（Cache）？" class="headerlink" title="如何在 Linux 中清除缓存（Cache）？"></a>如何在 Linux 中清除缓存（Cache）？</h1><p>每个 Linux 系统有三种选项来清除缓存而不需要中断任何进程或服务。</p>
+<blockquote>
+<p>（LCTT 译注：Cache，译作“缓存”，指 CPU 和内存之间高速缓存。Buffer，译作“缓冲区”，指在写入磁盘前的存储再内存中的内容。在本文中，Buffer 和 Cache 有时候会通指。）</p>
+</blockquote>
+<ol>
+<li><p>仅清除页面缓存（PageCache）</p>
+<p> <code>sync; echo 1 &gt; /proc/sys/vm/drop_caches</code></p>
+</li>
+<li><p>清除目录项和inode</p>
+<p> <code>sync; echo 2 &gt; /proc/sys/vm/drop_caches</code></p>
+</li>
+<li><p>清除页面缓存，目录项和inode</p>
+<p> <code>sync; echo 3 &gt; /proc/sys/vm/drop_caches</code></p>
+</li>
+</ol>
+<p><strong>上述命令的说明：</strong></p>
+<blockquote>
+<p>sync 将刷新文件系统缓冲区（buffer），命令通过“;”分隔，顺序执行，shell在执行序列中的下一个命令之前会等待命令的终止。正如内核文档中提到的，写入到drop_cache将清空缓存而不会杀死任何应用程序/服务，echo命令做写入文件的工作。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/12/Docker使用Swarm进行跨主机通信/" rel="next" title="Docker swarm 搭建及跨主机网络互联案例分析">
+                <i class="fa fa-chevron-left"></i> Docker swarm 搭建及跨主机网络互联案例分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -310,6 +466,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
 
         </div>
         
@@ -330,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -393,6 +564,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何在-Linux-中清除缓存（Cache）？"><span class="nav-number">1.</span> <span class="nav-text">如何在 Linux 中清除缓存（Cache）？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -506,10 +693,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
@@ -535,6 +722,10 @@
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2138530"></script>
+      <!-- UY END -->
     
   
 

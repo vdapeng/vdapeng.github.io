@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Docker," />
 
 
 
@@ -93,16 +93,17 @@
 
 
 
-<meta name="description" content="NginxInstall 打开终端, 查看是否已经安装了Homebrew, 直接终端输入命令man brew 没有安装，执行命令  ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;  安装nginx brew install nginx  Use 启">
+<meta name="description" content="Docker swarm 搭建及跨主机网络互联案例分析原文地址：http://www.cnblogs.com/Javame/p/6739184.html 有关集群的Docker命令如下： docker swarm：集群管理，子命令有init, join,join-token, leave, update docker node：节点管理，子命令有demote, inspect,ls, promot">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx">
-<meta property="og:url" content="http://yoursite.com/2016/12/22/Nginx/index.html">
+<meta property="og:title" content="Docker swarm 搭建及跨主机网络互联案例分析">
+<meta property="og:url" content="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/index.html">
 <meta property="og:site_name" content="vdapeng&#39;s blog">
-<meta property="og:description" content="NginxInstall 打开终端, 查看是否已经安装了Homebrew, 直接终端输入命令man brew 没有安装，执行命令  ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;  安装nginx brew install nginx  Use 启">
-<meta property="og:updated_time" content="2016-12-22T08:12:32.000Z">
+<meta property="og:description" content="Docker swarm 搭建及跨主机网络互联案例分析原文地址：http://www.cnblogs.com/Javame/p/6739184.html 有关集群的Docker命令如下： docker swarm：集群管理，子命令有init, join,join-token, leave, update docker node：节点管理，子命令有demote, inspect,ls, promot">
+<meta property="og:updated_time" content="2017-08-12T07:43:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx">
-<meta name="twitter:description" content="NginxInstall 打开终端, 查看是否已经安装了Homebrew, 直接终端输入命令man brew 没有安装，执行命令  ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;  安装nginx brew install nginx  Use 启">
+<meta name="twitter:title" content="Docker swarm 搭建及跨主机网络互联案例分析">
+<meta name="twitter:description" content="Docker swarm 搭建及跨主机网络互联案例分析原文地址：http://www.cnblogs.com/Javame/p/6739184.html 有关集群的Docker命令如下： docker swarm：集群管理，子命令有init, join,join-token, leave, update docker node：节点管理，子命令有demote, inspect,ls, promot">
 
 
 
@@ -130,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/22/Nginx/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/"/>
 
 
 
 
 
-  <title>Nginx | vdapeng's blog</title>
+  <title>Docker swarm 搭建及跨主机网络互联案例分析 | vdapeng's blog</title>
   
 
 
@@ -275,7 +276,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/22/Nginx/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dapeng">
@@ -292,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Nginx</h1>
+          <h1 class="post-title" itemprop="name headline">Docker swarm 搭建及跨主机网络互联案例分析</h1>
         
 
         <div class="post-meta">
@@ -304,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-22T15:49:00+08:00">
-                2016-12-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:43:00+08:00">
+                2017-08-12
               </time>
             
 
@@ -315,6 +316,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -322,7 +345,7 @@
 
           
           
-             <span id="/2016/12/22/Nginx/" class="leancloud_visitors" data-flag-title="Nginx">
+             <span id="/2017/08/12/Docker使用Swarm进行跨主机通信/" class="leancloud_visitors" data-flag-title="Docker swarm 搭建及跨主机网络互联案例分析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -350,25 +373,81 @@
       
 
       
-        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ol>
-<li><p>打开终端, 查看是否已经安装了Homebrew, 直接终端输入命令<code>man brew</code></p>
-<pre><code>没有安装，执行命令 
-ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre></li>
-<li>安装nginx <code>brew install nginx</code></li>
+        <h1 id="Docker-swarm-搭建及跨主机网络互联案例分析"><a href="#Docker-swarm-搭建及跨主机网络互联案例分析" class="headerlink" title="Docker swarm 搭建及跨主机网络互联案例分析"></a>Docker swarm 搭建及跨主机网络互联案例分析</h1><p><a href="http://www.cnblogs.com/Javame/p/6739184.html" target="_blank" rel="external">原文地址：http://www.cnblogs.com/Javame/p/6739184.html</a></p>
+<h2 id="有关集群的Docker命令如下："><a href="#有关集群的Docker命令如下：" class="headerlink" title="有关集群的Docker命令如下："></a>有关集群的Docker命令如下：</h2><ol>
+<li>docker swarm：集群管理，子命令有init, join,join-token, leave, update</li>
+<li>docker node：节点管理，子命令有demote, inspect,ls, promote, rm, ps, update</li>
+<li>docker service：服务管理，子命令有create, inspect, ps, ls ,rm , scale, update</li>
+<li>docker stack/deploy：试验特性，用于多应用部署</li>
 </ol>
-<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
-<li>启动 <code>sudo nginx</code></li>
-<li>停止 <code>sudo nginx -s stop</code></li>
-<li>重载 <code>sudo nginx -s reload</code> <strong>or</strong> <code>service nginx reload</code></li>
-<li>查看版本 <code>nginx -v</code></li>
-<li>检查配置文件是否正确 <code>nginx -t</code></li>
-<li>查看nginx主进程号 <code>ps -ef | grep nginx</code></li>
-<li>从容停止nginx <code>kill -QUIT 主进程号</code></li>
-<li>快速停止nginx <code>kill -TERM 主进程号</code></li>
-<li>强制停止nginx <code>pkill -9 nginx</code></li>
-</ol>
-<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2>
+<h2 id="创建swarm-集群"><a href="#创建swarm-集群" class="headerlink" title="创建swarm 集群"></a>创建swarm 集群</h2><h3 id="查看docker-swarm-命令说明"><a href="#查看docker-swarm-命令说明" class="headerlink" title="查看docker swarm 命令说明"></a>查看docker swarm 命令说明</h3><pre><code># docker swarm -h
+Flag shorthand -h has been deprecated, please use --help
+Usage:    docker swarm COMMAND
+Manage Docker Swarm
+Options:
+      --help   Print usage
+Commands:
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  update      Update the swarm
+  leave       Leave a swarm
+Run &apos;docker swarm COMMAND --help&apos; for more information on a command.
+</code></pre><h3 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h3><pre><code>#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;
+[root@centos-web ~]# docker swarm init --listen-addr 172.18.30.29:2377 
+Swarm initialized: current node (a60d5c3ttymvtozr46uvk17q4) is now a manager.
+docker swarm init --advertise-addr 122.62.24.161 --listen-addr 122.62.24.161:2377
+</code></pre><h3 id="查看集群"><a href="#查看集群" class="headerlink" title="查看集群"></a>查看集群</h3><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+</code></pre><h3 id="获取加入集群命令token"><a href="#获取加入集群命令token" class="headerlink" title="获取加入集群命令token"></a>获取加入集群命令token</h3><pre><code>#docker swarm join-token manager
+docker swarm join \
+    --token ********* \
+    172.18.30.29:2377
+</code></pre><h3 id="子节点加入集群"><a href="#子节点加入集群" class="headerlink" title="子节点加入集群"></a>子节点加入集群</h3><pre><code>docker swarm join \
+--token ********* \
+172.18.30.29:2377
+</code></pre><h3 id="删除集群子节点"><a href="#删除集群子节点" class="headerlink" title="删除集群子节点"></a>删除集群子节点</h3><pre><code>docker node demote ***
+docker swarm leave --force(节点上)
+docker node rm --force（manager上）
+</code></pre><h2 id="创建一个overlay-跨主机网络"><a href="#创建一个overlay-跨主机网络" class="headerlink" title="创建一个overlay 跨主机网络"></a>创建一个overlay 跨主机网络</h2><h3 id="查看当前网络"><a href="#查看当前网络" class="headerlink" title="查看当前网络"></a>查看当前网络</h3><pre><code>[root@H-T-29 ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+47d05fd82e77        bridge              bridge              local                             
+76e0302f7929        docker_gwbridge     bridge              local               
+81c22e7f1b48        host                host                local               
+4enpk54t9oy2        ingress             overlay             swarm               
+c80502ba134b        none                null                local 
+</code></pre><blockquote>
+<p>创建一个新的overlay网络</p>
+<p>swarm上默认已有一个名为ingress的overlay 网络</p>
+</blockquote>
+<pre><code> [root@centos-node4 ~]# docker network create --driver overlay docker-net
+2o223p435s5glx69dw211u5d2
+ [root@centos-web ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+abec77415f48        bridge              bridge              local
+aoqs3p835s5g        docker-net          overlay             swarm
+e2fff9d572a6        docker_gwbridge     bridge              local
+166bd71f7d0e        host                host                local
+9gr6bfff1rv9        ingress             overlay             swarm
+1d2bfc590294        none                null                local
+</code></pre><blockquote>
+<p>docker-net就是新创建的网络</p>
+</blockquote>
+<h3 id="在新的跨主机overlay-网络-docker-net-上创建应用"><a href="#在新的跨主机overlay-网络-docker-net-上创建应用" class="headerlink" title="在新的跨主机overlay 网络(docker-net)上创建应用"></a>在新的跨主机overlay 网络(docker-net)上创建应用</h3><h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><pre><code>docker service create --constraint=node.HOSTNAME==H-C-42 --replicas 2 --publish 2222:22 --name lvs --network=docker-net inits/lvs
+</code></pre><h4 id="指定一个节点部署应用"><a href="#指定一个节点部署应用" class="headerlink" title="指定一个节点部署应用"></a>指定一个节点部署应用</h4><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+#docker service create --constraint=node.HOSTNAME==centos-web --replicas 1 --publish 28152:22 --publish 8152:8080 --name web --network=docker-net  inits/source2.0.3
+ce2qc5paxmfa2gxrtu320v5m6
+</code></pre><blockquote>
+<p>–replicas 副本数量 </p>
+<p>–publish 服务发现，端口映射 </p>
+<p>–mount 挂载文件</p>
+<p>–mount type=bind,src=/home,dst=/home,readonly</p>
+<p>–name service名称</p>
+</blockquote>
+
       
     </div>
 
@@ -395,6 +474,12 @@ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/ma
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
 
       
       
@@ -404,8 +489,8 @@ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/ma
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/22/Docker/" rel="next" title="Docker基本使用教程">
-                <i class="fa fa-chevron-left"></i> Docker基本使用教程
+              <a href="/2017/07/18/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
@@ -414,8 +499,8 @@ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/ma
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/05/弹性盒子/" rel="prev" title="弹性盒子">
-                弹性盒子 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/" rel="prev" title="如何在 Linux 中清除缓存（Cache）？">
+                如何在 Linux 中清除缓存（Cache）？ <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -548,7 +633,7 @@ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/ma
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx"><span class="nav-number">1.</span> <span class="nav-text">Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install"><span class="nav-number">1.1.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use"><span class="nav-number">1.2.</span> <span class="nav-text">Use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config"><span class="nav-number">1.3.</span> <span class="nav-text">Config</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-swarm-搭建及跨主机网络互联案例分析"><span class="nav-number">1.</span> <span class="nav-text">Docker swarm 搭建及跨主机网络互联案例分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有关集群的Docker命令如下："><span class="nav-number">1.1.</span> <span class="nav-text">有关集群的Docker命令如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建swarm-集群"><span class="nav-number">1.2.</span> <span class="nav-text">创建swarm 集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看docker-swarm-命令说明"><span class="nav-number">1.2.1.</span> <span class="nav-text">查看docker swarm 命令说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建集群"><span class="nav-number">1.2.2.</span> <span class="nav-text">创建集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看集群"><span class="nav-number">1.2.3.</span> <span class="nav-text">查看集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取加入集群命令token"><span class="nav-number">1.2.4.</span> <span class="nav-text">获取加入集群命令token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子节点加入集群"><span class="nav-number">1.2.5.</span> <span class="nav-text">子节点加入集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除集群子节点"><span class="nav-number">1.2.6.</span> <span class="nav-text">删除集群子节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个overlay-跨主机网络"><span class="nav-number">1.3.</span> <span class="nav-text">创建一个overlay 跨主机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前网络"><span class="nav-number">1.3.1.</span> <span class="nav-text">查看当前网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在新的跨主机overlay-网络-docker-net-上创建应用"><span class="nav-number">1.3.2.</span> <span class="nav-text">在新的跨主机overlay 网络(docker-net)上创建应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#部署应用"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">部署应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定一个节点部署应用"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">指定一个节点部署应用</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

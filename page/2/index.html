@@ -276,6 +276,384 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Spring Cloud Config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Spring Cloud Config/" itemprop="url">Spring Cloud Config</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringCloud/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringCloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Spring Cloud Config/" class="leancloud_visitors" data-flag-title="Spring Cloud Config">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="spring-cloud"><a href="#spring-cloud" class="headerlink" title="spring cloud"></a>spring cloud</h1><ol>
+<li>创建配置文件存放仓库 git 或者 svn</li>
+<li>创建spring cloud配置服务器</li>
+<li>创建一个服务使用远程配置</li>
+</ol>
+<blockquote>
+<p>获取git上的资源信息遵循如下规则：</p>
+</blockquote>
+<pre><code>/{application}/{profile}[/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+</code></pre><ol>
+<li>application:表示应用名称,在client中通过spring.config.name配置</li>
+<li>profile:表示获取指定环境下配置，例如开发环境、测试环境、生产环境 默认值default，实际开发中可以是 dev、test、demo、production等</li>
+<li>label: git标签，默认值master</li>
+</ol>
+<h2 id="在Git端修改配置后如何让客户端生效？"><a href="#在Git端修改配置后如何让客户端生效？" class="headerlink" title="在Git端修改配置后如何让客户端生效？"></a>在Git端修改配置后如何让客户端生效？</h2><p>访问接口修改</p>
+<ol>
+<li>refresh<br>post方式执行<a href="http://localhost/refresh" target="_blank" rel="external">http://localhost/refresh</a> 会刷新env中的配置</li>
+<li>restart<br>如果配置信息已经注入到bean中，由于bean是单例的，不会去加载修改后的配置<br>需要通过post方式去执行<a href="http://localhost/restart" target="_blank" rel="external">http://localhost/restart</a>,<br>需要通过application.properties中配置endpoints.restart.enabled=true启动指定的端口</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Redis/" itemprop="url">Redis基础教程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Redis/" class="leancloud_visitors" data-flag-title="Redis基础教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>下载地址：<a href="http://redis.io/download" target="_blank" rel="external">http://redis.io/download</a></p>
+<p>解压：tar -zvxf redis-3.0.7.tar.gz  将解压后的文件夹放到 /usr/local目录下</p>
+<p>编译测试:接下来在终端中切换到/usr/local/redis目录下,输入：<code>sudo make test</code>,完成之后<code>sudo make install</code></p>
+<p>启动：切换至 /user/local/bin, 输入：<code>redis-server</code></p>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><ol>
+<li><p>在 /usr/local/redis目录下建立bin，etc，db三个目录</p>
+</li>
+<li><p>把/usr/local/redis/src目录下的mkreleasehdr.sh，redis-benchmark， redis-check-dump， redis-cli， redis-server拷贝到bin目录</p>
+</li>
+<li><p>在etc下，参考原/usr/local/redis目录下的redis.conf，新建一个redis.conf</p>
+<p> <em>具体配置可查看此链接 <a href="http://www.jianshu.com/p/6b5eca8d908b" target="_blank" rel="external">http://www.jianshu.com/p/6b5eca8d908b</a></em></p>
+</li>
+<li><p>启动: <code>./redis-server /usr/local/redis-3.2.6/redis.conf</code>具体启动地址根据路径不同版本不同进行更改</p>
+</li>
+</ol>
+<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
+<li><p><strong>jar:    必须架包</strong> </p>
+<pre><code>import redis.clients.jedis.Jedis;
+</code></pre></li>
+<li><p><strong>Connect:    链接Redis数据库</strong> </p>
+<pre><code>Jedis jedis = new Jedis(&quot;localhost&quot;);
+</code></pre></li>
+<li><p><strong>String:    设置String类型value</strong> </p>
+<pre><code>jedis.set(&quot;running man&quot;, &quot;angelbaby&quot;);
+System.out.println(jedis.get(&quot;running man&quot;));
+</code></pre></li>
+<li><p><strong>List: 设置List类型value</strong>  </p>
+<pre><code>jedis.lpush(&quot;running&quot;, &quot;dc&quot;);
+List&lt;String&gt; list = jedis.lrange(&quot;running&quot;, 0, 5);
+</code></pre></li>
+<li><p><strong>Keys：获取Redis数据库中所有keys</strong></p>
+<pre><code>System.out.println(jedis.keys(&quot;*&quot;));
+</code></pre></li>
+<li><p><strong>Set: 设置Set类型value</strong></p>
+<pre><code>// 无序集合
+jedis.sadd(&quot;man&quot;, &quot;mongodb&quot;);
+jedis.sadd(&quot;man&quot;, &quot;mysql&quot;);
+Set&lt;String&gt; set = jedis.smembers(&quot;man&quot;);
+// 有序集合 score 字段
+jedis.zadd(&quot;wdy&quot;, 0, &quot;Mr.Li&quot;);
+jedis.zadd(&quot;wdy&quot;, 1, &quot;Mr.Feng&quot;);
+Set&lt;String&gt; set = jedis.zrange(&quot;wdy&quot;, 0, 1);
+</code></pre></li>
+<li><p><strong>Map: 设置HashMap类型value</strong></p>
+<pre><code>Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+map.put(&quot;name&quot;, &quot;ken&quot;);
+jedis.hmset(&quot;map&quot;, map);
+map = jedis.hgetAll(&quot;map&quot;);
+</code></pre></li>
+<li><p><strong>Object: 设置Object类型value</strong></p>
+<pre><code>User user = new User();
+user.setUsername(&quot;DaPeng&quot;);
+user.setEmail(&quot;fengzq@vdaoyun.com&quot;);
+jedis.set(&quot;user&quot;.getBytes(), SerializeUtil.serialize(user));
+byte[] value = jedis.get(&quot;user&quot;.getBytes());
+Object object = SerializeUtil.unserialize(value);
+if (object != null) {
+    user = (User) object;
+    System.out.println(user.getUsername());
+    System.err.println(user.getEmail());
+}
+</code></pre></li>
+</ol>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ol>
+<li>检查是否启动：redis-cli ping</li>
+<li>关闭命令：redis-cli shutdown</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Feign/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -740,6 +1118,153 @@ public String deleteUser(@PathVariable Long id) {
   
   
 
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/05/Ngrok/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/05/Ngrok/" itemprop="url">ngrok</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-05T15:49:00+08:00">
+                2017-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/02/05/Ngrok/" class="leancloud_visitors" data-flag-title="ngrok">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ngrok功能"><a href="#ngrok功能" class="headerlink" title="ngrok功能"></a>ngrok功能</h2><pre><code>类似于花生壳的内网映射
+</code></pre><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="http://ngrok.2bdata.com/" target="_blank" rel="external">ngrok</a></p>
+<h2 id="启动命令-cd到解压文件下下"><a href="#启动命令-cd到解压文件下下" class="headerlink" title="启动命令,cd到解压文件下下"></a>启动命令,cd到解压文件下下</h2><pre><code>./ngrok -config=ngrok.cfg -subdomain 474607030 8080
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/05/弹性盒子/">
 
@@ -875,153 +1400,6 @@ inherit：从父元素继承
 [ flex-grow ]：定义弹性盒子元素的扩展比率。
 [ flex-shrink ]：定义弹性盒子元素的收缩比率。
 [ flex-basis ]：定义弹性盒子元素的默认基准值。
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/05/Ngrok/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/05/Ngrok/" itemprop="url">ngrok</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-05T15:49:00+08:00">
-                2017-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/02/05/Ngrok/" class="leancloud_visitors" data-flag-title="ngrok">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="ngrok功能"><a href="#ngrok功能" class="headerlink" title="ngrok功能"></a>ngrok功能</h2><pre><code>类似于花生壳的内网映射
-</code></pre><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="http://ngrok.2bdata.com/" target="_blank" rel="external">ngrok</a></p>
-<h2 id="启动命令-cd到解压文件下下"><a href="#启动命令-cd到解压文件下下" class="headerlink" title="启动命令,cd到解压文件下下"></a>启动命令,cd到解压文件下下</h2><pre><code>./ngrok -config=ngrok.cfg -subdomain 474607030 8080
 </code></pre>
           
         
@@ -1247,6 +1625,28 @@ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/ma
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1335,6 +1735,86 @@ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/ma
 </ol>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p>问：Docker项目出现中文乱码怎么办？</p>
 <p>答：在构建镜像的时候在Dockerfile文件中添加一行<code>ENV LANG C.UTF-8</code>。</p>
+<p>问：Docker容器时区跟主机时区不一致怎么办？</p>
+<p>答：创建容器的时候指定启动参数，挂载localtime文件到容器内  ，保证两者所采用的时区是一致的。<code>docker run --name &lt;name&gt; -v /etc/localtime:/etc/localtime:ro  ....</code></p>
+<p>或者复制主机的时区：<code>docker cp /etc/localtime:【容器ID或者NAME】/etc/localtime</code></p>
+<p>或者在Dockerfile中添加 </p>
+<pre><code>ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
+</code></pre><h1 id="Docker-swarm-搭建及跨主机网络互联案例分析"><a href="#Docker-swarm-搭建及跨主机网络互联案例分析" class="headerlink" title="Docker swarm 搭建及跨主机网络互联案例分析"></a>Docker swarm 搭建及跨主机网络互联案例分析</h1><p><a href="http://www.cnblogs.com/Javame/p/6739184.html" target="_blank" rel="external">原文地址：http://www.cnblogs.com/Javame/p/6739184.html</a></p>
+<h2 id="有关集群的Docker命令如下："><a href="#有关集群的Docker命令如下：" class="headerlink" title="有关集群的Docker命令如下："></a>有关集群的Docker命令如下：</h2><ol>
+<li>docker swarm：集群管理，子命令有init, join,join-token, leave, update</li>
+<li>docker node：节点管理，子命令有demote, inspect,ls, promote, rm, ps, update</li>
+<li>docker service：服务管理，子命令有create, inspect, ps, ls ,rm , scale, update</li>
+<li>docker stack/deploy：试验特性，用于多应用部署</li>
+</ol>
+<h2 id="创建swarm-集群"><a href="#创建swarm-集群" class="headerlink" title="创建swarm 集群"></a>创建swarm 集群</h2><h3 id="查看docker-swarm-命令说明"><a href="#查看docker-swarm-命令说明" class="headerlink" title="查看docker swarm 命令说明"></a>查看docker swarm 命令说明</h3><pre><code># docker swarm -h
+Flag shorthand -h has been deprecated, please use --help
+Usage:    docker swarm COMMAND
+Manage Docker Swarm
+Options:
+      --help   Print usage
+Commands:
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  update      Update the swarm
+  leave       Leave a swarm
+Run &apos;docker swarm COMMAND --help&apos; for more information on a command.
+</code></pre><h3 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h3><pre><code>#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;
+[root@centos-web ~]# docker swarm init --listen-addr 172.18.30.29:2377 
+Swarm initialized: current node (a60d5c3ttymvtozr46uvk17q4) is now a manager.
+docker swarm init --advertise-addr 122.62.24.161 --listen-addr 122.62.24.161:2377
+</code></pre><h3 id="查看集群"><a href="#查看集群" class="headerlink" title="查看集群"></a>查看集群</h3><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+</code></pre><h3 id="获取加入集群命令token"><a href="#获取加入集群命令token" class="headerlink" title="获取加入集群命令token"></a>获取加入集群命令token</h3><pre><code>#docker swarm join-token manager
+docker swarm join \
+    --token ********* \
+    172.18.30.29:2377
+</code></pre><h3 id="子节点加入集群"><a href="#子节点加入集群" class="headerlink" title="子节点加入集群"></a>子节点加入集群</h3><pre><code>docker swarm join \
+--token ********* \
+172.18.30.29:2377
+</code></pre><h3 id="删除集群子节点"><a href="#删除集群子节点" class="headerlink" title="删除集群子节点"></a>删除集群子节点</h3><pre><code>docker node demote ***
+docker swarm leave --force(节点上)
+docker node rm --force（manager上）
+</code></pre><h2 id="创建一个overlay-跨主机网络"><a href="#创建一个overlay-跨主机网络" class="headerlink" title="创建一个overlay 跨主机网络"></a>创建一个overlay 跨主机网络</h2><h3 id="查看当前网络"><a href="#查看当前网络" class="headerlink" title="查看当前网络"></a>查看当前网络</h3><pre><code>[root@H-T-29 ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+47d05fd82e77        bridge              bridge              local                             
+76e0302f7929        docker_gwbridge     bridge              local               
+81c22e7f1b48        host                host                local               
+4enpk54t9oy2        ingress             overlay             swarm               
+c80502ba134b        none                null                local 
+</code></pre><blockquote>
+<p>创建一个新的overlay网络</p>
+<p>swarm上默认已有一个名为ingress的overlay 网络</p>
+</blockquote>
+<pre><code> [root@centos-node4 ~]# docker network create --driver overlay docker-net
+2o223p435s5glx69dw211u5d2
+ [root@centos-web ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+abec77415f48        bridge              bridge              local
+aoqs3p835s5g        docker-net          overlay             swarm
+e2fff9d572a6        docker_gwbridge     bridge              local
+166bd71f7d0e        host                host                local
+9gr6bfff1rv9        ingress             overlay             swarm
+1d2bfc590294        none                null                local
+</code></pre><blockquote>
+<p>docker-net就是新创建的网络</p>
+</blockquote>
+<h3 id="在新的跨主机overlay-网络-docker-net-上创建应用"><a href="#在新的跨主机overlay-网络-docker-net-上创建应用" class="headerlink" title="在新的跨主机overlay 网络(docker-net)上创建应用"></a>在新的跨主机overlay 网络(docker-net)上创建应用</h3><h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><pre><code>docker service create --constraint=node.HOSTNAME==H-C-42 --replicas 2 --publish 2222:22 --name lvs --network=docker-net inits/lvs
+</code></pre><h4 id="指定一个节点部署应用"><a href="#指定一个节点部署应用" class="headerlink" title="指定一个节点部署应用"></a>指定一个节点部署应用</h4><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+#docker service create --constraint=node.HOSTNAME==centos-web --replicas 1 --publish 28152:22 --publish 8152:8080 --name web --network=docker-net  inits/source2.0.3
+ce2qc5paxmfa2gxrtu320v5m6
+</code></pre><blockquote>
+<p>–replicas 副本数量 </p>
+<p>–publish 服务发现，端口映射 </p>
+<p>–mount 挂载文件</p>
+<p>–mount type=bind,src=/home,dst=/home,readonly</p>
+<p>–name service名称</p>
+</blockquote>
 
           
         
@@ -1595,7 +2075,7 @@ title: First Night
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1606,7 +2086,7 @@ title: First Night
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1617,7 +2097,7 @@ title: First Night
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
