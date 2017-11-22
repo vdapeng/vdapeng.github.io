@@ -276,6 +276,257 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/Swagger在线文档编写/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/22/Swagger在线文档编写/" itemprop="url">Swagger在线Api文档编写</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-22T15:49:00+08:00">
+                2017-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/swagger/" itemprop="url" rel="index">
+                    <span itemprop="name">swagger</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/22/Swagger在线文档编写/" class="leancloud_visitors" data-flag-title="Swagger在线Api文档编写">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Swagger在线Api文档编写"><a href="#Swagger在线Api文档编写" class="headerlink" title="Swagger在线Api文档编写"></a>Swagger在线Api文档编写</h1><h2 id="集成配置"><a href="#集成配置" class="headerlink" title="集成配置"></a>集成配置</h2><h3 id="第一步：在项目的pom文件添加以下依赖："><a href="#第一步：在项目的pom文件添加以下依赖：" class="headerlink" title="第一步：在项目的pom文件添加以下依赖："></a>第一步：在项目的pom文件添加以下依赖：</h3><pre><code> &lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+    &lt;version&gt;2.7.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+    &lt;version&gt; 2.7.0 &lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="第二步：添加配置文件"><a href="#第二步：添加配置文件" class="headerlink" title="第二步：添加配置文件"></a>第二步：添加配置文件</h3><p>新建<code>SwaggerConfiguration</code>文件，内容如下：</p>
+<pre><code>@Configuration 
+@EnableSwagger2 // 启用swagger在线文档
+public class SwaggerConfiguration {
+
+    @Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(&quot;com.vdaoyun.hsApi.web.controller.common.member&quot;))// 需要生成的文档根目录，根据自己项目进行修改
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title(&quot;微道云RESTFUL API测试页面&quot;)
+                .description(&quot;在这里可以欢快的测试你写的优秀(LESE)代码了&quot;)
+                .termsOfServiceUrl(&quot;www.vdaoyun.com&quot;)
+                .contact(&quot;微小云&quot;)
+                .version(&quot;1.0&quot;)
+                .build();
+    }
+
+}
+</code></pre><h3 id="第三步：访问测试"><a href="#第三步：访问测试" class="headerlink" title="第三步：访问测试"></a>第三步：访问测试</h3><p>完成上面两步之后，基本的API在线文档就已经完成了，访问项目地址。看到如下页面说明集成成功。<br><img src="http://upload-images.jianshu.io/upload_images/2251942-55b24df7835c8c28.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在线文档示例"></p>
+<h2 id="Swagger在线文档编写"><a href="#Swagger在线文档编写" class="headerlink" title="Swagger在线文档编写"></a>Swagger在线文档编写</h2><h3 id="注释说明"><a href="#注释说明" class="headerlink" title="注释说明"></a>注释说明</h3><p><code>@Api</code>：作用于Controller</p>
+<p><code>@ApiIgnore</code>： 忽略注解标注的类或者方法，不添加到API文档中  </p>
+<p><code>@ApiOperation</code>： 展示每个API基本信息 </p>
+<pre><code>value api名称  
+notes 备注说明  
+</code></pre><p><code>@ApiImplicitParam</code>：用于规定接收参数类型、名称、是否必须等信息  </p>
+<pre><code>name 对应方法中接收参数名称  
+value 备注说明  
+required 是否必须 boolean  
+paramType 参数类型 body、path、query、header、form中的一种   
+    body 使用@RequestBody接收数据 POST有效  
+    path 在url中配置{}的参数  
+    query 普通查询参数 例如 ?query=q ,jquery ajax中data设置的值也可以，例如 {query:”q”},springMVC中不需要添加注解接收  
+    header 使用@RequestHeader接收数据  
+    form 笔者未使用，请查看官方API文档  
+dataType 数据类型，如果类型名称相同，请指定全路径，例如 dataType = “java.util.Date”，springfox会自动根据类型生成模型  
+</code></pre><p><code>@ApiImplicitParams</code>：包含多个@ApiImplicitParam  </p>
+<p><code>@ApiModelProperty</code>：对模型中属性添加说明，只能使用在类中。 </p>
+<pre><code>value 参数名称  
+required 是否必须 boolean  
+hidden 是否隐藏 boolean   
+其他信息和上面同名属性作用相同，hidden属性对于集合不能隐藏，目前不知道原因  
+</code></pre><p><code>@ApiParam</code>：对单独某个参数进行说明，使用在类中或者controller方法中都可以。注解中的属性和上面列出的同名属性作用相同  </p>
+<h3 id="Controller层代码示例："><a href="#Controller层代码示例：" class="headerlink" title="Controller层代码示例："></a>Controller层代码示例：</h3><pre><code>@Api(value = &quot;简历模块&quot;, description = &quot;简历模块相关接口&quot;)
+public class WcpResumeController {
+
+    @ApiOperation(value = &quot;列表查询&quot;)
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = &quot;pageNum&quot;, value = &quot;页码&quot;, defaultValue = &quot;1&quot;, paramType = &quot;query&quot;, dataTypeClass = Integer.class),
+        @ApiImplicitParam(name = &quot;pageSize&quot;, value = &quot;每页条数&quot;, defaultValue = &quot;10&quot;, paramType = &quot;query&quot;, dataTypeClass = Integer.class),
+        @ApiImplicitParam(name = &quot;order&quot;, value = &quot;排序字段&quot;, defaultValue= &quot;createDate&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
+        @ApiImplicitParam(name = &quot;sort&quot;, value = &quot;排序方式&quot;, defaultValue = &quot;DESC&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
+        @ApiImplicitParam(name = &quot;name&quot;, value = &quot;名字&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
+        @ApiImplicitParam(name = &quot;userId&quot;, value = &quot;管理员用户编号&quot;,required = true, paramType = &quot;query&quot;, dataTypeClass = String.class),
+        @ApiImplicitParam(name = &quot;startDate&quot;, value = &quot;开始时间&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
+        @ApiImplicitParam(name = &quot;finishDate&quot;, value = &quot;结束时间&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class)
+    })
+    public AjaxJson select(
+            @RequestParam(value = &quot;pageNum&quot;, defaultValue = &quot;1&quot;, required = false) Integer pageNum,
+            @RequestParam(value = &quot;pageSize&quot;, defaultValue = &quot;10&quot;, required = false) Integer pageSize,
+            @RequestParam(value = &quot;order&quot;, defaultValue = &quot;createDate&quot;, required = false) String order,
+            @RequestParam(value = &quot;sort&quot;, defaultValue = &quot;DESC&quot;, required = false) String sort,
+            @RequestParam(value = &quot;name&quot;, required = false) String name,
+            @RequestParam(value = &quot;userId&quot;) String userId,
+            @RequestParam(value = &quot;startDate&quot;, required = false) String startDate,
+            @RequestParam(value = &quot;finishDate&quot;, required = false) String finishDate
+    ) throws Exception {
+
+    }
+
+}
+</code></pre><h3 id="Model层代码示例："><a href="#Model层代码示例：" class="headerlink" title="Model层代码示例："></a>Model层代码示例：</h3><pre><code>@ApiModel(value = &quot;简历管理员&quot;)
+@Table(name = &quot;wcp_resume_admin&quot;)
+public class WcpResumeAdmin implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;id&quot;)
+    @ApiModelProperty(name = &quot;id&quot;, value = &quot;主键&quot;, hidden = true)
+    private Integer id;
+
+
+    /**
+     * 微道云企业编号
+     */
+    @Column(name = &quot;wcp_business_id&quot;)
+    @ApiModelProperty(name = &quot;wcpBusinessId&quot;, value = &quot;微道云企业编号&quot;)
+    private Integer wcpBusinessId;
+
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/Spring Boot项目使用Jenkins和Docker实现持续部署/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1808,7 +2059,7 @@ public class EnrollApplication {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Maven/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Linux常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dapeng">
@@ -1827,7 +2078,7 @@ public class EnrollApplication {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/11/Maven/" itemprop="url">maven</a></h1>
+                <a class="post-title-link" href="/2017/07/11/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1862,8 +2113,8 @@ public class EnrollApplication {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/maven/" itemprop="url" rel="index">
-                    <span itemprop="name">maven</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -1879,7 +2130,7 @@ public class EnrollApplication {
 
           
           
-             <span id="/2017/07/11/Maven/" class="leancloud_visitors" data-flag-title="maven">
+             <span id="/2017/07/11/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1909,254 +2160,37 @@ public class EnrollApplication {
       
         
           
-            <h1 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h1><h2 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h2><ol>
-<li><p>打开<code>Terminal</code>，输入一下命令，设置<code>Maven classpath</code></p>
-<pre><code>vi ~/.bash_profile
-</code></pre></li>
-<li><p>添加下列两行代码，之后保存并退出Vi：</p>
-<pre><code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_11,jdk/Contents/Home
-export M2_HOME=/Users/robbie/apache-maven-3.3.3
-export PATH=$PATH:$M2_HOME/bin
-</code></pre></li>
-<li><p>输入命令以使bash_profile生效</p>
-<pre><code>source ~/.bash_profile
-</code></pre></li>
-<li>输入<code>mvn -v</code>查看Maven是否安装成功<img src="http://upload-images.jianshu.io/upload_images/420187-fee2d6db07d70ca8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Apache Maven"></li>
-</ol>
-<h2 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h2><pre><code>str
-    -main
-        -java
-            -package
-    -test
-        -java
-            -package
-    resources
-</code></pre><h2 id="Maven构建命令"><a href="#Maven构建命令" class="headerlink" title="Maven构建命令"></a>Maven构建命令</h2><ol>
-<li><code>mvn -v</code> 查看maven版本</li>
-<li><code>mvn compile</code> 编译</li>
-<li><code>mvn test</code> 测试</li>
-<li><code>mvn package</code> 打包</li>
-<li><code>mvn clean</code> 删除target</li>
-<li><code>mvn install</code> 安装jar包到本地仓库</li>
-<li><code>mvn archetype:generate</code> 自动构建maven项目目录</li>
-<li><code>mvn archetype:generate -DgroupId=com.vdaoyun.wdy -DartifactId=com.vdaoyun.wdy-service -Dversion=1.0.0SNAPSHOT -Dpackage=com.vdaoyun.wdy-service</code><blockquote>
-<p>-DgroupId=组织名，公司网址的反写+项目名<br>-DartifactId=项目名-模板名<br>-Dversion=版本名<br>-Dpackage=代码所存在的包</p>
-</blockquote>
-</li>
-<li><code>mvn deploy</code> 上传jar包到nexus私服</li>
-</ol>
+            <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p><code>free -m -m</code> 查看系统内存情况</p>
+<p><code>netstat -lnp|grep XX</code> 查看指定端口是否被占用，XX为其他想要查看的端口</p>
+<p><code>kill XXX</code> 杀指定进程,XXX改为想要杀掉的进程号</p>
+<p><code>nohup java -jar XXXX.jar</code> 后台启动jar包，XXXX为你想要运行的jar包</p>
+<p><code>echo $PATH</code> 查看系统$PATH路径</p>
+<p><code>uzip XXXX.zip</code> 解压zip文件</p>
+<p><code>tar -zxvf XXXX.tar.gz</code> 解压tar.gz文件</p>
+<p><code>cd XXX</code> 切换到XXX路径</p>
+<p><code>ls</code> 查看当前目录下的所有文件</p>
+<p><code>rm</code>  删除一个目录中的一个或多个文件或目录，如果没有使用- r选项，则rm不会删除目录。如果使用              rm 来删除文件，通常仍可以将该文件恢复原状 rm [选项] 文件…</p>
+<pre><code>实例：
+（1）删除任何.log文件；删除前逐一询问确认  rm -i *.log
+（2）删除test子目录及子目录中所有档案删除,并且不用一一确认 rm -rf test
+（3）删除以-f开头的文件 rm -- -f* 
+</code></pre><p><code>rmdir</code> 从一个目录中删除一个或多个子目录项，删除某目录时也必须具有对其父目录的写权限。 注意：不能删除非空目录</p>
+<pre><code>实例：
+（1）当parent子目录被删除后使它也成为空目录的话，则顺便一并删除
+   rmdir -p parent/child/child11
+</code></pre><p><code>mv</code> 移动文件或修改文件名，根据第二参数类型（如目录，则移动文件；如为文件则重命令该文件）。<br>    当第二个参数为目录时，可刚多个文件以空格分隔作为第一参数，移动多个文件到参数2指定的目录中</p>
+<pre><code>实例：
+ （1）将文件test.log重命名为test1.txt 
+ mv test.log test1.txt
 
-          
-        
-      
-    </div>
+ （2）将文件log1.txt,log2.txt,log3.txt移动到根的test3目录中 
+ mv llog1.txt log2.txt log3.txt /test3
 
-    <div>
-      
-    </div>
+ （3）将文件file1改名为file2，如果file2已经存在，则询问是否覆盖 
+ mv -i log1.txt log2.txt
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Redis/" itemprop="url">Redis基础教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Redis/" class="leancloud_visitors" data-flag-title="Redis基础教程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>下载地址：<a href="http://redis.io/download" target="_blank" rel="external">http://redis.io/download</a></p>
-<p>解压：tar -zvxf redis-3.0.7.tar.gz  将解压后的文件夹放到 /usr/local目录下</p>
-<p>编译测试:接下来在终端中切换到/usr/local/redis目录下,输入：<code>sudo make test</code>,完成之后<code>sudo make install</code></p>
-<p>启动：切换至 /user/local/bin, 输入：<code>redis-server</code></p>
-<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><ol>
-<li><p>在 /usr/local/redis目录下建立bin，etc，db三个目录</p>
-</li>
-<li><p>把/usr/local/redis/src目录下的mkreleasehdr.sh，redis-benchmark， redis-check-dump， redis-cli， redis-server拷贝到bin目录</p>
-</li>
-<li><p>在etc下，参考原/usr/local/redis目录下的redis.conf，新建一个redis.conf</p>
-<p> <em>具体配置可查看此链接 <a href="http://www.jianshu.com/p/6b5eca8d908b" target="_blank" rel="external">http://www.jianshu.com/p/6b5eca8d908b</a></em></p>
-</li>
-<li><p>启动: <code>./redis-server /usr/local/redis-3.2.6/redis.conf</code>具体启动地址根据路径不同版本不同进行更改</p>
-</li>
-</ol>
-<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
-<li><p><strong>jar:    必须架包</strong> </p>
-<pre><code>import redis.clients.jedis.Jedis;
-</code></pre></li>
-<li><p><strong>Connect:    链接Redis数据库</strong> </p>
-<pre><code>Jedis jedis = new Jedis(&quot;localhost&quot;);
-</code></pre></li>
-<li><p><strong>String:    设置String类型value</strong> </p>
-<pre><code>jedis.set(&quot;running man&quot;, &quot;angelbaby&quot;);
-System.out.println(jedis.get(&quot;running man&quot;));
-</code></pre></li>
-<li><p><strong>List: 设置List类型value</strong>  </p>
-<pre><code>jedis.lpush(&quot;running&quot;, &quot;dc&quot;);
-List&lt;String&gt; list = jedis.lrange(&quot;running&quot;, 0, 5);
-</code></pre></li>
-<li><p><strong>Keys：获取Redis数据库中所有keys</strong></p>
-<pre><code>System.out.println(jedis.keys(&quot;*&quot;));
-</code></pre></li>
-<li><p><strong>Set: 设置Set类型value</strong></p>
-<pre><code>// 无序集合
-jedis.sadd(&quot;man&quot;, &quot;mongodb&quot;);
-jedis.sadd(&quot;man&quot;, &quot;mysql&quot;);
-Set&lt;String&gt; set = jedis.smembers(&quot;man&quot;);
-// 有序集合 score 字段
-jedis.zadd(&quot;wdy&quot;, 0, &quot;Mr.Li&quot;);
-jedis.zadd(&quot;wdy&quot;, 1, &quot;Mr.Feng&quot;);
-Set&lt;String&gt; set = jedis.zrange(&quot;wdy&quot;, 0, 1);
-</code></pre></li>
-<li><p><strong>Map: 设置HashMap类型value</strong></p>
-<pre><code>Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-map.put(&quot;name&quot;, &quot;ken&quot;);
-jedis.hmset(&quot;map&quot;, map);
-map = jedis.hgetAll(&quot;map&quot;);
-</code></pre></li>
-<li><p><strong>Object: 设置Object类型value</strong></p>
-<pre><code>User user = new User();
-user.setUsername(&quot;DaPeng&quot;);
-user.setEmail(&quot;fengzq@vdaoyun.com&quot;);
-jedis.set(&quot;user&quot;.getBytes(), SerializeUtil.serialize(user));
-byte[] value = jedis.get(&quot;user&quot;.getBytes());
-Object object = SerializeUtil.unserialize(value);
-if (object != null) {
-    user = (User) object;
-    System.out.println(user.getUsername());
-    System.err.println(user.getEmail());
-}
-</code></pre></li>
-</ol>
-<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ol>
-<li>检查是否启动：redis-cli ping</li>
-<li>关闭命令：redis-cli shutdown</li>
-</ol>
-
+  （4）移动当前文件夹下的所有文件到上一级目录 mv * ../
+</code></pre>
           
         
       
