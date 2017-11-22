@@ -276,6 +276,741 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Redis/" itemprop="url">Redis基础教程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Redis/" class="leancloud_visitors" data-flag-title="Redis基础教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>下载地址：<a href="http://redis.io/download" target="_blank" rel="external">http://redis.io/download</a></p>
+<p>解压：tar -zvxf redis-3.0.7.tar.gz  将解压后的文件夹放到 /usr/local目录下</p>
+<p>编译测试:接下来在终端中切换到/usr/local/redis目录下,输入：<code>sudo make test</code>,完成之后<code>sudo make install</code></p>
+<p>启动：切换至 /user/local/bin, 输入：<code>redis-server</code></p>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><ol>
+<li><p>在 /usr/local/redis目录下建立bin，etc，db三个目录</p>
+</li>
+<li><p>把/usr/local/redis/src目录下的mkreleasehdr.sh，redis-benchmark， redis-check-dump， redis-cli， redis-server拷贝到bin目录</p>
+</li>
+<li><p>在etc下，参考原/usr/local/redis目录下的redis.conf，新建一个redis.conf</p>
+<p> <em>具体配置可查看此链接 <a href="http://www.jianshu.com/p/6b5eca8d908b" target="_blank" rel="external">http://www.jianshu.com/p/6b5eca8d908b</a></em></p>
+</li>
+<li><p>启动: <code>./redis-server /usr/local/redis-3.2.6/redis.conf</code>具体启动地址根据路径不同版本不同进行更改</p>
+</li>
+</ol>
+<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
+<li><p><strong>jar:    必须架包</strong> </p>
+<pre><code>import redis.clients.jedis.Jedis;
+</code></pre></li>
+<li><p><strong>Connect:    链接Redis数据库</strong> </p>
+<pre><code>Jedis jedis = new Jedis(&quot;localhost&quot;);
+</code></pre></li>
+<li><p><strong>String:    设置String类型value</strong> </p>
+<pre><code>jedis.set(&quot;running man&quot;, &quot;angelbaby&quot;);
+System.out.println(jedis.get(&quot;running man&quot;));
+</code></pre></li>
+<li><p><strong>List: 设置List类型value</strong>  </p>
+<pre><code>jedis.lpush(&quot;running&quot;, &quot;dc&quot;);
+List&lt;String&gt; list = jedis.lrange(&quot;running&quot;, 0, 5);
+</code></pre></li>
+<li><p><strong>Keys：获取Redis数据库中所有keys</strong></p>
+<pre><code>System.out.println(jedis.keys(&quot;*&quot;));
+</code></pre></li>
+<li><p><strong>Set: 设置Set类型value</strong></p>
+<pre><code>// 无序集合
+jedis.sadd(&quot;man&quot;, &quot;mongodb&quot;);
+jedis.sadd(&quot;man&quot;, &quot;mysql&quot;);
+Set&lt;String&gt; set = jedis.smembers(&quot;man&quot;);
+// 有序集合 score 字段
+jedis.zadd(&quot;wdy&quot;, 0, &quot;Mr.Li&quot;);
+jedis.zadd(&quot;wdy&quot;, 1, &quot;Mr.Feng&quot;);
+Set&lt;String&gt; set = jedis.zrange(&quot;wdy&quot;, 0, 1);
+</code></pre></li>
+<li><p><strong>Map: 设置HashMap类型value</strong></p>
+<pre><code>Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+map.put(&quot;name&quot;, &quot;ken&quot;);
+jedis.hmset(&quot;map&quot;, map);
+map = jedis.hgetAll(&quot;map&quot;);
+</code></pre></li>
+<li><p><strong>Object: 设置Object类型value</strong></p>
+<pre><code>User user = new User();
+user.setUsername(&quot;DaPeng&quot;);
+user.setEmail(&quot;fengzq@vdaoyun.com&quot;);
+jedis.set(&quot;user&quot;.getBytes(), SerializeUtil.serialize(user));
+byte[] value = jedis.get(&quot;user&quot;.getBytes());
+Object object = SerializeUtil.unserialize(value);
+if (object != null) {
+    user = (User) object;
+    System.out.println(user.getUsername());
+    System.err.println(user.getEmail());
+}
+</code></pre></li>
+</ol>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ol>
+<li>检查是否启动：redis-cli ping</li>
+<li>关闭命令：redis-cli shutdown</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Ehcache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Ehcache/" itemprop="url">ehcache</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Ehcache/" class="leancloud_visitors" data-flag-title="ehcache">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ehcache"><a href="#ehcache" class="headerlink" title="ehcache"></a>ehcache</h1><h2 id="缓存配置"><a href="#缓存配置" class="headerlink" title="缓存配置"></a>缓存配置</h2><pre><code>name:缓存名称。 
+maxElementsInMemory：缓存最大个数。 
+eternal:对象是否永久有效，一但设置了，timeout将不起作用。 
+timeToIdleSeconds：设置对象在失效前的允许闲置时间（单位：秒）。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。 
+timeToLiveSeconds：设置对象在失效前允许存活时间（单位：秒）。最大时间介于创建时间和失效时间之间。仅当eternal=false对象不是永久有效时使用，默认是0.，也就是对象存活时间无穷大。 
+overflowToDisk：当内存中对象数量达到maxElementsInMemory时，Ehcache将会对象写到磁盘中。 
+diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。 
+maxElementsOnDisk：硬盘最大缓存个数。 
+diskPersistent：是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false. 
+diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。 
+memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。 
+clearOnFlush：内存数量最大时是否清除。 
+</code></pre><h2 id="依赖jar包"><a href="#依赖jar包" class="headerlink" title="依赖jar包"></a>依赖jar包</h2><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;
+    &lt;artifactId&gt;ehcache-core&lt;/artifactId&gt;
+    &lt;version&gt;2.6.11&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.googlecode.ehcache-spring-annotations&lt;/groupId&gt;
+    &lt;artifactId&gt;ehcache-spring-annotations&lt;/artifactId&gt;
+    &lt;version&gt;1.2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h2 id="spring-mvc-xml-配置"><a href="#spring-mvc-xml-配置" class="headerlink" title="spring-mvc.xml 配置"></a>spring-mvc.xml 配置</h2><p>xmlns:ehcache</p>
+<pre><code>xmlns:ehcache=&quot;http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring&quot;
+</code></pre><p>xsi:schemaLocation</p>
+<pre><code>xsi:schemaLocation=&quot;http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring 
+    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.0.xsd&quot;    
+</code></pre><p>bean    </p>
+<pre><code>&lt;bean id=&quot;slfKeyGenerator&quot;
+    class=&quot;com.googlecode.ehcache.annotations.key.StringCacheKeyGenerator&quot;&gt;
+    &lt;property name=&quot;includeMethod&quot; value=&quot;false&quot; /&gt;
+&lt;/bean&gt;
+
+&lt;!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 --&gt;
+&lt;ehcache:annotation-driven cache-manager=&quot;ehCacheManager&quot; /&gt;
+&lt;bean id=&quot;ehCacheManager&quot;
+    class=&quot;org.springframework.cache.ehcache.EhCacheManagerFactoryBean&quot;&gt;
+    &lt;property name=&quot;configLocation&quot;&gt;
+        &lt;value&gt;classpath:ehcache.xml&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>添加缓存    <code>@Cacheable(cacheName=&quot;departCache&quot;)</code></p>
+<p>清除缓存    <code>@TriggersRemove(cacheName=&quot;departCache&quot;,removeAll=true)</code> </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p><code>free -m -m</code> 查看系统内存情况</p>
+<p><code>netstat -lnp|grep XX</code> 查看指定端口是否被占用，XX为其他想要查看的端口</p>
+<p><code>kill XXX</code> 杀指定进程,XXX改为想要杀掉的进程号</p>
+<p><code>nohup java -jar XXXX.jar</code> 后台启动jar包，XXXX为你想要运行的jar包</p>
+<p><code>echo $PATH</code> 查看系统$PATH路径</p>
+<p><code>uzip XXXX.zip</code> 解压zip文件</p>
+<p><code>tar -zxvf XXXX.tar.gz</code> 解压tar.gz文件</p>
+<p><code>cd XXX</code> 切换到XXX路径</p>
+<p><code>ls</code> 查看当前目录下的所有文件</p>
+<p><code>rm</code>  删除一个目录中的一个或多个文件或目录，如果没有使用- r选项，则rm不会删除目录。如果使用              rm 来删除文件，通常仍可以将该文件恢复原状 rm [选项] 文件…</p>
+<pre><code>实例：
+（1）删除任何.log文件；删除前逐一询问确认  rm -i *.log
+（2）删除test子目录及子目录中所有档案删除,并且不用一一确认 rm -rf test
+（3）删除以-f开头的文件 rm -- -f* 
+</code></pre><p><code>rmdir</code> 从一个目录中删除一个或多个子目录项，删除某目录时也必须具有对其父目录的写权限。 注意：不能删除非空目录</p>
+<pre><code>实例：
+（1）当parent子目录被删除后使它也成为空目录的话，则顺便一并删除
+   rmdir -p parent/child/child11
+</code></pre><p><code>mv</code> 移动文件或修改文件名，根据第二参数类型（如目录，则移动文件；如为文件则重命令该文件）。<br>    当第二个参数为目录时，可刚多个文件以空格分隔作为第一参数，移动多个文件到参数2指定的目录中</p>
+<pre><code>实例：
+ （1）将文件test.log重命名为test1.txt 
+ mv test.log test1.txt
+
+ （2）将文件log1.txt,log2.txt,log3.txt移动到根的test3目录中 
+ mv llog1.txt log2.txt log3.txt /test3
+
+ （3）将文件file1改名为file2，如果file2已经存在，则询问是否覆盖 
+ mv -i log1.txt log2.txt
+
+  （4）移动当前文件夹下的所有文件到上一级目录 mv * ../
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/" itemprop="url">Spring-Boot中yml多环境配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringBoot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/" class="leancloud_visitors" data-flag-title="Spring-Boot中yml多环境配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring-Boot中yml多环境配置"><a href="#Spring-Boot中yml多环境配置" class="headerlink" title="Spring-Boot中yml多环境配置"></a>Spring-Boot中yml多环境配置</h1><blockquote>
+<p>在springboot的开发中,有时候我们会有不同的配置,例如日志打印,数据库连接等,开发,测试,生产每个环境可能配置都不一致,还好,springboot支持通过不同的profile来配置不同环境的配置,下面就大致介绍一下yml配置文件跟properties配置文件怎么使用profile配置不同环境的配置文件…</p>
+</blockquote>
+<pre><code>#查看springboot开启了哪些配置
+debug: false
+
+# 配置激活选项
+spring:
+  profiles:
+    active: dev
+
+---
+#开发环境配置
+spring:
+  profiles: dev
+
+
+server:
+  port: 8080
+
+
+---
+#测试环境配置
+spring:
+  profiles: test
+
+server:
+  port: 8081
+
+
+---
+#生产环境配置
+
+spring:
+  profiles: pro
+
+server:
+  port: 8082
+</code></pre><blockquote>
+<p>如果是部署到服务器的话,我们正常打成jar包,发布是时候,采用:\<br>–spring.profiles.active=test或者pro 来控制加载哪个环境的配置,完整命令如下:<br>java -jar xxxxx.jar –spring.profiles.active=test  表示加载测试环境的配置<br>java -jar xxxxx.jar –spring.profiles.active=pro  表示加载生产环境的配置</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Markdown基础语法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -510,549 +1245,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Redis/" itemprop="url">Redis基础教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Redis/" class="leancloud_visitors" data-flag-title="Redis基础教程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>下载地址：<a href="http://redis.io/download" target="_blank" rel="external">http://redis.io/download</a></p>
-<p>解压：tar -zvxf redis-3.0.7.tar.gz  将解压后的文件夹放到 /usr/local目录下</p>
-<p>编译测试:接下来在终端中切换到/usr/local/redis目录下,输入：<code>sudo make test</code>,完成之后<code>sudo make install</code></p>
-<p>启动：切换至 /user/local/bin, 输入：<code>redis-server</code></p>
-<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><ol>
-<li><p>在 /usr/local/redis目录下建立bin，etc，db三个目录</p>
-</li>
-<li><p>把/usr/local/redis/src目录下的mkreleasehdr.sh，redis-benchmark， redis-check-dump， redis-cli， redis-server拷贝到bin目录</p>
-</li>
-<li><p>在etc下，参考原/usr/local/redis目录下的redis.conf，新建一个redis.conf</p>
-<p> <em>具体配置可查看此链接 <a href="http://www.jianshu.com/p/6b5eca8d908b" target="_blank" rel="external">http://www.jianshu.com/p/6b5eca8d908b</a></em></p>
-</li>
-<li><p>启动: <code>./redis-server /usr/local/redis-3.2.6/redis.conf</code>具体启动地址根据路径不同版本不同进行更改</p>
-</li>
-</ol>
-<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
-<li><p><strong>jar:    必须架包</strong> </p>
-<pre><code>import redis.clients.jedis.Jedis;
-</code></pre></li>
-<li><p><strong>Connect:    链接Redis数据库</strong> </p>
-<pre><code>Jedis jedis = new Jedis(&quot;localhost&quot;);
-</code></pre></li>
-<li><p><strong>String:    设置String类型value</strong> </p>
-<pre><code>jedis.set(&quot;running man&quot;, &quot;angelbaby&quot;);
-System.out.println(jedis.get(&quot;running man&quot;));
-</code></pre></li>
-<li><p><strong>List: 设置List类型value</strong>  </p>
-<pre><code>jedis.lpush(&quot;running&quot;, &quot;dc&quot;);
-List&lt;String&gt; list = jedis.lrange(&quot;running&quot;, 0, 5);
-</code></pre></li>
-<li><p><strong>Keys：获取Redis数据库中所有keys</strong></p>
-<pre><code>System.out.println(jedis.keys(&quot;*&quot;));
-</code></pre></li>
-<li><p><strong>Set: 设置Set类型value</strong></p>
-<pre><code>// 无序集合
-jedis.sadd(&quot;man&quot;, &quot;mongodb&quot;);
-jedis.sadd(&quot;man&quot;, &quot;mysql&quot;);
-Set&lt;String&gt; set = jedis.smembers(&quot;man&quot;);
-// 有序集合 score 字段
-jedis.zadd(&quot;wdy&quot;, 0, &quot;Mr.Li&quot;);
-jedis.zadd(&quot;wdy&quot;, 1, &quot;Mr.Feng&quot;);
-Set&lt;String&gt; set = jedis.zrange(&quot;wdy&quot;, 0, 1);
-</code></pre></li>
-<li><p><strong>Map: 设置HashMap类型value</strong></p>
-<pre><code>Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
-map.put(&quot;name&quot;, &quot;ken&quot;);
-jedis.hmset(&quot;map&quot;, map);
-map = jedis.hgetAll(&quot;map&quot;);
-</code></pre></li>
-<li><p><strong>Object: 设置Object类型value</strong></p>
-<pre><code>User user = new User();
-user.setUsername(&quot;DaPeng&quot;);
-user.setEmail(&quot;fengzq@vdaoyun.com&quot;);
-jedis.set(&quot;user&quot;.getBytes(), SerializeUtil.serialize(user));
-byte[] value = jedis.get(&quot;user&quot;.getBytes());
-Object object = SerializeUtil.unserialize(value);
-if (object != null) {
-    user = (User) object;
-    System.out.println(user.getUsername());
-    System.err.println(user.getEmail());
-}
-</code></pre></li>
-</ol>
-<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ol>
-<li>检查是否启动：redis-cli ping</li>
-<li>关闭命令：redis-cli shutdown</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Spring Cloud Config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Spring Cloud Config/" itemprop="url">Spring Cloud Config</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringCloud/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringCloud</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Spring Cloud Config/" class="leancloud_visitors" data-flag-title="Spring Cloud Config">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="spring-cloud"><a href="#spring-cloud" class="headerlink" title="spring cloud"></a>spring cloud</h1><ol>
-<li>创建配置文件存放仓库 git 或者 svn</li>
-<li>创建spring cloud配置服务器</li>
-<li>创建一个服务使用远程配置</li>
-</ol>
-<blockquote>
-<p>获取git上的资源信息遵循如下规则：</p>
-</blockquote>
-<pre><code>/{application}/{profile}[/{label}]
-/{application}-{profile}.yml
-/{label}/{application}-{profile}.yml
-/{application}-{profile}.properties
-/{label}/{application}-{profile}.properties
-</code></pre><ol>
-<li>application:表示应用名称,在client中通过spring.config.name配置</li>
-<li>profile:表示获取指定环境下配置，例如开发环境、测试环境、生产环境 默认值default，实际开发中可以是 dev、test、demo、production等</li>
-<li>label: git标签，默认值master</li>
-</ol>
-<h2 id="在Git端修改配置后如何让客户端生效？"><a href="#在Git端修改配置后如何让客户端生效？" class="headerlink" title="在Git端修改配置后如何让客户端生效？"></a>在Git端修改配置后如何让客户端生效？</h2><p>访问接口修改</p>
-<ol>
-<li>refresh<br>post方式执行<a href="http://localhost/refresh" target="_blank" rel="external">http://localhost/refresh</a> 会刷新env中的配置</li>
-<li>restart<br>如果配置信息已经注入到bean中，由于bean是单例的，不会去加载修改后的配置<br>需要通过post方式去执行<a href="http://localhost/restart" target="_blank" rel="external">http://localhost/restart</a>,<br>需要通过application.properties中配置endpoints.restart.enabled=true启动指定的端口</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Ehcache/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Ehcache/" itemprop="url">ehcache</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Ehcache/" class="leancloud_visitors" data-flag-title="ehcache">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="ehcache"><a href="#ehcache" class="headerlink" title="ehcache"></a>ehcache</h1><h2 id="缓存配置"><a href="#缓存配置" class="headerlink" title="缓存配置"></a>缓存配置</h2><pre><code>name:缓存名称。 
-maxElementsInMemory：缓存最大个数。 
-eternal:对象是否永久有效，一但设置了，timeout将不起作用。 
-timeToIdleSeconds：设置对象在失效前的允许闲置时间（单位：秒）。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。 
-timeToLiveSeconds：设置对象在失效前允许存活时间（单位：秒）。最大时间介于创建时间和失效时间之间。仅当eternal=false对象不是永久有效时使用，默认是0.，也就是对象存活时间无穷大。 
-overflowToDisk：当内存中对象数量达到maxElementsInMemory时，Ehcache将会对象写到磁盘中。 
-diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。 
-maxElementsOnDisk：硬盘最大缓存个数。 
-diskPersistent：是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false. 
-diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。 
-memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。 
-clearOnFlush：内存数量最大时是否清除。 
-</code></pre><h2 id="依赖jar包"><a href="#依赖jar包" class="headerlink" title="依赖jar包"></a>依赖jar包</h2><pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;
-    &lt;artifactId&gt;ehcache-core&lt;/artifactId&gt;
-    &lt;version&gt;2.6.11&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.googlecode.ehcache-spring-annotations&lt;/groupId&gt;
-    &lt;artifactId&gt;ehcache-spring-annotations&lt;/artifactId&gt;
-    &lt;version&gt;1.2.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h2 id="spring-mvc-xml-配置"><a href="#spring-mvc-xml-配置" class="headerlink" title="spring-mvc.xml 配置"></a>spring-mvc.xml 配置</h2><p>xmlns:ehcache</p>
-<pre><code>xmlns:ehcache=&quot;http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring&quot;
-</code></pre><p>xsi:schemaLocation</p>
-<pre><code>xsi:schemaLocation=&quot;http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring 
-    http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.0.xsd&quot;    
-</code></pre><p>bean    </p>
-<pre><code>&lt;bean id=&quot;slfKeyGenerator&quot;
-    class=&quot;com.googlecode.ehcache.annotations.key.StringCacheKeyGenerator&quot;&gt;
-    &lt;property name=&quot;includeMethod&quot; value=&quot;false&quot; /&gt;
-&lt;/bean&gt;
-
-&lt;!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 --&gt;
-&lt;ehcache:annotation-driven cache-manager=&quot;ehCacheManager&quot; /&gt;
-&lt;bean id=&quot;ehCacheManager&quot;
-    class=&quot;org.springframework.cache.ehcache.EhCacheManagerFactoryBean&quot;&gt;
-    &lt;property name=&quot;configLocation&quot;&gt;
-        &lt;value&gt;classpath:ehcache.xml&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/bean&gt;
-</code></pre><h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>添加缓存    <code>@Cacheable(cacheName=&quot;departCache&quot;)</code></p>
-<p>清除缓存    <code>@TriggersRemove(cacheName=&quot;departCache&quot;,removeAll=true)</code> </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Maven/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1233,7 +1425,7 @@ export PATH=$PATH:$M2_HOME/bin
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Feign/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dapeng">
@@ -1252,7 +1444,7 @@ export PATH=$PATH:$M2_HOME/bin
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/" itemprop="url">Spring-Boot中yml多环境配置</a></h1>
+                <a class="post-title-link" href="/2017/07/11/Feign/" itemprop="url">Spring Cloud Feign</a></h1>
         
 
         <div class="post-meta">
@@ -1264,7 +1456,7 @@ export PATH=$PATH:$M2_HOME/bin
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:30:00+08:00">
                 2017-07-11
               </time>
             
@@ -1275,28 +1467,6 @@ export PATH=$PATH:$M2_HOME/bin
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringBoot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1304,7 +1474,7 @@ export PATH=$PATH:$M2_HOME/bin
 
           
           
-             <span id="/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/" class="leancloud_visitors" data-flag-title="Spring-Boot中yml多环境配置">
+             <span id="/2017/07/11/Feign/" class="leancloud_visitors" data-flag-title="Spring Cloud Feign">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1334,47 +1504,48 @@ export PATH=$PATH:$M2_HOME/bin
       
         
           
-            <h1 id="Spring-Boot中yml多环境配置"><a href="#Spring-Boot中yml多环境配置" class="headerlink" title="Spring-Boot中yml多环境配置"></a>Spring-Boot中yml多环境配置</h1><blockquote>
-<p>在springboot的开发中,有时候我们会有不同的配置,例如日志打印,数据库连接等,开发,测试,生产每个环境可能配置都不一致,还好,springboot支持通过不同的profile来配置不同环境的配置,下面就大致介绍一下yml配置文件跟properties配置文件怎么使用profile配置不同环境的配置文件…</p>
+            <h2 id="Spring-boot-amp-amp-Spring-Cloud"><a href="#Spring-boot-amp-amp-Spring-Cloud" class="headerlink" title="Spring boot &amp;&amp; Spring Cloud"></a>Spring boot &amp;&amp; Spring Cloud</h2><h3 id="Feign-配置"><a href="#Feign-配置" class="headerlink" title="Feign 配置"></a>Feign 配置</h3><h4 id="添加Maven依赖，如下示例："><a href="#添加Maven依赖，如下示例：" class="headerlink" title="添加Maven依赖，如下示例："></a>添加Maven依赖，如下示例：</h4><blockquote>
+<p><strong>注意：如果加入Feign服务后，启动报错。请检查spring-boot版本号以及spring-cloud版本号。</strong></p>
 </blockquote>
-<pre><code>#查看springboot开启了哪些配置
-debug: false
+<pre><code>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;1.5.4.RELEASE&lt;/version&gt;
+    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+&lt;/parent&gt;
 
-# 配置激活选项
-spring:
-  profiles:
-    active: dev
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-feign&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
 
----
-#开发环境配置
-spring:
-  profiles: dev
+&lt;properties&gt;
+    &lt;spring-cloud.version&gt;Dalston.SR1&lt;/spring-cloud.version&gt;
+&lt;/properties&gt;
 
-
-server:
-  port: 8080
-
-
----
-#测试环境配置
-spring:
-  profiles: test
-
-server:
-  port: 8081
-
-
----
-#生产环境配置
-
-spring:
-  profiles: pro
-
-server:
-  port: 8082
-</code></pre><blockquote>
-<p>如果是部署到服务器的话,我们正常打成jar包,发布是时候,采用:\<br>–spring.profiles.active=test或者pro 来控制加载哪个环境的配置,完整命令如下:<br>java -jar xxxxx.jar –spring.profiles.active=test  表示加载测试环境的配置<br>java -jar xxxxx.jar –spring.profiles.active=pro  表示加载生产环境的配置</p>
-</blockquote>
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre><h4 id="在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务"><a href="#在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务" class="headerlink" title="在Spring Boot项目启动类，添加@EnableFeignClients注解，用于开启Feign服务"></a>在Spring Boot项目启动类，添加<code>@EnableFeignClients</code>注解，用于开启Feign服务</h4><hr>
+<h3 id="Feign-使用"><a href="#Feign-使用" class="headerlink" title="Feign 使用"></a>Feign 使用</h3><h4 id="1-结合-Eureka-注册服务使用时："><a href="#1-结合-Eureka-注册服务使用时：" class="headerlink" title="1. 结合 Eureka 注册服务使用时："></a>1. 结合 Eureka 注册服务使用时：</h4><pre><code>`@FeignClient(name = &quot;&quot;)`
+</code></pre><p><strong>说明：name的值即为Api项目在Eureka中注册的application.name；</strong></p>
+<p><strong>例如：<code>@FeignClient(name = &quot;hs.api&quot;)</code></strong></p>
+<h4 id="2-单独使用时："><a href="#2-单独使用时：" class="headerlink" title="2. 单独使用时："></a>2. 单独使用时：</h4><pre><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;&quot;)
+</code></pre><p><strong>说明：url即为请求的ip或者域名</strong></p>
+<p><strong>例如：</strong></p>
+<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://192.168.1.112:7071&quot;)</code></strong></p>
+<p><strong>或者</strong></p>
+<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://www.hsybyh.com&quot;)</code></strong></p>
 
           
         
@@ -1506,170 +1677,6 @@ server:
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Feign/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Feign/" itemprop="url">Spring Cloud Feign</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:30:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Feign/" class="leancloud_visitors" data-flag-title="Spring Cloud Feign">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Spring-boot-amp-amp-Spring-Cloud"><a href="#Spring-boot-amp-amp-Spring-Cloud" class="headerlink" title="Spring boot &amp;&amp; Spring Cloud"></a>Spring boot &amp;&amp; Spring Cloud</h2><h3 id="Feign-配置"><a href="#Feign-配置" class="headerlink" title="Feign 配置"></a>Feign 配置</h3><h4 id="添加Maven依赖，如下示例："><a href="#添加Maven依赖，如下示例：" class="headerlink" title="添加Maven依赖，如下示例："></a>添加Maven依赖，如下示例：</h4><blockquote>
-<p><strong>注意：如果加入Feign服务后，启动报错。请检查spring-boot版本号以及spring-cloud版本号。</strong></p>
-</blockquote>
-<pre><code>&lt;parent&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;1.5.4.RELEASE&lt;/version&gt;
-    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-&lt;/parent&gt;
-
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-cloud-starter-feign&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-
-&lt;properties&gt;
-    &lt;spring-cloud.version&gt;Dalston.SR1&lt;/spring-cloud.version&gt;
-&lt;/properties&gt;
-
-&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-            &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
-</code></pre><h4 id="在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务"><a href="#在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务" class="headerlink" title="在Spring Boot项目启动类，添加@EnableFeignClients注解，用于开启Feign服务"></a>在Spring Boot项目启动类，添加<code>@EnableFeignClients</code>注解，用于开启Feign服务</h4><hr>
-<h3 id="Feign-使用"><a href="#Feign-使用" class="headerlink" title="Feign 使用"></a>Feign 使用</h3><h4 id="1-结合-Eureka-注册服务使用时："><a href="#1-结合-Eureka-注册服务使用时：" class="headerlink" title="1. 结合 Eureka 注册服务使用时："></a>1. 结合 Eureka 注册服务使用时：</h4><pre><code>`@FeignClient(name = &quot;&quot;)`
-</code></pre><p><strong>说明：name的值即为Api项目在Eureka中注册的application.name；</strong></p>
-<p><strong>例如：<code>@FeignClient(name = &quot;hs.api&quot;)</code></strong></p>
-<h4 id="2-单独使用时："><a href="#2-单独使用时：" class="headerlink" title="2. 单独使用时："></a>2. 单独使用时：</h4><pre><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;&quot;)
-</code></pre><p><strong>说明：url即为请求的ip或者域名</strong></p>
-<p><strong>例如：</strong></p>
-<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://192.168.1.112:7071&quot;)</code></strong></p>
-<p><strong>或者</strong></p>
-<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://www.hsybyh.com&quot;)</code></strong></p>
 
           
         

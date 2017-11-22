@@ -2059,7 +2059,7 @@ public class EnrollApplication {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Linux常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Spring Cloud Config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dapeng">
@@ -2078,7 +2078,7 @@ public class EnrollApplication {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/11/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
+                <a class="post-title-link" href="/2017/07/11/Spring Cloud Config/" itemprop="url">Spring Cloud Config</a></h1>
         
 
         <div class="post-meta">
@@ -2113,8 +2113,8 @@ public class EnrollApplication {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/SpringCloud/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringCloud</span>
                   </a>
                 </span>
 
@@ -2130,7 +2130,7 @@ public class EnrollApplication {
 
           
           
-             <span id="/2017/07/11/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
+             <span id="/2017/07/11/Spring Cloud Config/" class="leancloud_visitors" data-flag-title="Spring Cloud Config">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2160,37 +2160,30 @@ public class EnrollApplication {
       
         
           
-            <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p><code>free -m -m</code> 查看系统内存情况</p>
-<p><code>netstat -lnp|grep XX</code> 查看指定端口是否被占用，XX为其他想要查看的端口</p>
-<p><code>kill XXX</code> 杀指定进程,XXX改为想要杀掉的进程号</p>
-<p><code>nohup java -jar XXXX.jar</code> 后台启动jar包，XXXX为你想要运行的jar包</p>
-<p><code>echo $PATH</code> 查看系统$PATH路径</p>
-<p><code>uzip XXXX.zip</code> 解压zip文件</p>
-<p><code>tar -zxvf XXXX.tar.gz</code> 解压tar.gz文件</p>
-<p><code>cd XXX</code> 切换到XXX路径</p>
-<p><code>ls</code> 查看当前目录下的所有文件</p>
-<p><code>rm</code>  删除一个目录中的一个或多个文件或目录，如果没有使用- r选项，则rm不会删除目录。如果使用              rm 来删除文件，通常仍可以将该文件恢复原状 rm [选项] 文件…</p>
-<pre><code>实例：
-（1）删除任何.log文件；删除前逐一询问确认  rm -i *.log
-（2）删除test子目录及子目录中所有档案删除,并且不用一一确认 rm -rf test
-（3）删除以-f开头的文件 rm -- -f* 
-</code></pre><p><code>rmdir</code> 从一个目录中删除一个或多个子目录项，删除某目录时也必须具有对其父目录的写权限。 注意：不能删除非空目录</p>
-<pre><code>实例：
-（1）当parent子目录被删除后使它也成为空目录的话，则顺便一并删除
-   rmdir -p parent/child/child11
-</code></pre><p><code>mv</code> 移动文件或修改文件名，根据第二参数类型（如目录，则移动文件；如为文件则重命令该文件）。<br>    当第二个参数为目录时，可刚多个文件以空格分隔作为第一参数，移动多个文件到参数2指定的目录中</p>
-<pre><code>实例：
- （1）将文件test.log重命名为test1.txt 
- mv test.log test1.txt
+            <h1 id="spring-cloud"><a href="#spring-cloud" class="headerlink" title="spring cloud"></a>spring cloud</h1><ol>
+<li>创建配置文件存放仓库 git 或者 svn</li>
+<li>创建spring cloud配置服务器</li>
+<li>创建一个服务使用远程配置</li>
+</ol>
+<blockquote>
+<p>获取git上的资源信息遵循如下规则：</p>
+</blockquote>
+<pre><code>/{application}/{profile}[/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+</code></pre><ol>
+<li>application:表示应用名称,在client中通过spring.config.name配置</li>
+<li>profile:表示获取指定环境下配置，例如开发环境、测试环境、生产环境 默认值default，实际开发中可以是 dev、test、demo、production等</li>
+<li>label: git标签，默认值master</li>
+</ol>
+<h2 id="在Git端修改配置后如何让客户端生效？"><a href="#在Git端修改配置后如何让客户端生效？" class="headerlink" title="在Git端修改配置后如何让客户端生效？"></a>在Git端修改配置后如何让客户端生效？</h2><p>访问接口修改</p>
+<ol>
+<li>refresh<br>post方式执行<a href="http://localhost/refresh" target="_blank" rel="external">http://localhost/refresh</a> 会刷新env中的配置</li>
+<li>restart<br>如果配置信息已经注入到bean中，由于bean是单例的，不会去加载修改后的配置<br>需要通过post方式去执行<a href="http://localhost/restart" target="_blank" rel="external">http://localhost/restart</a>,<br>需要通过application.properties中配置endpoints.restart.enabled=true启动指定的端口</li>
+</ol>
 
- （2）将文件log1.txt,log2.txt,log3.txt移动到根的test3目录中 
- mv llog1.txt log2.txt log3.txt /test3
-
- （3）将文件file1改名为file2，如果file2已经存在，则询问是否覆盖 
- mv -i log1.txt log2.txt
-
-  （4）移动当前文件夹下的所有文件到上一级目录 mv * ../
-</code></pre>
           
         
       
