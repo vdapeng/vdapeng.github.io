@@ -276,6 +276,496 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/Docker搭建Gitlab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/20/Docker搭建Gitlab/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T15:36:21+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/20/Docker搭建Gitlab/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: 使用Docker搭建GitLab服务器<br>date:  2017-12-09 15:49:00<br>tags:  [‘GitLab’]</p>
+<h2 id="category-‘GitLab’"><a href="#category-‘GitLab’" class="headerlink" title="category: [‘GitLab’]"></a>category: [‘GitLab’]</h2><h1 id="使用Docker搭建GitLab服务器"><a href="#使用Docker搭建GitLab服务器" class="headerlink" title="使用Docker搭建GitLab服务器"></a>使用Docker搭建GitLab服务器</h1><h3 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h3><pre><code>docker run -d
+--name gitlab  
+--link gitlab-postgresql:postgresql 
+--link gitlab-redis:redisio 
+--publish 10022:22 --publish 80:80 
+--env &apos;GITLAB_PORT=80&apos; --env &apos;GITLAB_SSH_PORT=10022&apos; 
+--env &apos;GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alpha-numeric-string&apos; 
+--env &apos;GITLAB_SECRETS_SECRET_KEY_BASE=long-and-random-alpha-numeric-string&apos; 
+--env &apos;GITLAB_SECRETS_OTP_KEY_BASE=long-and-random-alpha-numeric-string&apos; 
+--env &apos;GITLAB_HOST=gitlab.vdaoyun.com&apos; 
+--env &apos;SMTP_ENABLED=true&apos; --env &apos;SMTP_DOMAIN=www.qq.com&apos; 
+--env &apos;SMTP_HOST=smtp.qq.com&apos;  --env &apos;SMTP_USER=474607030@qq.com&apos; 
+--env &apos;SMTP_PASS=***&apos; 
+--volume /usr/gitlab/gitlab:/home/git/data sameersbn/gitlab:10.2.5
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/springboot应用war包部署tomcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/20/springboot应用war包部署tomcat/" itemprop="url">springboot应用war包部署tomcat</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T09:12:00+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/20/springboot应用war包部署tomcat/" class="leancloud_visitors" data-flag-title="springboot应用war包部署tomcat">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="springboot应用war包部署tomcat"><a href="#springboot应用war包部署tomcat" class="headerlink" title="springboot应用war包部署tomcat"></a>springboot应用war包部署tomcat</h2><h3 id="1-将项目的启动类Application-java继承SpringBootServletInitializer并重写configure方法"><a href="#1-将项目的启动类Application-java继承SpringBootServletInitializer并重写configure方法" class="headerlink" title="1.将项目的启动类Application.java继承SpringBootServletInitializer并重写configure方法"></a>1.将项目的启动类Application.java继承SpringBootServletInitializer并重写configure方法</h3><pre><code>@SpringBootApplication
+public class Application extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+</code></pre><h3 id="2、在pom-xml文件中，project下面增加package标签"><a href="#2、在pom-xml文件中，project下面增加package标签" class="headerlink" title="2、在pom.xml文件中，project下面增加package标签"></a>2、在pom.xml文件中，project下面增加package标签</h3><pre><code>&lt;packaging&gt;war&lt;/packaging&gt;
+</code></pre><h3 id="3、还是在pom-xml文件中，dependencies下面添加"><a href="#3、还是在pom-xml文件中，dependencies下面添加" class="headerlink" title="3、还是在pom.xml文件中，dependencies下面添加"></a>3、还是在pom.xml文件中，dependencies下面添加</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt; 
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/09/使用Docker搭建Ngrok服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/09/使用Docker搭建Ngrok服务器/" itemprop="url">使用Docker搭建Ngrok服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-09T15:49:00+08:00">
+                2017-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ngrok/" itemprop="url" rel="index">
+                    <span itemprop="name">ngrok</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/09/使用Docker搭建Ngrok服务器/" class="leancloud_visitors" data-flag-title="使用Docker搭建Ngrok服务器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用Docker搭建Ngrok服务器"><a href="#使用Docker搭建Ngrok服务器" class="headerlink" title="使用Docker搭建Ngrok服务器"></a>使用Docker搭建Ngrok服务器</h1><h3 id="docker-pull-hteen-ngrok"><a href="#docker-pull-hteen-ngrok" class="headerlink" title="docker pull hteen/ngrok"></a>docker pull hteen/ngrok</h3><h3 id="启动Ngrok-serve"><a href="#启动Ngrok-serve" class="headerlink" title="启动Ngrok serve"></a>启动Ngrok serve</h3><pre><code>root@iZ25f738hs2Z ngrok]# docker run -idt --name ngrok-server \
+-v /data/ngrok:/myfiles \
+-p 80:80 \
+-p 443:443 \
+-p 4443:4443 \
+-e DOMAIN=&apos;tunnel.hteen.cn&apos; hteen/ngrok /bin/sh /server.sh
+</code></pre><h3 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h3><p>首先创建一个ngrok.cfg配置文件</p>
+<pre><code>server_addr: &quot;tunnel.hteen.cn:4443&quot;
+trust_host_root_certs: false
+</code></pre><p>然后在命令行执行</p>
+<pre><code>./ngrok -config ./ngrok.cfg -subdomain wechat 192.168.99.100:80
+</code></pre><p>Nginx + Docker + Ngrok</p>
+<pre><code>server {
+ listen       80;
+ server_name  tunnel.hteen.cn *.tunnel.hteen.cn;
+ location / {
+         proxy_redirect off;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_pass http://localhost:8082;
+ }
+ }
+ server {
+     listen       443;
+     server_name  tunnel.hteen.cn *.tunnel.hteen.cn;
+     location / {
+             proxy_redirect off;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-IP $remote_addr;
+             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+             proxy_pass http://localhost:4432;
+     }
+ }
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/Swagger在线文档编写/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1677,592 +2167,6 @@ CONTAINER ID        IMAGE                                         STATUS        
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/spring boot 读取配置文件（application.yml）中的属性值/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/12/spring boot 读取配置文件（application.yml）中的属性值/" itemprop="url">Spring Boot 读取配置文件（application.yml）中的属性值</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T18:00:00+08:00">
-                2017-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Boot/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring Boot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/12/spring boot 读取配置文件（application.yml）中的属性值/" class="leancloud_visitors" data-flag-title="Spring Boot 读取配置文件（application.yml）中的属性值">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Spring-Boot-读取配置文件（application-yml）中的属性值"><a href="#Spring-Boot-读取配置文件（application-yml）中的属性值" class="headerlink" title="Spring Boot 读取配置文件（application.yml）中的属性值"></a>Spring Boot 读取配置文件（application.yml）中的属性值</h1><ol>
-<li><p>引入依赖：</p>
-<pre><code>&lt;!-- 支持 @ConfigurationProperties 注解 --&gt;  
-&lt;dependency&gt;  
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  
-    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;  
-    &lt;optional&gt;true&lt;/optional&gt;  
-&lt;/dependency&gt;  
-</code></pre></li>
-<li><p>配置文件（application.yml）中配置各个属性的值：</p>
-<pre><code>spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.1.202:3306/hs_dev?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull
-    username: root
-    password: 
-    driver-class-name: com.mysql.jdbc.Driver
-</code></pre></li>
-<li><p>创建一个bean来接收配置信息：</p>
-</li>
-</ol>
-<pre><code>@Component
-@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
-public class DateBaseBean implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private String url;
-
-    private String driverClassName;
-
-    private String username;
-
-    private String password;
-
-    &lt;!-- 此处省略set和get --&gt;
-
-}
-</code></pre><ol>
-<li><p>使用<code>@Autowired</code>进行使用，如下测试用例：</p>
-<pre><code>@RestController
-@SpringBootApplication
-public class EnrollApplication {
-
-    @Autowired
-    private DateBaseBean dateBaseBean;
-
-    public static void main(String[] args) {
-        SpringApplication.run(EnrollApplication.class, args);
-    }
-
-    @RequestMapping(value = &quot;&quot;, method = RequestMethod.GET)
-    public DateBaseBean dateBaseBean() {
-        return dateBaseBean;
-    }
-}
-</code></pre></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/UML时序图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/12/UML时序图/" itemprop="url">UML时序图的画法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T15:40:00+08:00">
-                2017-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UML/" itemprop="url" rel="index">
-                    <span itemprop="name">UML</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/12/UML时序图/" class="leancloud_visitors" data-flag-title="UML时序图的画法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="UML时序图的画法"><a href="#UML时序图的画法" class="headerlink" title="UML时序图的画法"></a>UML时序图的画法</h1><h2 id="UML时序图简介"><a href="#UML时序图简介" class="headerlink" title="UML时序图简介"></a>UML时序图简介</h2><h3 id="时序图的概念"><a href="#时序图的概念" class="headerlink" title="时序图的概念"></a>时序图的概念</h3><p>时序图定义:</p>
-<pre><code>描述了对象之间传递消息的时间顺序, 用来表示用例中的行为顺序, 是强调消息时间顺序的交互图; 
-</code></pre><p>时序图描述的事物: </p>
-<pre><code>时序图描述系统中类和类之间的交互, 将这些交互建模成消息交换, 时序图描述了类以及类之间的交换以完成的期望行为的消息, 时序图中每条消息都代表了类的一个操作 或者 引起状态机改变的触发事件;
-</code></pre><p>时序图表示:</p>
-<pre><code>参与交互的对象在时序图顶端水平排列, 每个对象的底端绘制了一条垂直虚线, 对象A像对象B发送消息, 用一条带箭头的实线表示, 该实线起始于对象A底部的虚线, 终止于对象B底部的虚线; 实线箭头水平放置, 越靠近顶端越早被发送. 
-</code></pre><p>时序图轨迹:</p>
-<pre><code>时序图提供了随时间推移的, 清晰的 可视化的轨迹;
-</code></pre><h3 id="时序图组成"><a href="#时序图组成" class="headerlink" title="时序图组成"></a>时序图组成</h3><p>时序图组成 : 时序图包括四个元素 对象(Object), 生命线(Lifeline), 激活(Activation), 消息(Message);</p>
-<ol>
-<li><p>对象(Object)</p>
-<p> <img src="http://img.blog.csdn.net/20140306151055859" alt="图-1"></p>
-<pre><code>对象 : 时序图中的对象在交互中扮演的角色就是对象;    
-对象的符号 : 时序图中的对象与对象图中的表示方法一样, 使用矩形将对象名称包含起来, 并且对象名称下有下划线;
-
-对象创建时机 : 对象可以在交互开始的时候创建, 也可以在交互过程中进行创建; 
-– 处于顶部 : 如果对象的位置在时序图顶部, 说明在交互开始的时候对象就已经存在了; 
-– 不在顶部 : 如果对象的位置不在顶部, 那么对象在交互过程中创建的;
-</code></pre></li>
-<li><p>生命线(Lifeline)</p>
-<p> <img src="http://img.blog.csdn.net/20140306151055859" alt="图-2"></p>
-<pre><code>生命线 : 生命线是一条垂直的虚线, 这条虚线表示对象的存在, 在时序图中, 每个对象的底部都有生命线;
-
-生命线作用 : 生命线是一个时间线, 从时序图顶部一直到底部都存在, 其长度取决于交互的时间;
-
-对象的生命线 : 对象与生命线结合在一起就是对象的生命线, 这个概念包含对象图标 以及 对象下面的生命线图标 如上图;
-</code></pre></li>
-<li><p>激活(Activation)</p>
-<p> <img src="http://img.blog.csdn.net/20140306152228625" alt="图-3"></p>
-<pre><code>激活(Activation) : 代表时序图中对象执行一项操作的时期, 激活期可以理解为语义中 {} 中的内容, 表示该对象被占用以完成某个任务;
-
-去激活(Deactivation) : 指对象处于空闲状态, 在等待消息激活这个对象;
-
-激活的表示 : 当对象处于激活时期, 生命线可以拓宽为矩形, 这个矩形条成为激活条;
-
-激活去激活的时机 : 
-– 激活 : 对象激活是在激活条的顶部激活; 
-– 去激活 : 激活条的底部去激活, 通常发生在一个消息离开对象生命线;
-</code></pre></li>
-<li><p>消息</p>
-<pre><code>消息概念 : 定义 交互 和 协作 中 交换信息 的类, 对 对象之间的 通信内容 建模;
-
-消息动作 : 
-– 动作种类 : 消息允许在实体间传递信息 (传递参数), 允许实体请求其它服务, 对象之间通过 发送 和 接收 消息 进行通信; 
-– 产生结果 : 消息可以触发操作, 唤起信号, 或使目标对象创建 或 销毁;
-
-消息的异步和同步通信 : 
-– 异步通信 : 消息是信号的时候, 发送信号之后, 等待对方触发相应方法, 这是明确的 命名的 对象间的异步通信; 
-– 同步通信 : 直接调用对象的方法, 执行方法返回结果, 这种具有返回控制机制的操作是同步通信;
-
-时序图和协作图中消息的区别 : 时序图中的消息强调顺序, 协作图中的消息强调交换消息的对象间的关系;
-</code></pre></li>
-</ol>
-<p>消息类型 : </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160557765" alt="">这里写图片描述 : 两个对象间绘制消息; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160718453" alt="">这里写图片描述 : 两个对象之间的过程调用; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160803703" alt="">这里写图片描述: 两个对象之间的异步消息; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160855734" alt="">这里写图片描述: 过程调用中返回的消息; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306161046843" alt="">这里写图片描述 : 绘制反身消息;</p>
-<p>教程原文地址：<a href="http://blog.csdn.net/xingjiarong/article/details/50232199" target="_blank" rel="external">http://blog.csdn.net/xingjiarong/article/details/50232199</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Maven/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Maven/" itemprop="url">maven</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/maven/" itemprop="url" rel="index">
-                    <span itemprop="name">maven</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Maven/" class="leancloud_visitors" data-flag-title="maven">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h1><h2 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h2><ol>
-<li><p>打开<code>Terminal</code>，输入一下命令，设置<code>Maven classpath</code></p>
-<pre><code>vi ~/.bash_profile
-</code></pre></li>
-<li><p>添加下列两行代码，之后保存并退出Vi：</p>
-<pre><code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_11,jdk/Contents/Home
-export M2_HOME=/Users/robbie/apache-maven-3.3.3
-export PATH=$PATH:$M2_HOME/bin
-</code></pre></li>
-<li><p>输入命令以使bash_profile生效</p>
-<pre><code>source ~/.bash_profile
-</code></pre></li>
-<li>输入<code>mvn -v</code>查看Maven是否安装成功<img src="http://upload-images.jianshu.io/upload_images/420187-fee2d6db07d70ca8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Apache Maven"></li>
-</ol>
-<h2 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h2><pre><code>str
-    -main
-        -java
-            -package
-    -test
-        -java
-            -package
-    resources
-</code></pre><h2 id="Maven构建命令"><a href="#Maven构建命令" class="headerlink" title="Maven构建命令"></a>Maven构建命令</h2><ol>
-<li><code>mvn -v</code> 查看maven版本</li>
-<li><code>mvn compile</code> 编译</li>
-<li><code>mvn test</code> 测试</li>
-<li><code>mvn package</code> 打包</li>
-<li><code>mvn clean</code> 删除target</li>
-<li><code>mvn install</code> 安装jar包到本地仓库</li>
-<li><code>mvn archetype:generate</code> 自动构建maven项目目录</li>
-<li><code>mvn archetype:generate -DgroupId=com.vdaoyun.wdy -DartifactId=com.vdaoyun.wdy-service -Dversion=1.0.0SNAPSHOT -Dpackage=com.vdaoyun.wdy-service</code><blockquote>
-<p>-DgroupId=组织名，公司网址的反写+项目名<br>-DartifactId=项目名-模板名<br>-Dversion=版本名<br>-Dpackage=代码所存在的包</p>
-</blockquote>
-</li>
-<li><code>mvn deploy</code> 上传jar包到nexus私服</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2313,7 +2217,7 @@ export PATH=$PATH:$M2_HOME/bin
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2324,7 +2228,7 @@ export PATH=$PATH:$M2_HOME/bin
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2335,7 +2239,7 @@ export PATH=$PATH:$M2_HOME/bin
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

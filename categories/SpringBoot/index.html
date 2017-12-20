@@ -96,7 +96,7 @@
 <meta name="description" content="why you need to do it all by yourself? when right besides you there&apos;s a hand that could help">
 <meta property="og:type" content="website">
 <meta property="og:title" content="vdapeng&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/SpringBoot/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/springboot/index.html">
 <meta property="og:site_name" content="vdapeng&#39;s blog">
 <meta property="og:description" content="why you need to do it all by yourself? when right besides you there&apos;s a hand that could help">
 <meta name="twitter:card" content="summary">
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/SpringBoot/"/>
+  <link rel="canonical" href="http://yoursite.com/categories/springboot/"/>
 
 
 
 
 
-  <title>分类: SpringBoot | vdapeng's blog</title>
+  <title>分类: springboot | vdapeng's blog</title>
   
 
 
@@ -266,7 +266,7 @@
 
   <section id="posts" class="posts-collapse">
     <div class="collection-title">
-      <h1>SpringBoot<small>分类</small>
+      <h1>springboot<small>分类</small>
       </h1>
     </div>
 
@@ -278,37 +278,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/" itemprop="url">
+            <a class="post-title-link" href="/2017/12/20/springboot应用war包部署tomcat/" itemprop="url">
               
-                <span itemprop="name">Spring-Boot中yml多环境配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-11T09:31:00+08:00"
-              content="2017-07-11" >
-          07-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/02/05/Spring Boot 使用Redis实现Session共享/" itemprop="url">
-              
-                <span itemprop="name">Spring Boot 使用Redis实现Session共享</span>
+                <span itemprop="name">springboot应用war包部署tomcat</span>
               
             </a>
         
@@ -316,9 +288,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-02-05T15:49:00+08:00"
-              content="2017-02-05" >
-          02-05
+              datetime="2017-12-20T09:12:00+08:00"
+              content="2017-12-20" >
+          12-20
         </time>
       </div>
 
@@ -374,7 +346,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -385,7 +357,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -396,7 +368,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -666,6 +638,45 @@
             newcounter.save(null, {
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+ement = $(document.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
               },
               error: function(newcounter, error) {
