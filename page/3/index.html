@@ -443,330 +443,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Linux常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p><code>free -m -m</code> 查看系统内存情况</p>
-<p><code>netstat -lnp|grep XX</code> 查看指定端口是否被占用，XX为其他想要查看的端口</p>
-<p><code>kill XXX</code> 杀指定进程,XXX改为想要杀掉的进程号</p>
-<p><code>nohup java -jar XXXX.jar</code> 后台启动jar包，XXXX为你想要运行的jar包</p>
-<p><code>echo $PATH</code> 查看系统$PATH路径</p>
-<p><code>uzip XXXX.zip</code> 解压zip文件</p>
-<p><code>tar -zxvf XXXX.tar.gz</code> 解压tar.gz文件</p>
-<p><code>cd XXX</code> 切换到XXX路径</p>
-<p><code>ls</code> 查看当前目录下的所有文件</p>
-<p><code>rm</code>  删除一个目录中的一个或多个文件或目录，如果没有使用- r选项，则rm不会删除目录。如果使用              rm 来删除文件，通常仍可以将该文件恢复原状 rm [选项] 文件…</p>
-<pre><code>实例：
-（1）删除任何.log文件；删除前逐一询问确认  rm -i *.log
-（2）删除test子目录及子目录中所有档案删除,并且不用一一确认 rm -rf test
-（3）删除以-f开头的文件 rm -- -f* 
-</code></pre><p><code>rmdir</code> 从一个目录中删除一个或多个子目录项，删除某目录时也必须具有对其父目录的写权限。 注意：不能删除非空目录</p>
-<pre><code>实例：
-（1）当parent子目录被删除后使它也成为空目录的话，则顺便一并删除
-   rmdir -p parent/child/child11
-</code></pre><p><code>mv</code> 移动文件或修改文件名，根据第二参数类型（如目录，则移动文件；如为文件则重命令该文件）。<br>    当第二个参数为目录时，可刚多个文件以空格分隔作为第一参数，移动多个文件到参数2指定的目录中</p>
-<pre><code>实例：
- （1）将文件test.log重命名为test1.txt 
- mv test.log test1.txt
-
- （2）将文件log1.txt,log2.txt,log3.txt移动到根的test3目录中 
- mv llog1.txt log2.txt log3.txt /test3
-
- （3）将文件file1改名为file2，如果file2已经存在，则询问是否覆盖 
- mv -i log1.txt log2.txt
-
-  （4）移动当前文件夹下的所有文件到上一级目录 mv * ../
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Quartz中时间表达式的设置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Quartz中时间表达式的设置/" itemprop="url">Quartz中时间表达式的设置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Quartz/" itemprop="url" rel="index">
-                    <span itemprop="name">Quartz</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Quartz中时间表达式的设置/" class="leancloud_visitors" data-flag-title="Quartz中时间表达式的设置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Quartz中时间表达式的设置"><a href="#Quartz中时间表达式的设置" class="headerlink" title="Quartz中时间表达式的设置"></a>Quartz中时间表达式的设置</h1><p>时间格式: <!-- s m h d m w(?) y(?) -->,   分别对应: 秒&gt;分&gt;小时&gt;日&gt;月&gt;周&gt;年, </p>
-<p>举例:</p>
-<p>1.每天什么时候执行:</p>
-<pre><code> &lt;value&gt;0 59 23 * * ?&lt;/value&gt;: 如下为每天23:59:00开始执行
-
-&lt;value&gt;0 1,2,3 11,12 * * ? &lt;/value&gt;: 每天11:01,11:02,11:03; 12:01,12:02,12:03分执行任务
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -910,6 +586,180 @@ server:
 <p>如果是部署到服务器的话,我们正常打成jar包,发布是时候,采用:\<br>–spring.profiles.active=test或者pro 来控制加载哪个环境的配置,完整命令如下:<br>java -jar xxxxx.jar –spring.profiles.active=test  表示加载测试环境的配置<br>java -jar xxxxx.jar –spring.profiles.active=pro  表示加载生产环境的配置</p>
 </blockquote>
 
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p><code>free -m -m</code> 查看系统内存情况</p>
+<p><code>netstat -lnp|grep XX</code> 查看指定端口是否被占用，XX为其他想要查看的端口</p>
+<p><code>kill XXX</code> 杀指定进程,XXX改为想要杀掉的进程号</p>
+<p><code>nohup java -jar XXXX.jar</code> 后台启动jar包，XXXX为你想要运行的jar包</p>
+<p><code>echo $PATH</code> 查看系统$PATH路径</p>
+<p><code>uzip XXXX.zip</code> 解压zip文件</p>
+<p><code>tar -zxvf XXXX.tar.gz</code> 解压tar.gz文件</p>
+<p><code>cd XXX</code> 切换到XXX路径</p>
+<p><code>ls</code> 查看当前目录下的所有文件</p>
+<p><code>rm</code>  删除一个目录中的一个或多个文件或目录，如果没有使用- r选项，则rm不会删除目录。如果使用              rm 来删除文件，通常仍可以将该文件恢复原状 rm [选项] 文件…</p>
+<pre><code>实例：
+（1）删除任何.log文件；删除前逐一询问确认  rm -i *.log
+（2）删除test子目录及子目录中所有档案删除,并且不用一一确认 rm -rf test
+（3）删除以-f开头的文件 rm -- -f* 
+</code></pre><p><code>rmdir</code> 从一个目录中删除一个或多个子目录项，删除某目录时也必须具有对其父目录的写权限。 注意：不能删除非空目录</p>
+<pre><code>实例：
+（1）当parent子目录被删除后使它也成为空目录的话，则顺便一并删除
+   rmdir -p parent/child/child11
+</code></pre><p><code>mv</code> 移动文件或修改文件名，根据第二参数类型（如目录，则移动文件；如为文件则重命令该文件）。<br>    当第二个参数为目录时，可刚多个文件以空格分隔作为第一参数，移动多个文件到参数2指定的目录中</p>
+<pre><code>实例：
+ （1）将文件test.log重命名为test1.txt 
+ mv test.log test1.txt
+
+ （2）将文件log1.txt,log2.txt,log3.txt移动到根的test3目录中 
+ mv llog1.txt log2.txt log3.txt /test3
+
+ （3）将文件file1改名为file2，如果file2已经存在，则询问是否覆盖 
+ mv -i log1.txt log2.txt
+
+  （4）移动当前文件夹下的所有文件到上一级目录 mv * ../
+</code></pre>
           
         
       
@@ -1186,7 +1036,7 @@ server:
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Feign/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Quartz中时间表达式的设置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dapeng">
@@ -1205,7 +1055,7 @@ server:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/11/Feign/" itemprop="url">Spring Cloud Feign</a></h1>
+                <a class="post-title-link" href="/2017/07/11/Quartz中时间表达式的设置/" itemprop="url">Quartz中时间表达式的设置</a></h1>
         
 
         <div class="post-meta">
@@ -1217,7 +1067,7 @@ server:
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:30:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
                 2017-07-11
               </time>
             
@@ -1228,6 +1078,28 @@ server:
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Quartz/" itemprop="url" rel="index">
+                    <span itemprop="name">Quartz</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1235,7 +1107,7 @@ server:
 
           
           
-             <span id="/2017/07/11/Feign/" class="leancloud_visitors" data-flag-title="Spring Cloud Feign">
+             <span id="/2017/07/11/Quartz中时间表达式的设置/" class="leancloud_visitors" data-flag-title="Quartz中时间表达式的设置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1265,49 +1137,13 @@ server:
       
         
           
-            <h2 id="Spring-boot-amp-amp-Spring-Cloud"><a href="#Spring-boot-amp-amp-Spring-Cloud" class="headerlink" title="Spring boot &amp;&amp; Spring Cloud"></a>Spring boot &amp;&amp; Spring Cloud</h2><h3 id="Feign-配置"><a href="#Feign-配置" class="headerlink" title="Feign 配置"></a>Feign 配置</h3><h4 id="添加Maven依赖，如下示例："><a href="#添加Maven依赖，如下示例：" class="headerlink" title="添加Maven依赖，如下示例："></a>添加Maven依赖，如下示例：</h4><blockquote>
-<p><strong>注意：如果加入Feign服务后，启动报错。请检查spring-boot版本号以及spring-cloud版本号。</strong></p>
-</blockquote>
-<pre><code>&lt;parent&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-    &lt;version&gt;1.5.4.RELEASE&lt;/version&gt;
-    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
-&lt;/parent&gt;
+            <h1 id="Quartz中时间表达式的设置"><a href="#Quartz中时间表达式的设置" class="headerlink" title="Quartz中时间表达式的设置"></a>Quartz中时间表达式的设置</h1><p>时间格式: <!-- s m h d m w(?) y(?) -->,   分别对应: 秒&gt;分&gt;小时&gt;日&gt;月&gt;周&gt;年, </p>
+<p>举例:</p>
+<p>1.每天什么时候执行:</p>
+<pre><code> &lt;value&gt;0 59 23 * * ?&lt;/value&gt;: 如下为每天23:59:00开始执行
 
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-cloud-starter-feign&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-
-&lt;properties&gt;
-    &lt;spring-cloud.version&gt;Dalston.SR1&lt;/spring-cloud.version&gt;
-&lt;/properties&gt;
-
-&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-            &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
-</code></pre><h4 id="在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务"><a href="#在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务" class="headerlink" title="在Spring Boot项目启动类，添加@EnableFeignClients注解，用于开启Feign服务"></a>在Spring Boot项目启动类，添加<code>@EnableFeignClients</code>注解，用于开启Feign服务</h4><hr>
-<h3 id="Feign-使用"><a href="#Feign-使用" class="headerlink" title="Feign 使用"></a>Feign 使用</h3><h4 id="1-结合-Eureka-注册服务使用时："><a href="#1-结合-Eureka-注册服务使用时：" class="headerlink" title="1. 结合 Eureka 注册服务使用时："></a>1. 结合 Eureka 注册服务使用时：</h4><pre><code>`@FeignClient(name = &quot;&quot;)`
-</code></pre><p><strong>说明：name的值即为Api项目在Eureka中注册的application.name；</strong></p>
-<p><strong>例如：<code>@FeignClient(name = &quot;hs.api&quot;)</code></strong></p>
-<h4 id="2-单独使用时："><a href="#2-单独使用时：" class="headerlink" title="2. 单独使用时："></a>2. 单独使用时：</h4><pre><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;&quot;)
-</code></pre><p><strong>说明：url即为请求的ip或者域名</strong></p>
-<p><strong>例如：</strong></p>
-<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://192.168.1.112:7071&quot;)</code></strong></p>
-<p><strong>或者</strong></p>
-<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://www.hsybyh.com&quot;)</code></strong></p>
-
+&lt;value&gt;0 1,2,3 11,12 * * ? &lt;/value&gt;: 每天11:01,11:02,11:03; 12:01,12:02,12:03分执行任务
+</code></pre>
           
         
       
@@ -1438,6 +1274,170 @@ server:
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Feign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Feign/" itemprop="url">Spring Cloud Feign</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:30:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Feign/" class="leancloud_visitors" data-flag-title="Spring Cloud Feign">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Spring-boot-amp-amp-Spring-Cloud"><a href="#Spring-boot-amp-amp-Spring-Cloud" class="headerlink" title="Spring boot &amp;&amp; Spring Cloud"></a>Spring boot &amp;&amp; Spring Cloud</h2><h3 id="Feign-配置"><a href="#Feign-配置" class="headerlink" title="Feign 配置"></a>Feign 配置</h3><h4 id="添加Maven依赖，如下示例："><a href="#添加Maven依赖，如下示例：" class="headerlink" title="添加Maven依赖，如下示例："></a>添加Maven依赖，如下示例：</h4><blockquote>
+<p><strong>注意：如果加入Feign服务后，启动报错。请检查spring-boot版本号以及spring-cloud版本号。</strong></p>
+</blockquote>
+<pre><code>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;1.5.4.RELEASE&lt;/version&gt;
+    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+&lt;/parent&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-feign&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;properties&gt;
+    &lt;spring-cloud.version&gt;Dalston.SR1&lt;/spring-cloud.version&gt;
+&lt;/properties&gt;
+
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre><h4 id="在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务"><a href="#在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务" class="headerlink" title="在Spring Boot项目启动类，添加@EnableFeignClients注解，用于开启Feign服务"></a>在Spring Boot项目启动类，添加<code>@EnableFeignClients</code>注解，用于开启Feign服务</h4><hr>
+<h3 id="Feign-使用"><a href="#Feign-使用" class="headerlink" title="Feign 使用"></a>Feign 使用</h3><h4 id="1-结合-Eureka-注册服务使用时："><a href="#1-结合-Eureka-注册服务使用时：" class="headerlink" title="1. 结合 Eureka 注册服务使用时："></a>1. 结合 Eureka 注册服务使用时：</h4><pre><code>`@FeignClient(name = &quot;&quot;)`
+</code></pre><p><strong>说明：name的值即为Api项目在Eureka中注册的application.name；</strong></p>
+<p><strong>例如：<code>@FeignClient(name = &quot;hs.api&quot;)</code></strong></p>
+<h4 id="2-单独使用时："><a href="#2-单独使用时：" class="headerlink" title="2. 单独使用时："></a>2. 单独使用时：</h4><pre><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;&quot;)
+</code></pre><p><strong>说明：url即为请求的ip或者域名</strong></p>
+<p><strong>例如：</strong></p>
+<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://192.168.1.112:7071&quot;)</code></strong></p>
+<p><strong>或者</strong></p>
+<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://www.hsybyh.com&quot;)</code></strong></p>
 
           
         

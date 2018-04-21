@@ -670,7 +670,32 @@
       
         
           
-            <h1 id="Spring-cloud"><a href="#Spring-cloud" class="headerlink" title="Spring-cloud"></a>Spring-cloud</h1><h2 id="Spring-boot优缺点"><a href="#Spring-boot优缺点" class="headerlink" title="Spring-boot优缺点"></a>Spring-boot优缺点</h2><h2 id="Spring-Cloud优缺点"><a href="#Spring-Cloud优缺点" class="headerlink" title="Spring-Cloud优缺点"></a>Spring-Cloud优缺点</h2><h3 id="Config是什么？能做什么？"><a href="#Config是什么？能做什么？" class="headerlink" title="Config是什么？能做什么？"></a>Config是什么？能做什么？</h3><h3 id="Eureka是什么？能做什么？"><a href="#Eureka是什么？能做什么？" class="headerlink" title="Eureka是什么？能做什么？"></a>Eureka是什么？能做什么？</h3><h3 id="Zuul是什么？能做什么？"><a href="#Zuul是什么？能做什么？" class="headerlink" title="Zuul是什么？能做什么？"></a>Zuul是什么？能做什么？</h3><h3 id="Feign是什么？能做什么？"><a href="#Feign是什么？能做什么？" class="headerlink" title="Feign是什么？能做什么？"></a>Feign是什么？能做什么？</h3>
+            <h1 id="Spring-cloud"><a href="#Spring-cloud" class="headerlink" title="Spring-cloud"></a>Spring-cloud</h1><p><img src="https://upload-images.jianshu.io/upload_images/2251942-513576d3bc8b5fe8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SpringCloud.png"></p>
+<h2 id="Spring-boot优缺点"><a href="#Spring-boot优缺点" class="headerlink" title="Spring-boot优缺点"></a>Spring-boot优缺点</h2><blockquote>
+<p>Spring Boot 特性使用 Spring 项目引导页面可以在几秒构建一个项目方便对外输出各种形式的服务，如 REST API、WebSocket、Web、Streaming、Tasks非常简洁的安全策略集成支持关系数据库和非关系数据库支持运行期内嵌容器，如 Tomcat、Jetty强大的开发包，支持热启动自动管理依赖自带应用监控支持各种 IED，如 IntelliJ IDEA 、NetBeans缺点是集成度较高，使用过程中不太容易了解底层。</p>
+</blockquote>
+<h2 id="Spring-Cloud是什么"><a href="#Spring-Cloud是什么" class="headerlink" title="Spring-Cloud是什么"></a>Spring-Cloud是什么</h2><blockquote>
+<p>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。</p>
+</blockquote>
+<p>具体参考资料：<a href="https://springcloud.cc/" target="_blank" rel="external">https://springcloud.cc/</a>。SpringCloud提供了更多服务，可查看相关文档，测试使用。</p>
+<h3 id="Spring-Cloud-Config"><a href="#Spring-Cloud-Config" class="headerlink" title="Spring-Cloud-Config"></a>Spring-Cloud-Config</h3><p>具体参考资料：<a href="https://springcloud.cc/spring-cloud-config.html" target="_blank" rel="external">https://springcloud.cc/spring-cloud-config.html</a></p>
+<blockquote>
+<p>Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持。使用Config Server，您可以在所有环境中管理应用程序的外部属性。客户端和服务器上的概念映射与Spring Environment和PropertySource抽象相同，因此它们与Spring应用程序非常契合，但可以与任何以任何语言运行的应用程序一起使用。随着应用程序通过从开发人员到测试和生产的部署流程，您可以管理这些环境之间的配置，并确定应用程序具有迁移时需要运行的一切。服务器存储后端的默认实现使用git，因此它轻松支持标签版本的配置环境，以及可以访问用于管理内容的各种工具。可以轻松添加替代实现，并使用Spring配置将其插入。</p>
+</blockquote>
+<h3 id="Spring-Cloud-Netflix"><a href="#Spring-Cloud-Netflix" class="headerlink" title="Spring-Cloud-Netflix"></a>Spring-Cloud-Netflix</h3><p>具体参考资料：<a href="https://springcloud.cc/spring-cloud-netflix.html" target="_blank" rel="external">https://springcloud.cc/spring-cloud-netflix.html</a></p>
+<blockquote>
+<p>该项目通过自动配置和绑定到Spring环境和其他Spring编程模型的习惯方式来为Spring Boot应用程序提供Netflix OSS集成。通过几个简单的注释，您可以快速启用和配置应用程序中的常见模式，并通过经过测试的Netflix组件构建大型分布式系统。提供的模式包括服务发现（Eureka），断路器（Hystrix），智能路由（Zuul）和客户端负载平衡（Ribbon）。</p>
+</blockquote>
+<h4 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h4><blockquote>
+<p>服务发现是基于微服务架构的关键原则之一。尝试配置每个客户端或某种形式的约定可能非常困难，可以非常脆弱。Netflix服务发现服务器和客户端是Eureka。可以将服务器配置和部署为高可用性，每个服务器将注册服务的状态复制到其他服务器。</p>
+</blockquote>
+<h4 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h4><blockquote>
+<p>路由在微服务体系结构的一个组成部分。例如，/可以映射到您的Web应用程序，/api/users映射到用户服务，/api/shop映射到商店服务。Zuul是Netflix的基于JVM的路由器和服务器端负载均衡器。</p>
+</blockquote>
+<h4 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h4><blockquote>
+<p>Feign是一个声明式的Web服务客户端。这使得Web服务客户端的写入更加方便 要使用Feign创建一个界面并对其进行注释。它具有可插拔注释支持，包括Feign注释和JAX-RS注释。Feign还支持可插拔编码器和解码器。Spring Cloud添加了对Spring MVC注释的支持，并在Spring Web中使用默认使用的HttpMessageConverters。Spring Cloud集成Ribbon和Eureka以在使用Feign时提供负载均衡的http客户端。</p>
+</blockquote>
+
           
         
       
