@@ -276,7 +276,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/Spring Cloud oAuth2基本使用说明/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/使用ssh上传文件到gitlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dapeng">
@@ -295,7 +295,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/08/Spring Cloud oAuth2基本使用说明/" itemprop="url">Spring Cloud oAuth2基本使用说明</a></h1>
+                <a class="post-title-link" href="/2018/04/21/使用ssh上传文件到gitlab/" itemprop="url">使用ssh上传文件到gitlab</a></h1>
         
 
         <div class="post-meta">
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T11:10:00+08:00">
-                2018-02-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T10:05:00+08:00">
+                2018-04-21
               </time>
             
 
@@ -330,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring Cloud</span>
+                  <a href="/categories/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
                   </a>
                 </span>
 
@@ -341,8 +341,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Cloud/oAuth2/" itemprop="url" rel="index">
-                    <span itemprop="name">oAuth2</span>
+                  <a href="/categories/ssh/gitlab/" itemprop="url" rel="index">
+                    <span itemprop="name">gitlab</span>
                   </a>
                 </span>
 
@@ -358,7 +358,7 @@
 
           
           
-             <span id="/2018/02/08/Spring Cloud oAuth2基本使用说明/" class="leancloud_visitors" data-flag-title="Spring Cloud oAuth2基本使用说明">
+             <span id="/2018/04/21/使用ssh上传文件到gitlab/" class="leancloud_visitors" data-flag-title="使用ssh上传文件到gitlab">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -388,160 +388,289 @@
       
         
           
-            <h1 id="Spring-Cloud-oAuth2基本使用说明"><a href="#Spring-Cloud-oAuth2基本使用说明" class="headerlink" title="Spring Cloud oAuth2基本使用说明"></a>Spring Cloud oAuth2基本使用说明</h1><h2 id="oAuth2"><a href="#oAuth2" class="headerlink" title="oAuth2"></a>oAuth2</h2><h3 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h3><blockquote>
-<p>OAuth是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。</p>
-</blockquote>
-<h3 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h3><ol>
-<li>Third-party application：第三方应用程序，本文中又称”客户端”（client）。</li>
-<li>HTTP service：HTTP服务提供商，本文中简称”服务提供商”。</li>
-<li>Resource Owner：资源所有者，本文中又称”用户”（user）。</li>
-<li>User Agent：用户代理，本文中就是指浏览器。</li>
-<li>Authorization server：认证服务器，即服务提供商专门用来处理认证的服务器。</li>
-<li>Resource server：资源服务器，即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。</li>
-</ol>
-<h3 id="授权流程"><a href="#授权流程" class="headerlink" title="授权流程"></a>授权流程</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2014/bg2014051203.png" alt="授权流程"></p>
-<h3 id="授权模式"><a href="#授权模式" class="headerlink" title="授权模式"></a>授权模式</h3><ul>
-<li>授权码模式（authorization code）</li>
-<li>简化模式（implicit）</li>
-<li>密码模式（resource owner password credentials）</li>
-<li>客户端模式（client credentials）</li>
-</ul>
-<h2 id="Spring-Cloud-整合oAuth2"><a href="#Spring-Cloud-整合oAuth2" class="headerlink" title="Spring Cloud 整合oAuth2"></a>Spring Cloud 整合oAuth2</h2><blockquote>
-<p>在Spring Cloud需要使用OAUTH2来实现多个微服务的统一认证授权，通过向OAUTH服务发送某个类型的grant type进行集中认证和授权，从而获得access_token，而这个token是受其他微服务信任的，我们在后续的访问可以通过access_token来进行，从而实现了微服务的统一认证授权。</p>
-</blockquote>
-<h3 id="Api-Gateway"><a href="#Api-Gateway" class="headerlink" title="Api Gateway"></a>Api Gateway</h3><p>添加依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
-&lt;/dependency&gt;
+            <h1 id="使用ssh上传文件到gitlab"><a href="#使用ssh上传文件到gitlab" class="headerlink" title="使用ssh上传文件到gitlab"></a>使用ssh上传文件到gitlab</h1><h2 id="生成ssh秘钥"><a href="#生成ssh秘钥" class="headerlink" title="生成ssh秘钥"></a>生成ssh秘钥</h2><p>执行如下操作 <code>ssh-keygen -t rsa -C &quot;email@email.com&quot;</code></p>
+<p>到 <code>~/.ssh/id_rsa.pub</code> 路径进行查看</p>
+<h2 id="Gitlab配置ssh公匙"><a href="#Gitlab配置ssh公匙" class="headerlink" title="Gitlab配置ssh公匙"></a>Gitlab配置ssh公匙</h2><p>个人头像 -&gt; Settings -&gt; SSH Keys，将id_rsa.pub中的内容黏贴到key中，添加即可；</p>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre><p>启用<code>@EnableOAuth2Sso</code></p>
-<pre><code>@EnableOAuth2Sso
-@SpringBootApplication
-public class GatewayApplication {
-</code></pre><p><code>application.yml</code> 中新增如下配置</p>
-<pre><code>security:
-  oauth2:
-    client:
-        // 授权服务获取token url
-      access-token-uri: http://localhost:8080/uaa/oauth/token 
-      // 授权服务认证url
-      user-authorization-uri: http://localhost:8080/uaa/oauth/authorize
-      client-id: webapp
-    resource:
-      // 资源服务获取user信息url
-      user-info-uri: http://localhost:8080/uaa/user
-      prefer-token-info: false
-</code></pre><h3 id="Auth-Server"><a href="#Auth-Server" class="headerlink" title="Auth Server"></a>Auth Server</h3><p>添加依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
-&lt;/dependency&gt;
+          
+        
+      
+    </div>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre><p>新增授权配置文件<code>AuthorizationServerConfig</code>继承<code>AuthorizationServerConfigurerAdapter</code>,该文件主要对授权服务进行配置，并启用授权服务<code>@EnableAuthorizationServer</code></p>
-<pre><code>@Configuration
-@EnableAuthorizationServer// 启用授权服务
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private RedisConnectionFactory connectionFactory;
-    @Autowired
-    private UserDetailsService UserDetailsService;
+    <div>
+      
+    </div>
 
-    @Bean
-    public RedisTokenStore tokenStore() {// redis存储token
-        return new RedisTokenStore(connectionFactory);
-    }
+    <div>
+      
+    </div>
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints
-                .authenticationManager(authenticationManager)
-                .userDetailsService(UserDetailsService)//若无，refresh_token会有UserDetailsService is required错误
-                .tokenStore(tokenStore());
-    }
+    <div>
+      
+    </div>
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security
-                .tokenKeyAccess(&quot;permitAll()&quot;)
-                .checkTokenAccess(&quot;isAuthenticated()&quot;);
-    }
+    <footer class="post-footer">
+      
 
-    @Autowired
-    private DataSource dataSource;
+      
 
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource);// mysql存储clients
-    }
-}
-</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
-<pre><code>@Configuration
-@EnableResourceServer
-public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
+      
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
-    }
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
-}
-</code></pre><h3 id="Resource-Ower"><a href="#Resource-Ower" class="headerlink" title="Resource Ower"></a>Resource Ower</h3><p>添加依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
-&lt;/dependency&gt;
 
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
-<pre><code>@Configuration
-@EnableResourceServer
-public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
+    
+      
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
-    }
-}
-</code></pre><p><code>application.yml</code> 中新增如下配置</p>
-<pre><code>security:
-  oauth2:
-    resource:
-      id: wcp-elective
-      user-info-uri: http://${AUTH_HOST:localhost}:8080/uaa/user
-      prefer-token-info: false
-</code></pre><h2 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h2><p><a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="external">理解OAuth 2.0 - 阮一峰</a></p>
-<p><a href="http://wiselyman.iteye.com/blog/2379419" target="_blank" rel="external">Spring Cloud下基于OAUTH2认证授权的实现 - 汪云飞</a></p>
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/Thymeleaf 与 AngularJs交互/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/21/Thymeleaf 与 AngularJs交互/" itemprop="url">Thymeleaf 与 AngularJs交互</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T10:05:00+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/thymeleaf/" itemprop="url" rel="index">
+                    <span itemprop="name">thymeleaf</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/thymeleaf/angularjs/" itemprop="url" rel="index">
+                    <span itemprop="name">angularjs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/21/Thymeleaf 与 AngularJs交互/" class="leancloud_visitors" data-flag-title="Thymeleaf 与 AngularJs交互">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Thymeleaf-与-AngularJs交互"><a href="#Thymeleaf-与-AngularJs交互" class="headerlink" title="Thymeleaf 与 AngularJs交互"></a>Thymeleaf 与 AngularJs交互</h1><h2 id="1-怎么将Thymeleaf中的值传到AngularJs中"><a href="#1-怎么将Thymeleaf中的值传到AngularJs中" class="headerlink" title="1. 怎么将Thymeleaf中的值传到AngularJs中"></a>1. 怎么将Thymeleaf中的值传到AngularJs中</h2><p><strong>整体思路：通过Thymeleaf的th:attr进行属性赋值。将angular中ng-init当做属性进行赋值，具体填写格式如下：</strong></p>
+<pre><code>th:attr=&quot;ng-init = (&apos;dpParam.adminLevel = &apos; + ${admin.level})&quot;
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/Spring-cloud /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/17/Spring-cloud /" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T11:01:11+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/17/Spring-cloud /" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring-cloud"><a href="#Spring-cloud" class="headerlink" title="Spring-cloud"></a>Spring-cloud</h1><h2 id="Spring-boot优缺点"><a href="#Spring-boot优缺点" class="headerlink" title="Spring-boot优缺点"></a>Spring-boot优缺点</h2><h2 id="Spring-Cloud优缺点"><a href="#Spring-Cloud优缺点" class="headerlink" title="Spring-Cloud优缺点"></a>Spring-Cloud优缺点</h2><h3 id="Config是什么？能做什么？"><a href="#Config是什么？能做什么？" class="headerlink" title="Config是什么？能做什么？"></a>Config是什么？能做什么？</h3><h3 id="Eureka是什么？能做什么？"><a href="#Eureka是什么？能做什么？" class="headerlink" title="Eureka是什么？能做什么？"></a>Eureka是什么？能做什么？</h3><h3 id="Zuul是什么？能做什么？"><a href="#Zuul是什么？能做什么？" class="headerlink" title="Zuul是什么？能做什么？"></a>Zuul是什么？能做什么？</h3><h3 id="Feign是什么？能做什么？"><a href="#Feign是什么？能做什么？" class="headerlink" title="Feign是什么？能做什么？"></a>Feign是什么？能做什么？</h3>
           
         
       
@@ -889,6 +1018,314 @@ option.series(line);
 log.info(JSON.toJSONString(option));
 return option;
 </code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/Spring Cloud oAuth2基本使用说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/08/Spring Cloud oAuth2基本使用说明/" itemprop="url">Spring Cloud oAuth2基本使用说明</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T11:10:00+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Cloud</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/oAuth2/" itemprop="url" rel="index">
+                    <span itemprop="name">oAuth2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/08/Spring Cloud oAuth2基本使用说明/" class="leancloud_visitors" data-flag-title="Spring Cloud oAuth2基本使用说明">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring-Cloud-oAuth2基本使用说明"><a href="#Spring-Cloud-oAuth2基本使用说明" class="headerlink" title="Spring Cloud oAuth2基本使用说明"></a>Spring Cloud oAuth2基本使用说明</h1><h2 id="oAuth2"><a href="#oAuth2" class="headerlink" title="oAuth2"></a>oAuth2</h2><h3 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h3><blockquote>
+<p>OAuth是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。</p>
+</blockquote>
+<h3 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h3><ol>
+<li>Third-party application：第三方应用程序，本文中又称”客户端”（client）。</li>
+<li>HTTP service：HTTP服务提供商，本文中简称”服务提供商”。</li>
+<li>Resource Owner：资源所有者，本文中又称”用户”（user）。</li>
+<li>User Agent：用户代理，本文中就是指浏览器。</li>
+<li>Authorization server：认证服务器，即服务提供商专门用来处理认证的服务器。</li>
+<li>Resource server：资源服务器，即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。</li>
+</ol>
+<h3 id="授权流程"><a href="#授权流程" class="headerlink" title="授权流程"></a>授权流程</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2014/bg2014051203.png" alt="授权流程"></p>
+<h3 id="授权模式"><a href="#授权模式" class="headerlink" title="授权模式"></a>授权模式</h3><ul>
+<li>授权码模式（authorization code）</li>
+<li>简化模式（implicit）</li>
+<li>密码模式（resource owner password credentials）</li>
+<li>客户端模式（client credentials）</li>
+</ul>
+<h2 id="Spring-Cloud-整合oAuth2"><a href="#Spring-Cloud-整合oAuth2" class="headerlink" title="Spring Cloud 整合oAuth2"></a>Spring Cloud 整合oAuth2</h2><blockquote>
+<p>在Spring Cloud需要使用OAUTH2来实现多个微服务的统一认证授权，通过向OAUTH服务发送某个类型的grant type进行集中认证和授权，从而获得access_token，而这个token是受其他微服务信任的，我们在后续的访问可以通过access_token来进行，从而实现了微服务的统一认证授权。</p>
+</blockquote>
+<h3 id="Api-Gateway"><a href="#Api-Gateway" class="headerlink" title="Api Gateway"></a>Api Gateway</h3><p>添加依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>启用<code>@EnableOAuth2Sso</code></p>
+<pre><code>@EnableOAuth2Sso
+@SpringBootApplication
+public class GatewayApplication {
+</code></pre><p><code>application.yml</code> 中新增如下配置</p>
+<pre><code>security:
+  oauth2:
+    client:
+        // 授权服务获取token url
+      access-token-uri: http://localhost:8080/uaa/oauth/token 
+      // 授权服务认证url
+      user-authorization-uri: http://localhost:8080/uaa/oauth/authorize
+      client-id: webapp
+    resource:
+      // 资源服务获取user信息url
+      user-info-uri: http://localhost:8080/uaa/user
+      prefer-token-info: false
+</code></pre><h3 id="Auth-Server"><a href="#Auth-Server" class="headerlink" title="Auth Server"></a>Auth Server</h3><p>添加依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>新增授权配置文件<code>AuthorizationServerConfig</code>继承<code>AuthorizationServerConfigurerAdapter</code>,该文件主要对授权服务进行配置，并启用授权服务<code>@EnableAuthorizationServer</code></p>
+<pre><code>@Configuration
+@EnableAuthorizationServer// 启用授权服务
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private RedisConnectionFactory connectionFactory;
+    @Autowired
+    private UserDetailsService UserDetailsService;
+
+    @Bean
+    public RedisTokenStore tokenStore() {// redis存储token
+        return new RedisTokenStore(connectionFactory);
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints
+                .authenticationManager(authenticationManager)
+                .userDetailsService(UserDetailsService)//若无，refresh_token会有UserDetailsService is required错误
+                .tokenStore(tokenStore());
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security
+                .tokenKeyAccess(&quot;permitAll()&quot;)
+                .checkTokenAccess(&quot;isAuthenticated()&quot;);
+    }
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(dataSource);// mysql存储clients
+    }
+}
+</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
+<pre><code>@Configuration
+@EnableResourceServer
+public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+    }
+
+}
+</code></pre><h3 id="Resource-Ower"><a href="#Resource-Ower" class="headerlink" title="Resource Ower"></a>Resource Ower</h3><p>添加依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
+<pre><code>@Configuration
+@EnableResourceServer
+public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+    }
+}
+</code></pre><p><code>application.yml</code> 中新增如下配置</p>
+<pre><code>security:
+  oauth2:
+    resource:
+      id: wcp-elective
+      user-info-uri: http://${AUTH_HOST:localhost}:8080/uaa/user
+      prefer-token-info: false
+</code></pre><h2 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h2><p><a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="external">理解OAuth 2.0 - 阮一峰</a></p>
+<p><a href="http://wiselyman.iteye.com/blog/2379419" target="_blank" rel="external">Spring Cloud下基于OAUTH2认证授权的实现 - 汪云飞</a></p>
+
           
         
       
@@ -1889,640 +2326,11 @@ public class Jobs {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/Spring Boot项目使用Jenkins和Docker实现持续部署/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/10/Spring Boot项目使用Jenkins和Docker实现持续部署/" itemprop="url">Spring Boot项目使用Jenkins和Docker实现持续部署</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T10:48:00+08:00">
-                2017-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/Jenkins/" itemprop="url" rel="index">
-                    <span itemprop="name">Jenkins</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/Jenkins/Spring-Boot/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring Boot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/10/Spring Boot项目使用Jenkins和Docker实现持续部署/" class="leancloud_visitors" data-flag-title="Spring Boot项目使用Jenkins和Docker实现持续部署">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Spring-Boot项目使用Jenkins和Docker实现持续部署"><a href="#Spring-Boot项目使用Jenkins和Docker实现持续部署" class="headerlink" title="Spring Boot项目使用Jenkins和Docker实现持续部署"></a>Spring Boot项目使用Jenkins和Docker实现持续部署</h1><h2 id="什么是Jenkins？"><a href="#什么是Jenkins？" class="headerlink" title="什么是Jenkins？"></a>什么是Jenkins？</h2><blockquote>
-<p>Jenkins是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。</p>
-</blockquote>
-<p>简单来说，jenkins要做的工作就是定时从svn或者git中拉取代码，如发现有更新，即执行编写好的shell脚本，实现持续部署的效果。</p>
-<h2 id="Jenkins的安装"><a href="#Jenkins的安装" class="headerlink" title="Jenkins的安装"></a>Jenkins的安装</h2><p>前往<a href="https://jenkins.io/" target="_blank" rel="external">Jenkins官网</a>进行下载，可根据自身平台不同下载相应的版本，需要注意的是，Jenkins需要JDK的支持，建议使用jdk8。</p>
-<h2 id="Jenkins的启动"><a href="#Jenkins的启动" class="headerlink" title="Jenkins的启动"></a>Jenkins的启动</h2><p>以war包为例，使用<code>nohup java -jar jenkins.war</code>即可进行后台启动，默认占用8080端口，如果你的8080端口被占用，需要修改的话，可使用<code>nohup java -jar jenkins.war --ajp13Port=-1 --httpPort=8081</code>进行修改(该处的8081可改为你想要的端口)。</p>
-<h2 id="Jenkisn的使用"><a href="#Jenkisn的使用" class="headerlink" title="Jenkisn的使用"></a>Jenkisn的使用</h2><p><em>前提：服务器中安装好maven、jdk、jenkins、docker</em></p>
-<h3 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h3><p>**</p><p>服务器本地使用maven将代码进行打包，将打包好的项目放入容器中启动。</p>
-<p></p><p>也可以将代码添加到maven容器中，进行打包。完成之后将打包好的文件复制到另外一个容器中进行启动，这样实现打包与部署分离，但是会导致maven打包速度很慢(经常需要下载依赖包)，并且暂用空间大(使用maven<br>容器打包项目会生成一个八百兆左右的容器)。</p>
-<p></p><p>直接放入到服务器中进行打包，也保证了每次打包的环境一直，并且速度很快(不用每次都下载依赖包)，并且只生成一个容器，暂用空间相对较小。**</p>
-<hr>
-<h3 id="在项目中新建如下两个文件"><a href="#在项目中新建如下两个文件" class="headerlink" title="在项目中新建如下两个文件"></a>在项目中新建如下两个文件</h3><p>Dockerfile文件，用于将maven打包好的项目放入容器中启动。具体代码如下:</p>
-<pre><code>FROM ibmjava:jre
-# 将打包好的文件复制到容器内
-ADD ./target /app/target
-WORKDIR /app/target
-RUN cp XXX.jar app.jar
-# 编码问题
-ENV LANG C.UTF-8
-# 时区
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
-# 端口暴露
-EXPOSE 80
-# 执行启动指令，并指定配置文件
-ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd=file:/dev/./urandom&quot;,&quot;-jar&quot;,&quot;app.jar&quot;,&quot;--spring.profiles.active=prod&quot;]
-</code></pre><p>startup.sh文件，用于将项目代码进行打包，并且进行容器化，并上传至阿里云服务器备份，最后启动项目，完成自动部署。具体代码如下:</p>
-<pre><code># 新版本
-NEW_TAG=NEW_TAG
-# 老版本
-OLD_TAG=OLD_TAG
-# 工作空间  DOCKER-HUB 服务器，这里使用阿里云DOCKER-HUB服务器
-WORKSPACE=registry.cn-hangzhou.aliyuncs.com
-# 命名空间  对应阿里云 NAMESPACE
-NAMESPACE= NAMESPACE
-# 项目名
-PROJECT= PROJECT
-# 映射至主机接口
-# FROM_PORT= FROM_PORT
-# 容器内部暴露接口
-# TO_PORT= TO_PORT
-
-mvn clean
-mvn test
-mvn install
-
-# /usr/local/bin/mvn-entrypoint.sh mvn verify clean --fail-never
-
-# /usr/local/bin/mvn-entrypoint.sh mvn verify
-
-# 将打包好的项目容器化
-docker build -t $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG .
-
-# 推送至阿里云镜像仓库存储
-docker push $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG
-
-# 停止运行中旧的版本容器
-if docker ps -a | grep -i $PROJECT.$OLD_TAG; then
-  docker stop $PROJECT.$OLD_TAG || true
-  docker rm $PROJECT.$OLD_TAG || true
-fi
-
-# 停止运行中的重复版本
-if docker ps -a | grep -i $PROJECT.$NEW_TAG; then
-  docker stop $PROJECT.$NEW_TAG || true
-  docker rm $PROJECT.$NEW_TAG   || true
-fi
-
-# 开启新的版本
-if [ ! -n &quot;$FROM_PORT&quot; ] || [ ! -n &quot;$TO_PORT&quot;]; then
-  docker run -d -it --name $PROJECT.$NEW_TAG $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG
-else
-  docker run -d -it --name $PROJECT.$NEW_TAG -p $FROM_PORT:$TO_PORT $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG
-fi
-
-# 删除旧的镜像
-docker rmi $WORKSPACE/$NAMESPACE/$PROJECT:$OLD_TAG || true
-</code></pre><h3 id="到启动好的Jenkins中，新建任务"><a href="#到启动好的Jenkins中，新建任务" class="headerlink" title="到启动好的Jenkins中，新建任务"></a>到启动好的Jenkins中，新建任务</h3><hr>
-<h4 id="拉取代码，如发现有代码有变动，即执行构建"><a href="#拉取代码，如发现有代码有变动，即执行构建" class="headerlink" title="拉取代码，如发现有代码有变动，即执行构建"></a>拉取代码，如发现有代码有变动，即执行构建</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-31654406d37148a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代码拉取"></p>
-<h4 id="使用scm实现定时触发"><a href="#使用scm实现定时触发" class="headerlink" title="使用scm实现定时触发"></a>使用scm实现定时触发</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-9bb91b8e55c6c0cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="定时任务"></p>
-<h4 id="执行写好的脚本文件，执行自动部署操作"><a href="#执行写好的脚本文件，执行自动部署操作" class="headerlink" title="执行写好的脚本文件，执行自动部署操作"></a>执行写好的脚本文件，执行自动部署操作</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-f1ee7a18fd18571c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="构建指令"></p>
-<h4 id="部署完成之后，使用邮件进行过程及结果通知"><a href="#部署完成之后，使用邮件进行过程及结果通知" class="headerlink" title="部署完成之后，使用邮件进行过程及结果通知"></a>部署完成之后，使用邮件进行过程及结果通知</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-46720047cc67f0fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="邮件通知"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/" itemprop="url">如何在 Linux 中清除缓存（Cache）？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:49:00+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/" class="leancloud_visitors" data-flag-title="如何在 Linux 中清除缓存（Cache）？">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="如何在-Linux-中清除缓存（Cache）？"><a href="#如何在-Linux-中清除缓存（Cache）？" class="headerlink" title="如何在 Linux 中清除缓存（Cache）？"></a>如何在 Linux 中清除缓存（Cache）？</h1><p>每个 Linux 系统有三种选项来清除缓存而不需要中断任何进程或服务。</p>
-<blockquote>
-<p>（LCTT 译注：Cache，译作“缓存”，指 CPU 和内存之间高速缓存。Buffer，译作“缓冲区”，指在写入磁盘前的存储再内存中的内容。在本文中，Buffer 和 Cache 有时候会通指。）</p>
-</blockquote>
-<ol>
-<li><p>仅清除页面缓存（PageCache）</p>
-<p> <code>sync; echo 1 &gt; /proc/sys/vm/drop_caches</code></p>
-</li>
-<li><p>清除目录项和inode</p>
-<p> <code>sync; echo 2 &gt; /proc/sys/vm/drop_caches</code></p>
-</li>
-<li><p>清除页面缓存，目录项和inode</p>
-<p> <code>sync; echo 3 &gt; /proc/sys/vm/drop_caches</code></p>
-</li>
-</ol>
-<p><strong>上述命令的说明：</strong></p>
-<blockquote>
-<p>sync 将刷新文件系统缓冲区（buffer），命令通过“;”分隔，顺序执行，shell在执行序列中的下一个命令之前会等待命令的终止。正如内核文档中提到的，写入到drop_cache将清空缓存而不会杀死任何应用程序/服务，echo命令做写入文件的工作。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/12/Docker使用Swarm进行跨主机通信/" itemprop="url">Docker swarm 搭建及跨主机网络互联案例分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:43:00+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/12/Docker使用Swarm进行跨主机通信/" class="leancloud_visitors" data-flag-title="Docker swarm 搭建及跨主机网络互联案例分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Docker-swarm-搭建及跨主机网络互联案例分析"><a href="#Docker-swarm-搭建及跨主机网络互联案例分析" class="headerlink" title="Docker swarm 搭建及跨主机网络互联案例分析"></a>Docker swarm 搭建及跨主机网络互联案例分析</h1><p><a href="http://www.cnblogs.com/Javame/p/6739184.html" target="_blank" rel="external">原文地址：http://www.cnblogs.com/Javame/p/6739184.html</a></p>
-<h2 id="有关集群的Docker命令如下："><a href="#有关集群的Docker命令如下：" class="headerlink" title="有关集群的Docker命令如下："></a>有关集群的Docker命令如下：</h2><ol>
-<li>docker swarm：集群管理，子命令有init, join,join-token, leave, update</li>
-<li>docker node：节点管理，子命令有demote, inspect,ls, promote, rm, ps, update</li>
-<li>docker service：服务管理，子命令有create, inspect, ps, ls ,rm , scale, update</li>
-<li>docker stack/deploy：试验特性，用于多应用部署</li>
-</ol>
-<h2 id="创建swarm-集群"><a href="#创建swarm-集群" class="headerlink" title="创建swarm 集群"></a>创建swarm 集群</h2><h3 id="查看docker-swarm-命令说明"><a href="#查看docker-swarm-命令说明" class="headerlink" title="查看docker swarm 命令说明"></a>查看docker swarm 命令说明</h3><pre><code># docker swarm -h
-Flag shorthand -h has been deprecated, please use --help
-Usage:    docker swarm COMMAND
-Manage Docker Swarm
-Options:
-      --help   Print usage
-Commands:
-  init        Initialize a swarm
-  join        Join a swarm as a node and/or manager
-  join-token  Manage join tokens
-  update      Update the swarm
-  leave       Leave a swarm
-Run &apos;docker swarm COMMAND --help&apos; for more information on a command.
-</code></pre><h3 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h3><pre><code>#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;
-[root@centos-web ~]# docker swarm init --listen-addr 172.18.30.29:2377 
-Swarm initialized: current node (a60d5c3ttymvtozr46uvk17q4) is now a manager.
-docker swarm init --advertise-addr 122.62.24.161 --listen-addr 122.62.24.161:2377
-</code></pre><h3 id="查看集群"><a href="#查看集群" class="headerlink" title="查看集群"></a>查看集群</h3><pre><code># docker node ls
-ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
-a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
-</code></pre><h3 id="获取加入集群命令token"><a href="#获取加入集群命令token" class="headerlink" title="获取加入集群命令token"></a>获取加入集群命令token</h3><pre><code>#docker swarm join-token manager
-docker swarm join \
-    --token ********* \
-    172.18.30.29:2377
-</code></pre><h3 id="子节点加入集群"><a href="#子节点加入集群" class="headerlink" title="子节点加入集群"></a>子节点加入集群</h3><pre><code>docker swarm join \
---token ********* \
-172.18.30.29:2377
-</code></pre><h3 id="删除集群子节点"><a href="#删除集群子节点" class="headerlink" title="删除集群子节点"></a>删除集群子节点</h3><pre><code>docker node demote ***
-docker swarm leave --force(节点上)
-docker node rm --force（manager上）
-</code></pre><h2 id="创建一个overlay-跨主机网络"><a href="#创建一个overlay-跨主机网络" class="headerlink" title="创建一个overlay 跨主机网络"></a>创建一个overlay 跨主机网络</h2><h3 id="查看当前网络"><a href="#查看当前网络" class="headerlink" title="查看当前网络"></a>查看当前网络</h3><pre><code>[root@H-T-29 ~]# docker network ls
-NETWORK ID          NAME                DRIVER              SCOPE
-47d05fd82e77        bridge              bridge              local                             
-76e0302f7929        docker_gwbridge     bridge              local               
-81c22e7f1b48        host                host                local               
-4enpk54t9oy2        ingress             overlay             swarm               
-c80502ba134b        none                null                local 
-</code></pre><blockquote>
-<p>创建一个新的overlay网络</p>
-<p>swarm上默认已有一个名为ingress的overlay 网络</p>
-</blockquote>
-<pre><code> [root@centos-node4 ~]# docker network create --driver overlay docker-net
-2o223p435s5glx69dw211u5d2
- [root@centos-web ~]# docker network ls
-NETWORK ID          NAME                DRIVER              SCOPE
-abec77415f48        bridge              bridge              local
-aoqs3p835s5g        docker-net          overlay             swarm
-e2fff9d572a6        docker_gwbridge     bridge              local
-166bd71f7d0e        host                host                local
-9gr6bfff1rv9        ingress             overlay             swarm
-1d2bfc590294        none                null                local
-</code></pre><blockquote>
-<p>docker-net就是新创建的网络</p>
-</blockquote>
-<h3 id="在新的跨主机overlay-网络-docker-net-上创建应用"><a href="#在新的跨主机overlay-网络-docker-net-上创建应用" class="headerlink" title="在新的跨主机overlay 网络(docker-net)上创建应用"></a>在新的跨主机overlay 网络(docker-net)上创建应用</h3><h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><pre><code>docker service create --constraint=node.HOSTNAME==H-C-42 --replicas 2 --publish 2222:22 --name lvs --network=docker-net inits/lvs
-</code></pre><h4 id="指定一个节点部署应用"><a href="#指定一个节点部署应用" class="headerlink" title="指定一个节点部署应用"></a>指定一个节点部署应用</h4><pre><code># docker node ls
-ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
-a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
-#docker service create --constraint=node.HOSTNAME==centos-web --replicas 1 --publish 28152:22 --publish 8152:8080 --name web --network=docker-net  inits/source2.0.3
-ce2qc5paxmfa2gxrtu320v5m6
-</code></pre><blockquote>
-<p>–replicas 副本数量 </p>
-<p>–publish 服务发现，端口映射 </p>
-<p>–mount 挂载文件</p>
-<p>–mount type=bind,src=/home,dst=/home,readonly</p>
-<p>–name service名称</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2568,7 +2376,7 @@ ce2qc5paxmfa2gxrtu320v5m6
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2579,7 +2387,7 @@ ce2qc5paxmfa2gxrtu320v5m6
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2590,7 +2398,7 @@ ce2qc5paxmfa2gxrtu320v5m6
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

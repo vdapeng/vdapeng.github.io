@@ -276,6 +276,635 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/10/Spring Boot项目使用Jenkins和Docker实现持续部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/10/Spring Boot项目使用Jenkins和Docker实现持续部署/" itemprop="url">Spring Boot项目使用Jenkins和Docker实现持续部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T10:48:00+08:00">
+                2017-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/Jenkins/" itemprop="url" rel="index">
+                    <span itemprop="name">Jenkins</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/Jenkins/Spring-Boot/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Boot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/10/Spring Boot项目使用Jenkins和Docker实现持续部署/" class="leancloud_visitors" data-flag-title="Spring Boot项目使用Jenkins和Docker实现持续部署">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring-Boot项目使用Jenkins和Docker实现持续部署"><a href="#Spring-Boot项目使用Jenkins和Docker实现持续部署" class="headerlink" title="Spring Boot项目使用Jenkins和Docker实现持续部署"></a>Spring Boot项目使用Jenkins和Docker实现持续部署</h1><h2 id="什么是Jenkins？"><a href="#什么是Jenkins？" class="headerlink" title="什么是Jenkins？"></a>什么是Jenkins？</h2><blockquote>
+<p>Jenkins是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。</p>
+</blockquote>
+<p>简单来说，jenkins要做的工作就是定时从svn或者git中拉取代码，如发现有更新，即执行编写好的shell脚本，实现持续部署的效果。</p>
+<h2 id="Jenkins的安装"><a href="#Jenkins的安装" class="headerlink" title="Jenkins的安装"></a>Jenkins的安装</h2><p>前往<a href="https://jenkins.io/" target="_blank" rel="external">Jenkins官网</a>进行下载，可根据自身平台不同下载相应的版本，需要注意的是，Jenkins需要JDK的支持，建议使用jdk8。</p>
+<h2 id="Jenkins的启动"><a href="#Jenkins的启动" class="headerlink" title="Jenkins的启动"></a>Jenkins的启动</h2><p>以war包为例，使用<code>nohup java -jar jenkins.war</code>即可进行后台启动，默认占用8080端口，如果你的8080端口被占用，需要修改的话，可使用<code>nohup java -jar jenkins.war --ajp13Port=-1 --httpPort=8081</code>进行修改(该处的8081可改为你想要的端口)。</p>
+<h2 id="Jenkisn的使用"><a href="#Jenkisn的使用" class="headerlink" title="Jenkisn的使用"></a>Jenkisn的使用</h2><p><em>前提：服务器中安装好maven、jdk、jenkins、docker</em></p>
+<h3 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h3><p>**</p><p>服务器本地使用maven将代码进行打包，将打包好的项目放入容器中启动。</p>
+<p></p><p>也可以将代码添加到maven容器中，进行打包。完成之后将打包好的文件复制到另外一个容器中进行启动，这样实现打包与部署分离，但是会导致maven打包速度很慢(经常需要下载依赖包)，并且暂用空间大(使用maven<br>容器打包项目会生成一个八百兆左右的容器)。</p>
+<p></p><p>直接放入到服务器中进行打包，也保证了每次打包的环境一直，并且速度很快(不用每次都下载依赖包)，并且只生成一个容器，暂用空间相对较小。**</p>
+<hr>
+<h3 id="在项目中新建如下两个文件"><a href="#在项目中新建如下两个文件" class="headerlink" title="在项目中新建如下两个文件"></a>在项目中新建如下两个文件</h3><p>Dockerfile文件，用于将maven打包好的项目放入容器中启动。具体代码如下:</p>
+<pre><code>FROM ibmjava:jre
+# 将打包好的文件复制到容器内
+ADD ./target /app/target
+WORKDIR /app/target
+RUN cp XXX.jar app.jar
+# 编码问题
+ENV LANG C.UTF-8
+# 时区
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
+# 端口暴露
+EXPOSE 80
+# 执行启动指令，并指定配置文件
+ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd=file:/dev/./urandom&quot;,&quot;-jar&quot;,&quot;app.jar&quot;,&quot;--spring.profiles.active=prod&quot;]
+</code></pre><p>startup.sh文件，用于将项目代码进行打包，并且进行容器化，并上传至阿里云服务器备份，最后启动项目，完成自动部署。具体代码如下:</p>
+<pre><code># 新版本
+NEW_TAG=NEW_TAG
+# 老版本
+OLD_TAG=OLD_TAG
+# 工作空间  DOCKER-HUB 服务器，这里使用阿里云DOCKER-HUB服务器
+WORKSPACE=registry.cn-hangzhou.aliyuncs.com
+# 命名空间  对应阿里云 NAMESPACE
+NAMESPACE= NAMESPACE
+# 项目名
+PROJECT= PROJECT
+# 映射至主机接口
+# FROM_PORT= FROM_PORT
+# 容器内部暴露接口
+# TO_PORT= TO_PORT
+
+mvn clean
+mvn test
+mvn install
+
+# /usr/local/bin/mvn-entrypoint.sh mvn verify clean --fail-never
+
+# /usr/local/bin/mvn-entrypoint.sh mvn verify
+
+# 将打包好的项目容器化
+docker build -t $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG .
+
+# 推送至阿里云镜像仓库存储
+docker push $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG
+
+# 停止运行中旧的版本容器
+if docker ps -a | grep -i $PROJECT.$OLD_TAG; then
+  docker stop $PROJECT.$OLD_TAG || true
+  docker rm $PROJECT.$OLD_TAG || true
+fi
+
+# 停止运行中的重复版本
+if docker ps -a | grep -i $PROJECT.$NEW_TAG; then
+  docker stop $PROJECT.$NEW_TAG || true
+  docker rm $PROJECT.$NEW_TAG   || true
+fi
+
+# 开启新的版本
+if [ ! -n &quot;$FROM_PORT&quot; ] || [ ! -n &quot;$TO_PORT&quot;]; then
+  docker run -d -it --name $PROJECT.$NEW_TAG $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG
+else
+  docker run -d -it --name $PROJECT.$NEW_TAG -p $FROM_PORT:$TO_PORT $WORKSPACE/$NAMESPACE/$PROJECT:$NEW_TAG
+fi
+
+# 删除旧的镜像
+docker rmi $WORKSPACE/$NAMESPACE/$PROJECT:$OLD_TAG || true
+</code></pre><h3 id="到启动好的Jenkins中，新建任务"><a href="#到启动好的Jenkins中，新建任务" class="headerlink" title="到启动好的Jenkins中，新建任务"></a>到启动好的Jenkins中，新建任务</h3><hr>
+<h4 id="拉取代码，如发现有代码有变动，即执行构建"><a href="#拉取代码，如发现有代码有变动，即执行构建" class="headerlink" title="拉取代码，如发现有代码有变动，即执行构建"></a>拉取代码，如发现有代码有变动，即执行构建</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-31654406d37148a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代码拉取"></p>
+<h4 id="使用scm实现定时触发"><a href="#使用scm实现定时触发" class="headerlink" title="使用scm实现定时触发"></a>使用scm实现定时触发</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-9bb91b8e55c6c0cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="定时任务"></p>
+<h4 id="执行写好的脚本文件，执行自动部署操作"><a href="#执行写好的脚本文件，执行自动部署操作" class="headerlink" title="执行写好的脚本文件，执行自动部署操作"></a>执行写好的脚本文件，执行自动部署操作</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-f1ee7a18fd18571c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="构建指令"></p>
+<h4 id="部署完成之后，使用邮件进行过程及结果通知"><a href="#部署完成之后，使用邮件进行过程及结果通知" class="headerlink" title="部署完成之后，使用邮件进行过程及结果通知"></a>部署完成之后，使用邮件进行过程及结果通知</h4><p><img src="http://upload-images.jianshu.io/upload_images/2251942-46720047cc67f0fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="邮件通知"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/" itemprop="url">如何在 Linux 中清除缓存（Cache）？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:49:00+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/12/Linux解决buffe:cache消耗内存过高引发的额问题/" class="leancloud_visitors" data-flag-title="如何在 Linux 中清除缓存（Cache）？">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何在-Linux-中清除缓存（Cache）？"><a href="#如何在-Linux-中清除缓存（Cache）？" class="headerlink" title="如何在 Linux 中清除缓存（Cache）？"></a>如何在 Linux 中清除缓存（Cache）？</h1><p>每个 Linux 系统有三种选项来清除缓存而不需要中断任何进程或服务。</p>
+<blockquote>
+<p>（LCTT 译注：Cache，译作“缓存”，指 CPU 和内存之间高速缓存。Buffer，译作“缓冲区”，指在写入磁盘前的存储再内存中的内容。在本文中，Buffer 和 Cache 有时候会通指。）</p>
+</blockquote>
+<ol>
+<li><p>仅清除页面缓存（PageCache）</p>
+<p> <code>sync; echo 1 &gt; /proc/sys/vm/drop_caches</code></p>
+</li>
+<li><p>清除目录项和inode</p>
+<p> <code>sync; echo 2 &gt; /proc/sys/vm/drop_caches</code></p>
+</li>
+<li><p>清除页面缓存，目录项和inode</p>
+<p> <code>sync; echo 3 &gt; /proc/sys/vm/drop_caches</code></p>
+</li>
+</ol>
+<p><strong>上述命令的说明：</strong></p>
+<blockquote>
+<p>sync 将刷新文件系统缓冲区（buffer），命令通过“;”分隔，顺序执行，shell在执行序列中的下一个命令之前会等待命令的终止。正如内核文档中提到的，写入到drop_cache将清空缓存而不会杀死任何应用程序/服务，echo命令做写入文件的工作。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/12/Docker使用Swarm进行跨主机通信/" itemprop="url">Docker swarm 搭建及跨主机网络互联案例分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:43:00+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/12/Docker使用Swarm进行跨主机通信/" class="leancloud_visitors" data-flag-title="Docker swarm 搭建及跨主机网络互联案例分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Docker-swarm-搭建及跨主机网络互联案例分析"><a href="#Docker-swarm-搭建及跨主机网络互联案例分析" class="headerlink" title="Docker swarm 搭建及跨主机网络互联案例分析"></a>Docker swarm 搭建及跨主机网络互联案例分析</h1><p><a href="http://www.cnblogs.com/Javame/p/6739184.html" target="_blank" rel="external">原文地址：http://www.cnblogs.com/Javame/p/6739184.html</a></p>
+<h2 id="有关集群的Docker命令如下："><a href="#有关集群的Docker命令如下：" class="headerlink" title="有关集群的Docker命令如下："></a>有关集群的Docker命令如下：</h2><ol>
+<li>docker swarm：集群管理，子命令有init, join,join-token, leave, update</li>
+<li>docker node：节点管理，子命令有demote, inspect,ls, promote, rm, ps, update</li>
+<li>docker service：服务管理，子命令有create, inspect, ps, ls ,rm , scale, update</li>
+<li>docker stack/deploy：试验特性，用于多应用部署</li>
+</ol>
+<h2 id="创建swarm-集群"><a href="#创建swarm-集群" class="headerlink" title="创建swarm 集群"></a>创建swarm 集群</h2><h3 id="查看docker-swarm-命令说明"><a href="#查看docker-swarm-命令说明" class="headerlink" title="查看docker swarm 命令说明"></a>查看docker swarm 命令说明</h3><pre><code># docker swarm -h
+Flag shorthand -h has been deprecated, please use --help
+Usage:    docker swarm COMMAND
+Manage Docker Swarm
+Options:
+      --help   Print usage
+Commands:
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  update      Update the swarm
+  leave       Leave a swarm
+Run &apos;docker swarm COMMAND --help&apos; for more information on a command.
+</code></pre><h3 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h3><pre><code>#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;
+[root@centos-web ~]# docker swarm init --listen-addr 172.18.30.29:2377 
+Swarm initialized: current node (a60d5c3ttymvtozr46uvk17q4) is now a manager.
+docker swarm init --advertise-addr 122.62.24.161 --listen-addr 122.62.24.161:2377
+</code></pre><h3 id="查看集群"><a href="#查看集群" class="headerlink" title="查看集群"></a>查看集群</h3><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+</code></pre><h3 id="获取加入集群命令token"><a href="#获取加入集群命令token" class="headerlink" title="获取加入集群命令token"></a>获取加入集群命令token</h3><pre><code>#docker swarm join-token manager
+docker swarm join \
+    --token ********* \
+    172.18.30.29:2377
+</code></pre><h3 id="子节点加入集群"><a href="#子节点加入集群" class="headerlink" title="子节点加入集群"></a>子节点加入集群</h3><pre><code>docker swarm join \
+--token ********* \
+172.18.30.29:2377
+</code></pre><h3 id="删除集群子节点"><a href="#删除集群子节点" class="headerlink" title="删除集群子节点"></a>删除集群子节点</h3><pre><code>docker node demote ***
+docker swarm leave --force(节点上)
+docker node rm --force（manager上）
+</code></pre><h2 id="创建一个overlay-跨主机网络"><a href="#创建一个overlay-跨主机网络" class="headerlink" title="创建一个overlay 跨主机网络"></a>创建一个overlay 跨主机网络</h2><h3 id="查看当前网络"><a href="#查看当前网络" class="headerlink" title="查看当前网络"></a>查看当前网络</h3><pre><code>[root@H-T-29 ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+47d05fd82e77        bridge              bridge              local                             
+76e0302f7929        docker_gwbridge     bridge              local               
+81c22e7f1b48        host                host                local               
+4enpk54t9oy2        ingress             overlay             swarm               
+c80502ba134b        none                null                local 
+</code></pre><blockquote>
+<p>创建一个新的overlay网络</p>
+<p>swarm上默认已有一个名为ingress的overlay 网络</p>
+</blockquote>
+<pre><code> [root@centos-node4 ~]# docker network create --driver overlay docker-net
+2o223p435s5glx69dw211u5d2
+ [root@centos-web ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+abec77415f48        bridge              bridge              local
+aoqs3p835s5g        docker-net          overlay             swarm
+e2fff9d572a6        docker_gwbridge     bridge              local
+166bd71f7d0e        host                host                local
+9gr6bfff1rv9        ingress             overlay             swarm
+1d2bfc590294        none                null                local
+</code></pre><blockquote>
+<p>docker-net就是新创建的网络</p>
+</blockquote>
+<h3 id="在新的跨主机overlay-网络-docker-net-上创建应用"><a href="#在新的跨主机overlay-网络-docker-net-上创建应用" class="headerlink" title="在新的跨主机overlay 网络(docker-net)上创建应用"></a>在新的跨主机overlay 网络(docker-net)上创建应用</h3><h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><pre><code>docker service create --constraint=node.HOSTNAME==H-C-42 --replicas 2 --publish 2222:22 --name lvs --network=docker-net inits/lvs
+</code></pre><h4 id="指定一个节点部署应用"><a href="#指定一个节点部署应用" class="headerlink" title="指定一个节点部署应用"></a>指定一个节点部署应用</h4><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+#docker service create --constraint=node.HOSTNAME==centos-web --replicas 1 --publish 28152:22 --publish 8152:8080 --name web --network=docker-net  inits/source2.0.3
+ce2qc5paxmfa2gxrtu320v5m6
+</code></pre><blockquote>
+<p>–replicas 副本数量 </p>
+<p>–publish 服务发现，端口映射 </p>
+<p>–mount 挂载文件</p>
+<p>–mount type=bind,src=/home,dst=/home,readonly</p>
+<p>–name service名称</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1006,6 +1635,217 @@ public class EnrollApplication {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Redis/" itemprop="url">Redis基础教程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Redis/" class="leancloud_visitors" data-flag-title="Redis基础教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>下载地址：<a href="http://redis.io/download" target="_blank" rel="external">http://redis.io/download</a></p>
+<p>解压：tar -zvxf redis-3.0.7.tar.gz  将解压后的文件夹放到 /usr/local目录下</p>
+<p>编译测试:接下来在终端中切换到/usr/local/redis目录下,输入：<code>sudo make test</code>,完成之后<code>sudo make install</code></p>
+<p>启动：切换至 /user/local/bin, 输入：<code>redis-server</code></p>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><ol>
+<li><p>在 /usr/local/redis目录下建立bin，etc，db三个目录</p>
+</li>
+<li><p>把/usr/local/redis/src目录下的mkreleasehdr.sh，redis-benchmark， redis-check-dump， redis-cli， redis-server拷贝到bin目录</p>
+</li>
+<li><p>在etc下，参考原/usr/local/redis目录下的redis.conf，新建一个redis.conf</p>
+<p> <em>具体配置可查看此链接 <a href="http://www.jianshu.com/p/6b5eca8d908b" target="_blank" rel="external">http://www.jianshu.com/p/6b5eca8d908b</a></em></p>
+</li>
+<li><p>启动: <code>./redis-server /usr/local/redis-3.2.6/redis.conf</code>具体启动地址根据路径不同版本不同进行更改</p>
+</li>
+</ol>
+<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
+<li><p><strong>jar:    必须架包</strong> </p>
+<pre><code>import redis.clients.jedis.Jedis;
+</code></pre></li>
+<li><p><strong>Connect:    链接Redis数据库</strong> </p>
+<pre><code>Jedis jedis = new Jedis(&quot;localhost&quot;);
+</code></pre></li>
+<li><p><strong>String:    设置String类型value</strong> </p>
+<pre><code>jedis.set(&quot;running man&quot;, &quot;angelbaby&quot;);
+System.out.println(jedis.get(&quot;running man&quot;));
+</code></pre></li>
+<li><p><strong>List: 设置List类型value</strong>  </p>
+<pre><code>jedis.lpush(&quot;running&quot;, &quot;dc&quot;);
+List&lt;String&gt; list = jedis.lrange(&quot;running&quot;, 0, 5);
+</code></pre></li>
+<li><p><strong>Keys：获取Redis数据库中所有keys</strong></p>
+<pre><code>System.out.println(jedis.keys(&quot;*&quot;));
+</code></pre></li>
+<li><p><strong>Set: 设置Set类型value</strong></p>
+<pre><code>// 无序集合
+jedis.sadd(&quot;man&quot;, &quot;mongodb&quot;);
+jedis.sadd(&quot;man&quot;, &quot;mysql&quot;);
+Set&lt;String&gt; set = jedis.smembers(&quot;man&quot;);
+// 有序集合 score 字段
+jedis.zadd(&quot;wdy&quot;, 0, &quot;Mr.Li&quot;);
+jedis.zadd(&quot;wdy&quot;, 1, &quot;Mr.Feng&quot;);
+Set&lt;String&gt; set = jedis.zrange(&quot;wdy&quot;, 0, 1);
+</code></pre></li>
+<li><p><strong>Map: 设置HashMap类型value</strong></p>
+<pre><code>Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+map.put(&quot;name&quot;, &quot;ken&quot;);
+jedis.hmset(&quot;map&quot;, map);
+map = jedis.hgetAll(&quot;map&quot;);
+</code></pre></li>
+<li><p><strong>Object: 设置Object类型value</strong></p>
+<pre><code>User user = new User();
+user.setUsername(&quot;DaPeng&quot;);
+user.setEmail(&quot;fengzq@vdaoyun.com&quot;);
+jedis.set(&quot;user&quot;.getBytes(), SerializeUtil.serialize(user));
+byte[] value = jedis.get(&quot;user&quot;.getBytes());
+Object object = SerializeUtil.unserialize(value);
+if (object != null) {
+    user = (User) object;
+    System.out.println(user.getUsername());
+    System.err.println(user.getEmail());
+}
+</code></pre></li>
+</ol>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ol>
+<li>检查是否启动：redis-cli ping</li>
+<li>关闭命令：redis-cli shutdown</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Ehcache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1129,564 +1969,6 @@ clearOnFlush：内存数量最大时是否清除。
 </code></pre><h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>添加缓存    <code>@Cacheable(cacheName=&quot;departCache&quot;)</code></p>
 <p>清除缓存    <code>@TriggersRemove(cacheName=&quot;departCache&quot;,removeAll=true)</code> </p>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Linux常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p><code>free -m -m</code> 查看系统内存情况</p>
-<p><code>netstat -lnp|grep XX</code> 查看指定端口是否被占用，XX为其他想要查看的端口</p>
-<p><code>kill XXX</code> 杀指定进程,XXX改为想要杀掉的进程号</p>
-<p><code>nohup java -jar XXXX.jar</code> 后台启动jar包，XXXX为你想要运行的jar包</p>
-<p><code>echo $PATH</code> 查看系统$PATH路径</p>
-<p><code>uzip XXXX.zip</code> 解压zip文件</p>
-<p><code>tar -zxvf XXXX.tar.gz</code> 解压tar.gz文件</p>
-<p><code>cd XXX</code> 切换到XXX路径</p>
-<p><code>ls</code> 查看当前目录下的所有文件</p>
-<p><code>rm</code>  删除一个目录中的一个或多个文件或目录，如果没有使用- r选项，则rm不会删除目录。如果使用              rm 来删除文件，通常仍可以将该文件恢复原状 rm [选项] 文件…</p>
-<pre><code>实例：
-（1）删除任何.log文件；删除前逐一询问确认  rm -i *.log
-（2）删除test子目录及子目录中所有档案删除,并且不用一一确认 rm -rf test
-（3）删除以-f开头的文件 rm -- -f* 
-</code></pre><p><code>rmdir</code> 从一个目录中删除一个或多个子目录项，删除某目录时也必须具有对其父目录的写权限。 注意：不能删除非空目录</p>
-<pre><code>实例：
-（1）当parent子目录被删除后使它也成为空目录的话，则顺便一并删除
-   rmdir -p parent/child/child11
-</code></pre><p><code>mv</code> 移动文件或修改文件名，根据第二参数类型（如目录，则移动文件；如为文件则重命令该文件）。<br>    当第二个参数为目录时，可刚多个文件以空格分隔作为第一参数，移动多个文件到参数2指定的目录中</p>
-<pre><code>实例：
- （1）将文件test.log重命名为test1.txt 
- mv test.log test1.txt
-
- （2）将文件log1.txt,log2.txt,log3.txt移动到根的test3目录中 
- mv llog1.txt log2.txt log3.txt /test3
-
- （3）将文件file1改名为file2，如果file2已经存在，则询问是否覆盖 
- mv -i log1.txt log2.txt
-
-  （4）移动当前文件夹下的所有文件到上一级目录 mv * ../
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Quartz中时间表达式的设置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Quartz中时间表达式的设置/" itemprop="url">Quartz中时间表达式的设置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Quartz/" itemprop="url" rel="index">
-                    <span itemprop="name">Quartz</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Quartz中时间表达式的设置/" class="leancloud_visitors" data-flag-title="Quartz中时间表达式的设置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Quartz中时间表达式的设置"><a href="#Quartz中时间表达式的设置" class="headerlink" title="Quartz中时间表达式的设置"></a>Quartz中时间表达式的设置</h1><p>时间格式: <!-- s m h d m w(?) y(?) -->,   分别对应: 秒&gt;分&gt;小时&gt;日&gt;月&gt;周&gt;年, </p>
-<p>举例:</p>
-<p>1.每天什么时候执行:</p>
-<pre><code> &lt;value&gt;0 59 23 * * ?&lt;/value&gt;: 如下为每天23:59:00开始执行
-
-&lt;value&gt;0 1,2,3 11,12 * * ? &lt;/value&gt;: 每天11:01,11:02,11:03; 12:01,12:02,12:03分执行任务
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Markdown基础语法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Markdown基础语法/" itemprop="url">markdown基础语法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/markdown/" itemprop="url" rel="index">
-                    <span itemprop="name">markdown</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Markdown基础语法/" class="leancloud_visitors" data-flag-title="markdown基础语法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="markdown基础语法"><a href="#markdown基础语法" class="headerlink" title="markdown基础语法"></a>markdown基础语法</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>在Markdown中，如果您需要使用标题，只需要在文本前面添加#即可！如果您想要二级标题的话，添加两个##即可，三级、四级、五级、六级只需要添加对应的#个数就可以了！例如：</p>
-<pre><code># 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-###### 六级标题
-</code></pre><p><em>注：#和标题文本之间建议保持一个字符的空格，这是最标准的Markdown写法。</em></p>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>Markdown中列表分有序列表和无序列表，其中无序列表只需要在文本前加上 * 或者(-和+)</p>
-<pre><code>- 文本一
-- 文本二
-- 文本三
-</code></pre><p>有序列表需要在本文前加上1. 2. 3.就可以了</p>
-<pre><code>1. 文本一
-2. 文本二
-3. 文本三
-</code></pre><h2 id="链接和图片"><a href="#链接和图片" class="headerlink" title="链接和图片"></a>链接和图片</h2><p>Markdown中插入链接只需要使用<code>[链接文本](链接地址)</code>这样的语法即可，例如:<a href="http://vdaoyun.com" target="_blank" rel="external">微道云</a></p>
-<pre><code>［微道云](http://vdaoyun.com)
-</code></pre><p>插入图片的用法和链接差不多，只需要使用<code>![图片文本](图片地址)</code>这样的语法即可，例如：</p>
-<pre><code>![banner](http://upload-images.jianshu.io/upload_images/2251942-d3994f9d486ae5fe.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/2251942-d3994f9d486ae5fe.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="66602281704F0223B6033C9DE297FAAE.jpg"></p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
-<p>一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。</p>
-<blockquote>
-<p>一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。</p>
-</blockquote>
-<p>一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。</p>
-<blockquote>
-<p>一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。</p>
-</blockquote>
-</blockquote>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><table>
-<thead>
-<tr>
-<th>Tables</th>
-<th>Are</th>
-<th>Cool</th>
-<th>giid</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>col 3 is</td>
-<td>right-aligned</td>
-<td>$1600</td>
-<td>right-aligned</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td>centered</td>
-<td>$12</td>
-<td>right-aligned</td>
-</tr>
-<tr>
-<td>zebra stripes</td>
-<td>are neat</td>
-<td>$1</td>
-<td>right-aligned</td>
-</tr>
-</tbody>
-</table>
-<p>以上为Markdown中表格效果，想要实现表格，需采用以下格式：</p>
-<pre><code>| Tables        | Are           | Cool  |      giid     |
-| ------------- | ------------- | ----- | ------------- |
-| col 3 is      | right-aligned | $1600 | right-aligned | 
-| col 2 is      | centered      |   $12 | right-aligned | 
-| zebra stripes | are neat      |    $1 | right-aligned | 
-</code></pre><h2 id="代码框"><a href="#代码框" class="headerlink" title="代码框"></a>代码框</h2><p>贴入代码格式<code>｀Code｀</code>：例如</p>
-<pre><code>- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id &lt;BMKAnnotation&gt;)annotation
-{
-    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
-        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@&quot;myAnnotation&quot;];
-        newAnnotationView.animatesDrop = YES;
-        newAnnotationView.annotation = annotation;
-        //设定popView的高度，根据是否含有缩略图
-        double popViewH = 60;
-        if (annotation.subtitle == nil) {
-            popViewH = 38;
-        }
-        QZGCustomCalloutView *calloutView = [[QZGCustomCalloutView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 100, popViewH)];
-        [calloutView setImage:FGetImage(@&quot;u5334&quot;)];
-        BMKActionPaopaoView *pView = [[BMKActionPaopaoView alloc] initWithCustomView:calloutView];
-        pView.frame = CGRectMake(0, 0, SCREEN_WIDTH-100, popViewH);
-        ((BMKPinAnnotationView*)newAnnotationView).paopaoView = nil;
-        ((BMKPinAnnotationView*)newAnnotationView).paopaoView = pView;
-        newAnnotationView.image = FGetImage(@&quot;tab_work_selected&quot;);
-        return newAnnotationView;
-    }
-    return nil;
-}
-</code></pre>
           
         
       
@@ -1900,196 +2182,11 @@ export PATH=$PATH:$M2_HOME/bin
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/" itemprop="url">Spring-Boot中yml多环境配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:31:00+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringBoot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/11/Spring-Boot使用profile来配置不同环境的配置文件/" class="leancloud_visitors" data-flag-title="Spring-Boot中yml多环境配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Spring-Boot中yml多环境配置"><a href="#Spring-Boot中yml多环境配置" class="headerlink" title="Spring-Boot中yml多环境配置"></a>Spring-Boot中yml多环境配置</h1><blockquote>
-<p>在springboot的开发中,有时候我们会有不同的配置,例如日志打印,数据库连接等,开发,测试,生产每个环境可能配置都不一致,还好,springboot支持通过不同的profile来配置不同环境的配置,下面就大致介绍一下yml配置文件跟properties配置文件怎么使用profile配置不同环境的配置文件…</p>
-</blockquote>
-<pre><code>#查看springboot开启了哪些配置
-debug: false
-
-# 配置激活选项
-spring:
-  profiles:
-    active: dev
-
----
-#开发环境配置
-spring:
-  profiles: dev
-
-
-server:
-  port: 8080
-
-
----
-#测试环境配置
-spring:
-  profiles: test
-
-server:
-  port: 8081
-
-
----
-#生产环境配置
-
-spring:
-  profiles: pro
-
-server:
-  port: 8082
-</code></pre><blockquote>
-<p>如果是部署到服务器的话,我们正常打成jar包,发布是时候,采用:\<br>–spring.profiles.active=test或者pro 来控制加载哪个环境的配置,完整命令如下:<br>java -jar xxxxx.jar –spring.profiles.active=test  表示加载测试环境的配置<br>java -jar xxxxx.jar –spring.profiles.active=pro  表示加载生产环境的配置</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2135,7 +2232,7 @@ server:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2146,7 +2243,7 @@ server:
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2157,7 +2254,7 @@ server:
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
