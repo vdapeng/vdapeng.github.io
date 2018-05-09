@@ -276,6 +276,304 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/Spring Cloud Eureka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/09/Spring Cloud Eureka/" itemprop="url">Spring Cloud Eureka</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T14:49:00+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Eureka/" itemprop="url" rel="index">
+                    <span itemprop="name">Eureka</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Eureka/Spring-Cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/09/Spring Cloud Eureka/" class="leancloud_visitors" data-flag-title="Spring Cloud Eureka">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h1><h2 id="常用设置"><a href="#常用设置" class="headerlink" title="常用设置"></a>常用设置</h2><h3 id="手工指定客户端IP，添加以下配置："><a href="#手工指定客户端IP，添加以下配置：" class="headerlink" title="手工指定客户端IP，添加以下配置："></a>手工指定客户端IP，添加以下配置：</h3><pre><code># 指定此实例的ip
+eureka.instance.ip-address=192.168.0.1
+# 注册时使用ip而不是主机名
+eureka.instance.prefer-ip-address=true
+</code></pre><h3 id="实用security进行注册身份验证"><a href="#实用security进行注册身份验证" class="headerlink" title="实用security进行注册身份验证"></a>实用security进行注册身份验证</h3><p>服务端添加如下配置：</p>
+<pre><code>security:
+  basic:
+    enabled: true
+  user:
+    name: admin
+    password: admin
+    role:
+    - USER
+    - ADMIN
+</code></pre><p>客户端注册时，需配置用户名和密码，如下配置：</p>
+<pre><code>eureka:
+    client:
+        serviceUrl: 
+          defaultZone: http://admin:admin@192.168.11.136:7070/eureka/
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/如何利用ApacheJMeter进行压力测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/21/如何利用ApacheJMeter进行压力测试/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T15:32:22+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/21/如何利用ApacheJMeter进行压力测试/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何利用ApacheJMeter进行压力测试"><a href="#如何利用ApacheJMeter进行压力测试" class="headerlink" title="如何利用ApacheJMeter进行压力测试"></a>如何利用ApacheJMeter进行压力测试</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>新建计划 -&gt; 新建线程组 -&gt; 添加http请求 -&gt; 添加相关参数 -&gt; 执行</p>
+<h3 id="配置带json数据的请求"><a href="#配置带json数据的请求" class="headerlink" title="配置带json数据的请求"></a>配置带json数据的请求</h3><p>HTTP请求 -&gt; 添加HTTP信息头关系 -&gt; {‘Content-Type’ : ‘application/json’}</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/21/使用ssh上传文件到gitlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -760,314 +1058,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/Spring Cloud oAuth2基本使用说明/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/08/Spring Cloud oAuth2基本使用说明/" itemprop="url">Spring Cloud oAuth2基本使用说明</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T11:10:00+08:00">
-                2018-02-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring Cloud</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Cloud/oAuth2/" itemprop="url" rel="index">
-                    <span itemprop="name">oAuth2</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/02/08/Spring Cloud oAuth2基本使用说明/" class="leancloud_visitors" data-flag-title="Spring Cloud oAuth2基本使用说明">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Spring-Cloud-oAuth2基本使用说明"><a href="#Spring-Cloud-oAuth2基本使用说明" class="headerlink" title="Spring Cloud oAuth2基本使用说明"></a>Spring Cloud oAuth2基本使用说明</h1><h2 id="oAuth2"><a href="#oAuth2" class="headerlink" title="oAuth2"></a>oAuth2</h2><h3 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h3><blockquote>
-<p>OAuth是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。</p>
-</blockquote>
-<h3 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h3><ol>
-<li>Third-party application：第三方应用程序，本文中又称”客户端”（client）。</li>
-<li>HTTP service：HTTP服务提供商，本文中简称”服务提供商”。</li>
-<li>Resource Owner：资源所有者，本文中又称”用户”（user）。</li>
-<li>User Agent：用户代理，本文中就是指浏览器。</li>
-<li>Authorization server：认证服务器，即服务提供商专门用来处理认证的服务器。</li>
-<li>Resource server：资源服务器，即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。</li>
-</ol>
-<h3 id="授权流程"><a href="#授权流程" class="headerlink" title="授权流程"></a>授权流程</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2014/bg2014051203.png" alt="授权流程"></p>
-<h3 id="授权模式"><a href="#授权模式" class="headerlink" title="授权模式"></a>授权模式</h3><ul>
-<li>授权码模式（authorization code）</li>
-<li>简化模式（implicit）</li>
-<li>密码模式（resource owner password credentials）</li>
-<li>客户端模式（client credentials）</li>
-</ul>
-<h2 id="Spring-Cloud-整合oAuth2"><a href="#Spring-Cloud-整合oAuth2" class="headerlink" title="Spring Cloud 整合oAuth2"></a>Spring Cloud 整合oAuth2</h2><blockquote>
-<p>在Spring Cloud需要使用OAUTH2来实现多个微服务的统一认证授权，通过向OAUTH服务发送某个类型的grant type进行集中认证和授权，从而获得access_token，而这个token是受其他微服务信任的，我们在后续的访问可以通过access_token来进行，从而实现了微服务的统一认证授权。</p>
-</blockquote>
-<h3 id="Api-Gateway"><a href="#Api-Gateway" class="headerlink" title="Api Gateway"></a>Api Gateway</h3><p>添加依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
-&lt;/dependency&gt;
-
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre><p>启用<code>@EnableOAuth2Sso</code></p>
-<pre><code>@EnableOAuth2Sso
-@SpringBootApplication
-public class GatewayApplication {
-</code></pre><p><code>application.yml</code> 中新增如下配置</p>
-<pre><code>security:
-  oauth2:
-    client:
-        // 授权服务获取token url
-      access-token-uri: http://localhost:8080/uaa/oauth/token 
-      // 授权服务认证url
-      user-authorization-uri: http://localhost:8080/uaa/oauth/authorize
-      client-id: webapp
-    resource:
-      // 资源服务获取user信息url
-      user-info-uri: http://localhost:8080/uaa/user
-      prefer-token-info: false
-</code></pre><h3 id="Auth-Server"><a href="#Auth-Server" class="headerlink" title="Auth Server"></a>Auth Server</h3><p>添加依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
-&lt;/dependency&gt;
-
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre><p>新增授权配置文件<code>AuthorizationServerConfig</code>继承<code>AuthorizationServerConfigurerAdapter</code>,该文件主要对授权服务进行配置，并启用授权服务<code>@EnableAuthorizationServer</code></p>
-<pre><code>@Configuration
-@EnableAuthorizationServer// 启用授权服务
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private RedisConnectionFactory connectionFactory;
-    @Autowired
-    private UserDetailsService UserDetailsService;
-
-    @Bean
-    public RedisTokenStore tokenStore() {// redis存储token
-        return new RedisTokenStore(connectionFactory);
-    }
-
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints
-                .authenticationManager(authenticationManager)
-                .userDetailsService(UserDetailsService)//若无，refresh_token会有UserDetailsService is required错误
-                .tokenStore(tokenStore());
-    }
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security
-                .tokenKeyAccess(&quot;permitAll()&quot;)
-                .checkTokenAccess(&quot;isAuthenticated()&quot;);
-    }
-
-    @Autowired
-    private DataSource dataSource;
-
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource);// mysql存储clients
-    }
-}
-</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
-<pre><code>@Configuration
-@EnableResourceServer
-public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
-    }
-
-}
-</code></pre><h3 id="Resource-Ower"><a href="#Resource-Ower" class="headerlink" title="Resource Ower"></a>Resource Ower</h3><p>添加依赖</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
-&lt;/dependency&gt;
-
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
-<pre><code>@Configuration
-@EnableResourceServer
-public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic();
-    }
-}
-</code></pre><p><code>application.yml</code> 中新增如下配置</p>
-<pre><code>security:
-  oauth2:
-    resource:
-      id: wcp-elective
-      user-info-uri: http://${AUTH_HOST:localhost}:8080/uaa/user
-      prefer-token-info: false
-</code></pre><h2 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h2><p><a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="external">理解OAuth 2.0 - 阮一峰</a></p>
-<p><a href="http://wiselyman.iteye.com/blog/2379419" target="_blank" rel="external">Spring Cloud下基于OAUTH2认证授权的实现 - 汪云飞</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/ECharts - Java类库使用说明/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1373,6 +1363,314 @@ option.series(line);
 log.info(JSON.toJSONString(option));
 return option;
 </code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/Spring Cloud oAuth2基本使用说明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/08/Spring Cloud oAuth2基本使用说明/" itemprop="url">Spring Cloud oAuth2基本使用说明</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T11:10:00+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Cloud</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/oAuth2/" itemprop="url" rel="index">
+                    <span itemprop="name">oAuth2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/08/Spring Cloud oAuth2基本使用说明/" class="leancloud_visitors" data-flag-title="Spring Cloud oAuth2基本使用说明">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Spring-Cloud-oAuth2基本使用说明"><a href="#Spring-Cloud-oAuth2基本使用说明" class="headerlink" title="Spring Cloud oAuth2基本使用说明"></a>Spring Cloud oAuth2基本使用说明</h1><h2 id="oAuth2"><a href="#oAuth2" class="headerlink" title="oAuth2"></a>oAuth2</h2><h3 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h3><blockquote>
+<p>OAuth是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。</p>
+</blockquote>
+<h3 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h3><ol>
+<li>Third-party application：第三方应用程序，本文中又称”客户端”（client）。</li>
+<li>HTTP service：HTTP服务提供商，本文中简称”服务提供商”。</li>
+<li>Resource Owner：资源所有者，本文中又称”用户”（user）。</li>
+<li>User Agent：用户代理，本文中就是指浏览器。</li>
+<li>Authorization server：认证服务器，即服务提供商专门用来处理认证的服务器。</li>
+<li>Resource server：资源服务器，即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。</li>
+</ol>
+<h3 id="授权流程"><a href="#授权流程" class="headerlink" title="授权流程"></a>授权流程</h3><p><img src="http://www.ruanyifeng.com/blogimg/asset/2014/bg2014051203.png" alt="授权流程"></p>
+<h3 id="授权模式"><a href="#授权模式" class="headerlink" title="授权模式"></a>授权模式</h3><ul>
+<li>授权码模式（authorization code）</li>
+<li>简化模式（implicit）</li>
+<li>密码模式（resource owner password credentials）</li>
+<li>客户端模式（client credentials）</li>
+</ul>
+<h2 id="Spring-Cloud-整合oAuth2"><a href="#Spring-Cloud-整合oAuth2" class="headerlink" title="Spring Cloud 整合oAuth2"></a>Spring Cloud 整合oAuth2</h2><blockquote>
+<p>在Spring Cloud需要使用OAUTH2来实现多个微服务的统一认证授权，通过向OAUTH服务发送某个类型的grant type进行集中认证和授权，从而获得access_token，而这个token是受其他微服务信任的，我们在后续的访问可以通过access_token来进行，从而实现了微服务的统一认证授权。</p>
+</blockquote>
+<h3 id="Api-Gateway"><a href="#Api-Gateway" class="headerlink" title="Api Gateway"></a>Api Gateway</h3><p>添加依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>启用<code>@EnableOAuth2Sso</code></p>
+<pre><code>@EnableOAuth2Sso
+@SpringBootApplication
+public class GatewayApplication {
+</code></pre><p><code>application.yml</code> 中新增如下配置</p>
+<pre><code>security:
+  oauth2:
+    client:
+        // 授权服务获取token url
+      access-token-uri: http://localhost:8080/uaa/oauth/token 
+      // 授权服务认证url
+      user-authorization-uri: http://localhost:8080/uaa/oauth/authorize
+      client-id: webapp
+    resource:
+      // 资源服务获取user信息url
+      user-info-uri: http://localhost:8080/uaa/user
+      prefer-token-info: false
+</code></pre><h3 id="Auth-Server"><a href="#Auth-Server" class="headerlink" title="Auth Server"></a>Auth Server</h3><p>添加依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>新增授权配置文件<code>AuthorizationServerConfig</code>继承<code>AuthorizationServerConfigurerAdapter</code>,该文件主要对授权服务进行配置，并启用授权服务<code>@EnableAuthorizationServer</code></p>
+<pre><code>@Configuration
+@EnableAuthorizationServer// 启用授权服务
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private RedisConnectionFactory connectionFactory;
+    @Autowired
+    private UserDetailsService UserDetailsService;
+
+    @Bean
+    public RedisTokenStore tokenStore() {// redis存储token
+        return new RedisTokenStore(connectionFactory);
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints
+                .authenticationManager(authenticationManager)
+                .userDetailsService(UserDetailsService)//若无，refresh_token会有UserDetailsService is required错误
+                .tokenStore(tokenStore());
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security
+                .tokenKeyAccess(&quot;permitAll()&quot;)
+                .checkTokenAccess(&quot;isAuthenticated()&quot;);
+    }
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(dataSource);// mysql存储clients
+    }
+}
+</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
+<pre><code>@Configuration
+@EnableResourceServer
+public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+    }
+
+}
+</code></pre><h3 id="Resource-Ower"><a href="#Resource-Ower" class="headerlink" title="Resource Ower"></a>Resource Ower</h3><p>添加依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>新建资源配置文件<code>ResourceServerConfig</code>继承<code>ResourceServerConfigurerAdapter</code>，并启用资源服务<code>@EnableResourceServer</code></p>
+<pre><code>@Configuration
+@EnableResourceServer
+public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -&gt; response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+    }
+}
+</code></pre><p><code>application.yml</code> 中新增如下配置</p>
+<pre><code>security:
+  oauth2:
+    resource:
+      id: wcp-elective
+      user-info-uri: http://${AUTH_HOST:localhost}:8080/uaa/user
+      prefer-token-info: false
+</code></pre><h2 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h2><p><a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="external">理解OAuth 2.0 - 阮一峰</a></p>
+<p><a href="http://wiselyman.iteye.com/blog/2379419" target="_blank" rel="external">Spring Cloud下基于OAUTH2认证授权的实现 - 汪云飞</a></p>
+
           
         
       
@@ -1916,463 +2214,6 @@ trust_host_root_certs: false
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/Swagger在线文档编写/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/22/Swagger在线文档编写/" itemprop="url">Swagger在线Api文档编写</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-22T15:49:00+08:00">
-                2017-11-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/swagger/" itemprop="url" rel="index">
-                    <span itemprop="name">swagger</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/11/22/Swagger在线文档编写/" class="leancloud_visitors" data-flag-title="Swagger在线Api文档编写">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Swagger在线Api文档编写"><a href="#Swagger在线Api文档编写" class="headerlink" title="Swagger在线Api文档编写"></a>Swagger在线Api文档编写</h1><h2 id="集成配置"><a href="#集成配置" class="headerlink" title="集成配置"></a>集成配置</h2><h3 id="第一步：在项目的pom文件添加以下依赖："><a href="#第一步：在项目的pom文件添加以下依赖：" class="headerlink" title="第一步：在项目的pom文件添加以下依赖："></a>第一步：在项目的pom文件添加以下依赖：</h3><pre><code> &lt;dependency&gt;
-    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
-    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
-    &lt;version&gt;2.7.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
-    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
-    &lt;version&gt; 2.7.0 &lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h3 id="第二步：添加配置文件"><a href="#第二步：添加配置文件" class="headerlink" title="第二步：添加配置文件"></a>第二步：添加配置文件</h3><p>新建<code>SwaggerConfiguration</code>文件，内容如下：</p>
-<pre><code>@Configuration 
-@EnableSwagger2 // 启用swagger在线文档
-public class SwaggerConfiguration {
-
-    @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage(&quot;com.vdaoyun.hsApi.web.controller.common.member&quot;))// 需要生成的文档根目录，根据自己项目进行修改
-                .paths(PathSelectors.any())
-                .build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title(&quot;微道云RESTFUL API测试页面&quot;)
-                .description(&quot;在这里可以欢快的测试你写的优秀(LESE)代码了&quot;)
-                .termsOfServiceUrl(&quot;www.vdaoyun.com&quot;)
-                .contact(&quot;微小云&quot;)
-                .version(&quot;1.0&quot;)
-                .build();
-    }
-
-}
-</code></pre><h3 id="第三步：访问测试"><a href="#第三步：访问测试" class="headerlink" title="第三步：访问测试"></a>第三步：访问测试</h3><p>完成上面两步之后，基本的API在线文档就已经完成了，访问项目地址。看到如下页面说明集成成功。<br><img src="http://upload-images.jianshu.io/upload_images/2251942-55b24df7835c8c28.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在线文档示例"></p>
-<h2 id="Swagger在线文档编写"><a href="#Swagger在线文档编写" class="headerlink" title="Swagger在线文档编写"></a>Swagger在线文档编写</h2><h3 id="注释说明"><a href="#注释说明" class="headerlink" title="注释说明"></a>注释说明</h3><p><code>@Api</code>：作用于Controller</p>
-<p><code>@ApiIgnore</code>： 忽略注解标注的类或者方法，不添加到API文档中  </p>
-<p><code>@ApiOperation</code>： 展示每个API基本信息 </p>
-<pre><code>value api名称  
-notes 备注说明  
-</code></pre><p><code>@ApiImplicitParam</code>：用于规定接收参数类型、名称、是否必须等信息  </p>
-<pre><code>name 对应方法中接收参数名称  
-value 备注说明  
-required 是否必须 boolean  
-paramType 参数类型 body、path、query、header、form中的一种   
-    body 使用@RequestBody接收数据 POST有效  
-    path 在url中配置{}的参数  
-    query 普通查询参数 例如 ?query=q ,jquery ajax中data设置的值也可以，例如 {query:”q”},springMVC中不需要添加注解接收  
-    header 使用@RequestHeader接收数据  
-    form 笔者未使用，请查看官方API文档  
-dataType 数据类型，如果类型名称相同，请指定全路径，例如 dataType = “java.util.Date”，springfox会自动根据类型生成模型  
-</code></pre><p><code>@ApiImplicitParams</code>：包含多个@ApiImplicitParam  </p>
-<p><code>@ApiModelProperty</code>：对模型中属性添加说明，只能使用在类中。 </p>
-<pre><code>value 参数名称  
-required 是否必须 boolean  
-hidden 是否隐藏 boolean   
-其他信息和上面同名属性作用相同，hidden属性对于集合不能隐藏，目前不知道原因  
-</code></pre><p><code>@ApiParam</code>：对单独某个参数进行说明，使用在类中或者controller方法中都可以。注解中的属性和上面列出的同名属性作用相同  </p>
-<h3 id="Controller层代码示例："><a href="#Controller层代码示例：" class="headerlink" title="Controller层代码示例："></a>Controller层代码示例：</h3><pre><code>@Api(value = &quot;简历模块&quot;, description = &quot;简历模块相关接口&quot;)
-public class WcpResumeController {
-
-    @ApiOperation(value = &quot;列表查询&quot;)
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = &quot;pageNum&quot;, value = &quot;页码&quot;, defaultValue = &quot;1&quot;, paramType = &quot;query&quot;, dataTypeClass = Integer.class),
-        @ApiImplicitParam(name = &quot;pageSize&quot;, value = &quot;每页条数&quot;, defaultValue = &quot;10&quot;, paramType = &quot;query&quot;, dataTypeClass = Integer.class),
-        @ApiImplicitParam(name = &quot;order&quot;, value = &quot;排序字段&quot;, defaultValue= &quot;createDate&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
-        @ApiImplicitParam(name = &quot;sort&quot;, value = &quot;排序方式&quot;, defaultValue = &quot;DESC&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
-        @ApiImplicitParam(name = &quot;name&quot;, value = &quot;名字&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
-        @ApiImplicitParam(name = &quot;userId&quot;, value = &quot;管理员用户编号&quot;,required = true, paramType = &quot;query&quot;, dataTypeClass = String.class),
-        @ApiImplicitParam(name = &quot;startDate&quot;, value = &quot;开始时间&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class),
-        @ApiImplicitParam(name = &quot;finishDate&quot;, value = &quot;结束时间&quot;, paramType = &quot;query&quot;, dataTypeClass = String.class)
-    })
-    public AjaxJson select(
-            @RequestParam(value = &quot;pageNum&quot;, defaultValue = &quot;1&quot;, required = false) Integer pageNum,
-            @RequestParam(value = &quot;pageSize&quot;, defaultValue = &quot;10&quot;, required = false) Integer pageSize,
-            @RequestParam(value = &quot;order&quot;, defaultValue = &quot;createDate&quot;, required = false) String order,
-            @RequestParam(value = &quot;sort&quot;, defaultValue = &quot;DESC&quot;, required = false) String sort,
-            @RequestParam(value = &quot;name&quot;, required = false) String name,
-            @RequestParam(value = &quot;userId&quot;) String userId,
-            @RequestParam(value = &quot;startDate&quot;, required = false) String startDate,
-            @RequestParam(value = &quot;finishDate&quot;, required = false) String finishDate
-    ) throws Exception {
-
-    }
-
-}
-</code></pre><h3 id="Model层代码示例："><a href="#Model层代码示例：" class="headerlink" title="Model层代码示例："></a>Model层代码示例：</h3><pre><code>@ApiModel(value = &quot;简历管理员&quot;)
-@Table(name = &quot;wcp_resume_admin&quot;)
-public class WcpResumeAdmin implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = &quot;id&quot;)
-    @ApiModelProperty(name = &quot;id&quot;, value = &quot;主键&quot;, hidden = true)
-    private Integer id;
-
-
-    /**
-     * 微道云企业编号
-     */
-    @Column(name = &quot;wcp_business_id&quot;)
-    @ApiModelProperty(name = &quot;wcpBusinessId&quot;, value = &quot;微道云企业编号&quot;)
-    private Integer wcpBusinessId;
-
-}
-</code></pre><h2 id="参考链接-http-www-jianshu-com-p-12f4394462d5"><a href="#参考链接-http-www-jianshu-com-p-12f4394462d5" class="headerlink" title="参考链接 http://www.jianshu.com/p/12f4394462d5"></a>参考链接 <a href="http://www.jianshu.com/p/12f4394462d5" target="_blank" rel="external">http://www.jianshu.com/p/12f4394462d5</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/12/spring boot项目中处理Schedule定时任务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/12/spring boot项目中处理Schedule定时任务/" itemprop="url">spring boot项目中处理Schedule定时任务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T10:48:00+08:00">
-                2017-11-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Schedule/" itemprop="url" rel="index">
-                    <span itemprop="name">Schedule</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Schedule/Spring-Boot/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring Boot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/11/12/spring boot项目中处理Schedule定时任务/" class="leancloud_visitors" data-flag-title="spring boot项目中处理Schedule定时任务">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="spring-boot项目中处理Schedule定时任务"><a href="#spring-boot项目中处理Schedule定时任务" class="headerlink" title="spring boot项目中处理Schedule定时任务"></a>spring boot项目中处理Schedule定时任务</h1><h3 id="在spring-boot的入口类Application-java中，允许支持schedule"><a href="#在spring-boot的入口类Application-java中，允许支持schedule" class="headerlink" title="在spring boot的入口类Application.java中，允许支持schedule"></a>在spring boot的入口类Application.java中，允许支持schedule</h3><pre><code>@SpringBootApplication
-@EnableScheduling
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-}
-</code></pre><h3 id="然后，新建一个执行类Jobs-java"><a href="#然后，新建一个执行类Jobs-java" class="headerlink" title="然后，新建一个执行类Jobs.java"></a>然后，新建一个执行类Jobs.java</h3><pre><code>@Component
-public class Jobs {
-    public final static long ONE_Minute =  60 * 1000;
-
-    @Scheduled(fixedDelay=ONE_Minute)
-    public void fixedDelayJob(){
-        System.out.println(Dates.format_yyyyMMddHHmmss(new Date())+&quot; &gt;&gt;fixedDelay执行....&quot;);
-    }
-
-    @Scheduled(fixedRate=ONE_Minute)
-    public void fixedRateJob(){
-        System.out.println(Dates.format_yyyyMMddHHmmss(new Date())+&quot; &gt;&gt;fixedRate执行....&quot;);
-    }
-
-    @Scheduled(cron=&quot;0 15 3 * * ?&quot;)
-    public void cronJob(){
-        System.out.println(Dates.format_yyyyMMddHHmmss(new Date())+&quot; &gt;&gt;cron执行....&quot;);
-    }
-}
-</code></pre><p>这是最简单的2种方式，多少分钟执行一次，fixedDelay和fixedRate，单位是毫秒，所以1分钟就是60秒×1000<br>他们的区别在于，fixedRate就是每多次分钟一次，不论你业务执行花费了多少时间。我都是1分钟执行1次，而fixedDelay是当任务执行完毕后1分钟在执行。所以根据实际业务不同，我们会选择不同的方式。</p>
-<p>而还有一类定时任务，比如是每天的3点15分执行，那么我们就需要用另外一种方式：cron表达式</p>
-<p>cron表达式，有专门的语法，而且感觉有点绕人，不过简单来说，大家记住一些常用的用法即可，特殊的语法可以单独去查。<br>cron一共有7位，但是最后一位是年，可以留空，所以我们可以写6位：</p>
-<pre><code>* 第一位，表示秒，取值0-59
-* 第二位，表示分，取值0-59
-* 第三位，表示小时，取值0-23
-* 第四位，日期天/日，取值1-31
-* 第五位，日期月份，取值1-12
-* 第六位，星期，取值1-7，星期一，星期二...，注：不是第1周，第二周的意思
-          另外：1表示星期天，2表示星期一。
-* 第7为，年份，可以留空，取值1970-2099
-</code></pre><p>cron中，还有一些特殊的符号，含义如下：</p>
-<pre><code>(*)星号：可以理解为每的意思，每秒，每分，每天，每月，每年...
-(?)问号：问号只能出现在日期和星期这两个位置，表示这个位置的值不确定，每天3点执行，所以第六位星期的位置，我们是不需要关注的，就是不确定的值。同时：日期和星期是两个相互排斥的元素，通过问号来表明不指定值。比如，1月10日，比如是星期1，如果在星期的位置是另指定星期二，就前后冲突矛盾了。
-(-)减号：表达一个范围，如在小时字段中使用“10-12”，则表示从10到12点，即10,11,12
-(,)逗号：表达一个列表值，如在星期字段中使用“1,2,4”，则表示星期一，星期二，星期四
-(/)斜杠：如：x/y，x是开始值，y是步长，比如在第一位（秒） 0/15就是，从0秒开始，每15秒，最后就是0，15，30，45，60    另：*/y，等同于0/y
-</code></pre><p>下面列举几个例子供大家来验证：</p>
-<pre><code>0 0 3 * * ?     每天3点执行
-0 5 3 * * ?     每天3点5分执行
-0 5 3 ? * *     每天3点5分执行，与上面作用相同
-0 5/10 3 * * ?  每天3点的 5分，15分，25分，35分，45分，55分这几个时间点执行
-0 10 3 ? * 1    每周星期天，3点10分 执行，注：1表示星期天    
-0 10 3 ? * 1#3  每个月的第三个星期，星期天 执行，#号只能出现在星期的位置
-</code></pre><p><strong>作者：陶清清<br><br>链接：<a href="http://www.jianshu.com/p/ef18af5a9c1d" target="_blank" rel="external">http://www.jianshu.com/p/ef18af5a9c1d</a><br><br>來源：简书<br><br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</strong></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2423,7 +2264,7 @@ public class Jobs {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2434,7 +2275,7 @@ public class Jobs {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2445,7 +2286,7 @@ public class Jobs {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
