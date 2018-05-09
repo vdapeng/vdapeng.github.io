@@ -2092,7 +2092,7 @@ public class EnrollApplication {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Linux常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="dapeng">
@@ -2111,7 +2111,7 @@ public class EnrollApplication {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/11/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
+                <a class="post-title-link" href="/2017/07/11/Redis/" itemprop="url">Redis基础教程</a></h1>
         
 
         <div class="post-meta">
@@ -2146,8 +2146,8 @@ public class EnrollApplication {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
                   </a>
                 </span>
 
@@ -2163,7 +2163,7 @@ public class EnrollApplication {
 
           
           
-             <span id="/2017/07/11/Linux常用命令/" class="leancloud_visitors" data-flag-title="Linux常用命令">
+             <span id="/2017/07/11/Redis/" class="leancloud_visitors" data-flag-title="Redis基础教程">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2193,37 +2193,74 @@ public class EnrollApplication {
       
         
           
-            <h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p><code>free -m -m</code> 查看系统内存情况</p>
-<p><code>netstat -lnp|grep XX</code> 查看指定端口是否被占用，XX为其他想要查看的端口</p>
-<p><code>kill XXX</code> 杀指定进程,XXX改为想要杀掉的进程号</p>
-<p><code>nohup java -jar XXXX.jar</code> 后台启动jar包，XXXX为你想要运行的jar包</p>
-<p><code>echo $PATH</code> 查看系统$PATH路径</p>
-<p><code>uzip XXXX.zip</code> 解压zip文件</p>
-<p><code>tar -zxvf XXXX.tar.gz</code> 解压tar.gz文件</p>
-<p><code>cd XXX</code> 切换到XXX路径</p>
-<p><code>ls</code> 查看当前目录下的所有文件</p>
-<p><code>rm</code>  删除一个目录中的一个或多个文件或目录，如果没有使用- r选项，则rm不会删除目录。如果使用              rm 来删除文件，通常仍可以将该文件恢复原状 rm [选项] 文件…</p>
-<pre><code>实例：
-（1）删除任何.log文件；删除前逐一询问确认  rm -i *.log
-（2）删除test子目录及子目录中所有档案删除,并且不用一一确认 rm -rf test
-（3）删除以-f开头的文件 rm -- -f* 
-</code></pre><p><code>rmdir</code> 从一个目录中删除一个或多个子目录项，删除某目录时也必须具有对其父目录的写权限。 注意：不能删除非空目录</p>
-<pre><code>实例：
-（1）当parent子目录被删除后使它也成为空目录的话，则顺便一并删除
-   rmdir -p parent/child/child11
-</code></pre><p><code>mv</code> 移动文件或修改文件名，根据第二参数类型（如目录，则移动文件；如为文件则重命令该文件）。<br>    当第二个参数为目录时，可刚多个文件以空格分隔作为第一参数，移动多个文件到参数2指定的目录中</p>
-<pre><code>实例：
- （1）将文件test.log重命名为test1.txt 
- mv test.log test1.txt
+            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>下载地址：<a href="http://redis.io/download" target="_blank" rel="external">http://redis.io/download</a></p>
+<p>解压：tar -zvxf redis-3.0.7.tar.gz  将解压后的文件夹放到 /usr/local目录下</p>
+<p>编译测试:接下来在终端中切换到/usr/local/redis目录下,输入：<code>sudo make test</code>,完成之后<code>sudo make install</code></p>
+<p>启动：切换至 /user/local/bin, 输入：<code>redis-server</code></p>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><ol>
+<li><p>在 /usr/local/redis目录下建立bin，etc，db三个目录</p>
+</li>
+<li><p>把/usr/local/redis/src目录下的mkreleasehdr.sh，redis-benchmark， redis-check-dump， redis-cli， redis-server拷贝到bin目录</p>
+</li>
+<li><p>在etc下，参考原/usr/local/redis目录下的redis.conf，新建一个redis.conf</p>
+<p> <em>具体配置可查看此链接 <a href="http://www.jianshu.com/p/6b5eca8d908b" target="_blank" rel="external">http://www.jianshu.com/p/6b5eca8d908b</a></em></p>
+</li>
+<li><p>启动: <code>./redis-server /usr/local/redis-3.2.6/redis.conf</code>具体启动地址根据路径不同版本不同进行更改</p>
+</li>
+</ol>
+<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
+<li><p><strong>jar:    必须架包</strong> </p>
+<pre><code>import redis.clients.jedis.Jedis;
+</code></pre></li>
+<li><p><strong>Connect:    链接Redis数据库</strong> </p>
+<pre><code>Jedis jedis = new Jedis(&quot;localhost&quot;);
+</code></pre></li>
+<li><p><strong>String:    设置String类型value</strong> </p>
+<pre><code>jedis.set(&quot;running man&quot;, &quot;angelbaby&quot;);
+System.out.println(jedis.get(&quot;running man&quot;));
+</code></pre></li>
+<li><p><strong>List: 设置List类型value</strong>  </p>
+<pre><code>jedis.lpush(&quot;running&quot;, &quot;dc&quot;);
+List&lt;String&gt; list = jedis.lrange(&quot;running&quot;, 0, 5);
+</code></pre></li>
+<li><p><strong>Keys：获取Redis数据库中所有keys</strong></p>
+<pre><code>System.out.println(jedis.keys(&quot;*&quot;));
+</code></pre></li>
+<li><p><strong>Set: 设置Set类型value</strong></p>
+<pre><code>// 无序集合
+jedis.sadd(&quot;man&quot;, &quot;mongodb&quot;);
+jedis.sadd(&quot;man&quot;, &quot;mysql&quot;);
+Set&lt;String&gt; set = jedis.smembers(&quot;man&quot;);
+// 有序集合 score 字段
+jedis.zadd(&quot;wdy&quot;, 0, &quot;Mr.Li&quot;);
+jedis.zadd(&quot;wdy&quot;, 1, &quot;Mr.Feng&quot;);
+Set&lt;String&gt; set = jedis.zrange(&quot;wdy&quot;, 0, 1);
+</code></pre></li>
+<li><p><strong>Map: 设置HashMap类型value</strong></p>
+<pre><code>Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+map.put(&quot;name&quot;, &quot;ken&quot;);
+jedis.hmset(&quot;map&quot;, map);
+map = jedis.hgetAll(&quot;map&quot;);
+</code></pre></li>
+<li><p><strong>Object: 设置Object类型value</strong></p>
+<pre><code>User user = new User();
+user.setUsername(&quot;DaPeng&quot;);
+user.setEmail(&quot;fengzq@vdaoyun.com&quot;);
+jedis.set(&quot;user&quot;.getBytes(), SerializeUtil.serialize(user));
+byte[] value = jedis.get(&quot;user&quot;.getBytes());
+Object object = SerializeUtil.unserialize(value);
+if (object != null) {
+    user = (User) object;
+    System.out.println(user.getUsername());
+    System.err.println(user.getEmail());
+}
+</code></pre></li>
+</ol>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ol>
+<li>检查是否启动：redis-cli ping</li>
+<li>关闭命令：redis-cli shutdown</li>
+</ol>
 
- （2）将文件log1.txt,log2.txt,log3.txt移动到根的test3目录中 
- mv llog1.txt log2.txt log3.txt /test3
-
- （3）将文件file1改名为file2，如果file2已经存在，则询问是否覆盖 
- mv -i log1.txt log2.txt
-
-  （4）移动当前文件夹下的所有文件到上一级目录 mv * ../
-</code></pre>
           
         
       
@@ -2318,7 +2355,7 @@ public class EnrollApplication {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2329,7 +2366,7 @@ public class EnrollApplication {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
