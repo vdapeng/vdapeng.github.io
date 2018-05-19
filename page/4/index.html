@@ -276,6 +276,170 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/Feign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/11/Feign/" itemprop="url">Spring Cloud Feign</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T09:30:00+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/11/Feign/" class="leancloud_visitors" data-flag-title="Spring Cloud Feign">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Spring-boot-amp-amp-Spring-Cloud"><a href="#Spring-boot-amp-amp-Spring-Cloud" class="headerlink" title="Spring boot &amp;&amp; Spring Cloud"></a>Spring boot &amp;&amp; Spring Cloud</h2><h3 id="Feign-配置"><a href="#Feign-配置" class="headerlink" title="Feign 配置"></a>Feign 配置</h3><h4 id="添加Maven依赖，如下示例："><a href="#添加Maven依赖，如下示例：" class="headerlink" title="添加Maven依赖，如下示例："></a>添加Maven依赖，如下示例：</h4><blockquote>
+<p><strong>注意：如果加入Feign服务后，启动报错。请检查spring-boot版本号以及spring-cloud版本号。</strong></p>
+</blockquote>
+<pre><code>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;1.5.4.RELEASE&lt;/version&gt;
+    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+&lt;/parent&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-cloud-starter-feign&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;properties&gt;
+    &lt;spring-cloud.version&gt;Dalston.SR1&lt;/spring-cloud.version&gt;
+&lt;/properties&gt;
+
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre><h4 id="在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务"><a href="#在Spring-Boot项目启动类，添加-EnableFeignClients注解，用于开启Feign服务" class="headerlink" title="在Spring Boot项目启动类，添加@EnableFeignClients注解，用于开启Feign服务"></a>在Spring Boot项目启动类，添加<code>@EnableFeignClients</code>注解，用于开启Feign服务</h4><hr>
+<h3 id="Feign-使用"><a href="#Feign-使用" class="headerlink" title="Feign 使用"></a>Feign 使用</h3><h4 id="1-结合-Eureka-注册服务使用时："><a href="#1-结合-Eureka-注册服务使用时：" class="headerlink" title="1. 结合 Eureka 注册服务使用时："></a>1. 结合 Eureka 注册服务使用时：</h4><pre><code>`@FeignClient(name = &quot;&quot;)`
+</code></pre><p><strong>说明：name的值即为Api项目在Eureka中注册的application.name；</strong></p>
+<p><strong>例如：<code>@FeignClient(name = &quot;hs.api&quot;)</code></strong></p>
+<h4 id="2-单独使用时："><a href="#2-单独使用时：" class="headerlink" title="2. 单独使用时："></a>2. 单独使用时：</h4><pre><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;&quot;)
+</code></pre><p><strong>说明：url即为请求的ip或者域名</strong></p>
+<p><strong>例如：</strong></p>
+<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://192.168.1.112:7071&quot;)</code></strong></p>
+<p><strong>或者</strong></p>
+<p><strong><code>@FeignClient(value = &quot;hs.api&quot;, url = &quot;http://www.hsybyh.com&quot;)</code></strong></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/08/Restful APi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -834,6 +998,146 @@ inherit：从父元素继承
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/22/Nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/22/Nginx/" itemprop="url">Nginx</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-22T15:49:00+08:00">
+                2016-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/22/Nginx/" class="leancloud_visitors" data-flag-title="Nginx">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ol>
+<li><p>打开终端, 查看是否已经安装了Homebrew, 直接终端输入命令<code>man brew</code></p>
+<pre><code>没有安装，执行命令 
+ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre></li>
+<li>安装nginx <code>brew install nginx</code></li>
+</ol>
+<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
+<li>启动 <code>sudo nginx</code></li>
+<li>停止 <code>sudo nginx -s stop</code></li>
+<li>重载 <code>sudo nginx -s reload</code> <strong>or</strong> <code>service nginx reload</code></li>
+<li>查看版本 <code>nginx -v</code></li>
+<li>检查配置文件是否正确 <code>nginx -t</code></li>
+<li>查看nginx主进程号 <code>ps -ef | grep nginx</code></li>
+<li>从容停止nginx <code>kill -QUIT 主进程号</code></li>
+<li>快速停止nginx <code>kill -TERM 主进程号</code></li>
+<li>强制停止nginx <code>pkill -9 nginx</code></li>
+</ol>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/22/Docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1109,146 +1413,6 @@ ce2qc5paxmfa2gxrtu320v5m6
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/22/Nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/22/Nginx/" itemprop="url">Nginx</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-22T15:49:00+08:00">
-                2016-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/12/22/Nginx/" class="leancloud_visitors" data-flag-title="Nginx">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ol>
-<li><p>打开终端, 查看是否已经安装了Homebrew, 直接终端输入命令<code>man brew</code></p>
-<pre><code>没有安装，执行命令 
-ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre></li>
-<li>安装nginx <code>brew install nginx</code></li>
-</ol>
-<h2 id="Use"><a href="#Use" class="headerlink" title="Use"></a>Use</h2><ol>
-<li>启动 <code>sudo nginx</code></li>
-<li>停止 <code>sudo nginx -s stop</code></li>
-<li>重载 <code>sudo nginx -s reload</code> <strong>or</strong> <code>service nginx reload</code></li>
-<li>查看版本 <code>nginx -v</code></li>
-<li>检查配置文件是否正确 <code>nginx -t</code></li>
-<li>查看nginx主进程号 <code>ps -ef | grep nginx</code></li>
-<li>从容停止nginx <code>kill -QUIT 主进程号</code></li>
-<li>快速停止nginx <code>kill -TERM 主进程号</code></li>
-<li>强制停止nginx <code>pkill -9 nginx</code></li>
-</ol>
-<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/02/五分钟 搭建免费个人博客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1466,7 +1630,7 @@ title: First Night
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

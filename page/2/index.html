@@ -276,6 +276,180 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/springboot应用war包部署tomcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/20/springboot应用war包部署tomcat/" itemprop="url">springboot应用war包部署tomcat</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T09:12:00+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/20/springboot应用war包部署tomcat/" class="leancloud_visitors" data-flag-title="springboot应用war包部署tomcat">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="springboot应用war包部署tomcat"><a href="#springboot应用war包部署tomcat" class="headerlink" title="springboot应用war包部署tomcat"></a>springboot应用war包部署tomcat</h2><h3 id="1-将项目的启动类Application-java继承SpringBootServletInitializer并重写configure方法"><a href="#1-将项目的启动类Application-java继承SpringBootServletInitializer并重写configure方法" class="headerlink" title="1.将项目的启动类Application.java继承SpringBootServletInitializer并重写configure方法"></a>1.将项目的启动类Application.java继承SpringBootServletInitializer并重写configure方法</h3><pre><code>@SpringBootApplication
+public class Application extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+</code></pre><h3 id="2、在pom-xml文件中，project下面增加package标签"><a href="#2、在pom-xml文件中，project下面增加package标签" class="headerlink" title="2、在pom.xml文件中，project下面增加package标签"></a>2、在pom.xml文件中，project下面增加package标签</h3><pre><code>&lt;packaging&gt;war&lt;/packaging&gt;
+</code></pre><h3 id="3、还是在pom-xml文件中，dependencies下面添加"><a href="#3、还是在pom-xml文件中，dependencies下面添加" class="headerlink" title="3、还是在pom.xml文件中，dependencies下面添加"></a>3、还是在pom.xml文件中，dependencies下面添加</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt; 
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/09/使用Docker搭建Ngrok服务器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2057,210 +2231,6 @@ public class EnrollApplication {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/UML时序图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/12/UML时序图/" itemprop="url">UML时序图的画法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T15:40:00+08:00">
-                2017-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UML/" itemprop="url" rel="index">
-                    <span itemprop="name">UML</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/12/UML时序图/" class="leancloud_visitors" data-flag-title="UML时序图的画法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="UML时序图的画法"><a href="#UML时序图的画法" class="headerlink" title="UML时序图的画法"></a>UML时序图的画法</h1><h2 id="UML时序图简介"><a href="#UML时序图简介" class="headerlink" title="UML时序图简介"></a>UML时序图简介</h2><h3 id="时序图的概念"><a href="#时序图的概念" class="headerlink" title="时序图的概念"></a>时序图的概念</h3><p>时序图定义:</p>
-<pre><code>描述了对象之间传递消息的时间顺序, 用来表示用例中的行为顺序, 是强调消息时间顺序的交互图; 
-</code></pre><p>时序图描述的事物: </p>
-<pre><code>时序图描述系统中类和类之间的交互, 将这些交互建模成消息交换, 时序图描述了类以及类之间的交换以完成的期望行为的消息, 时序图中每条消息都代表了类的一个操作 或者 引起状态机改变的触发事件;
-</code></pre><p>时序图表示:</p>
-<pre><code>参与交互的对象在时序图顶端水平排列, 每个对象的底端绘制了一条垂直虚线, 对象A像对象B发送消息, 用一条带箭头的实线表示, 该实线起始于对象A底部的虚线, 终止于对象B底部的虚线; 实线箭头水平放置, 越靠近顶端越早被发送. 
-</code></pre><p>时序图轨迹:</p>
-<pre><code>时序图提供了随时间推移的, 清晰的 可视化的轨迹;
-</code></pre><h3 id="时序图组成"><a href="#时序图组成" class="headerlink" title="时序图组成"></a>时序图组成</h3><p>时序图组成 : 时序图包括四个元素 对象(Object), 生命线(Lifeline), 激活(Activation), 消息(Message);</p>
-<ol>
-<li><p>对象(Object)</p>
-<p> <img src="http://img.blog.csdn.net/20140306151055859" alt="图-1"></p>
-<pre><code>对象 : 时序图中的对象在交互中扮演的角色就是对象;    
-对象的符号 : 时序图中的对象与对象图中的表示方法一样, 使用矩形将对象名称包含起来, 并且对象名称下有下划线;
-
-对象创建时机 : 对象可以在交互开始的时候创建, 也可以在交互过程中进行创建; 
-– 处于顶部 : 如果对象的位置在时序图顶部, 说明在交互开始的时候对象就已经存在了; 
-– 不在顶部 : 如果对象的位置不在顶部, 那么对象在交互过程中创建的;
-</code></pre></li>
-<li><p>生命线(Lifeline)</p>
-<p> <img src="http://img.blog.csdn.net/20140306151055859" alt="图-2"></p>
-<pre><code>生命线 : 生命线是一条垂直的虚线, 这条虚线表示对象的存在, 在时序图中, 每个对象的底部都有生命线;
-
-生命线作用 : 生命线是一个时间线, 从时序图顶部一直到底部都存在, 其长度取决于交互的时间;
-
-对象的生命线 : 对象与生命线结合在一起就是对象的生命线, 这个概念包含对象图标 以及 对象下面的生命线图标 如上图;
-</code></pre></li>
-<li><p>激活(Activation)</p>
-<p> <img src="http://img.blog.csdn.net/20140306152228625" alt="图-3"></p>
-<pre><code>激活(Activation) : 代表时序图中对象执行一项操作的时期, 激活期可以理解为语义中 {} 中的内容, 表示该对象被占用以完成某个任务;
-
-去激活(Deactivation) : 指对象处于空闲状态, 在等待消息激活这个对象;
-
-激活的表示 : 当对象处于激活时期, 生命线可以拓宽为矩形, 这个矩形条成为激活条;
-
-激活去激活的时机 : 
-– 激活 : 对象激活是在激活条的顶部激活; 
-– 去激活 : 激活条的底部去激活, 通常发生在一个消息离开对象生命线;
-</code></pre></li>
-<li><p>消息</p>
-<pre><code>消息概念 : 定义 交互 和 协作 中 交换信息 的类, 对 对象之间的 通信内容 建模;
-
-消息动作 : 
-– 动作种类 : 消息允许在实体间传递信息 (传递参数), 允许实体请求其它服务, 对象之间通过 发送 和 接收 消息 进行通信; 
-– 产生结果 : 消息可以触发操作, 唤起信号, 或使目标对象创建 或 销毁;
-
-消息的异步和同步通信 : 
-– 异步通信 : 消息是信号的时候, 发送信号之后, 等待对方触发相应方法, 这是明确的 命名的 对象间的异步通信; 
-– 同步通信 : 直接调用对象的方法, 执行方法返回结果, 这种具有返回控制机制的操作是同步通信;
-
-时序图和协作图中消息的区别 : 时序图中的消息强调顺序, 协作图中的消息强调交换消息的对象间的关系;
-</code></pre></li>
-</ol>
-<p>消息类型 : </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160557765" alt="">这里写图片描述 : 两个对象间绘制消息; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160718453" alt="">这里写图片描述 : 两个对象之间的过程调用; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160803703" alt="">这里写图片描述: 两个对象之间的异步消息; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306160855734" alt="">这里写图片描述: 过程调用中返回的消息; </p>
-<p>– <img src="http://img.blog.csdn.net/20140306161046843" alt="">这里写图片描述 : 绘制反身消息;</p>
-<p>教程原文地址：<a href="http://blog.csdn.net/xingjiarong/article/details/50232199" target="_blank" rel="external">http://blog.csdn.net/xingjiarong/article/details/50232199</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2311,7 +2281,7 @@ public class EnrollApplication {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
