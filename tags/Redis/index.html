@@ -96,7 +96,7 @@
 <meta name="description" content="why you need to do it all by yourself? when right besides you there&apos;s a hand that could help">
 <meta property="og:type" content="website">
 <meta property="og:title" content="vdapeng&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/Redis/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/redis/index.html">
 <meta property="og:site_name" content="vdapeng&#39;s blog">
 <meta property="og:description" content="why you need to do it all by yourself? when right besides you there&apos;s a hand that could help">
 <meta name="twitter:card" content="summary">
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Redis/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/redis/"/>
 
 
 
 
 
-  <title>标签: Redis | vdapeng's blog</title>
+  <title>标签: redis | vdapeng's blog</title>
   
 
 
@@ -266,7 +266,7 @@
 
   <div id="posts" class="posts-collapse">
     <div class="collection-title">
-      <h1>Redis<small>标签</small>
+      <h1>redis<small>标签</small>
       </h1>
     </div>
 
@@ -278,37 +278,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/08/12/利用redis实现同步锁/" itemprop="url">
+            <a class="post-title-link" href="/2017/02/05/Spring Boot 使用Redis实现Session共享/" itemprop="url">
               
-                <span itemprop="name">利用redis实现同步锁</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-12T15:43:00+08:00"
-              content="2017-08-12" >
-          08-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/07/11/Redis/" itemprop="url">
-              
-                <span itemprop="name">Redis基础教程</span>
+                <span itemprop="name">Spring Boot 使用Redis实现Session共享</span>
               
             </a>
         
@@ -316,9 +288,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-11T09:31:00+08:00"
-              content="2017-07-11" >
-          07-11
+              datetime="2017-02-05T15:49:00+08:00"
+              content="2017-02-05" >
+          02-05
         </time>
       </div>
 
@@ -666,6 +638,44 @@
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+t('time'));
               },
               error: function(newcounter, error) {
                 console.log('Failed to create');

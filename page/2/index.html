@@ -1144,357 +1144,6 @@ docker rmi $WORKSPACE/$NAMESPACE/$PROJECT:$OLD_TAG || true
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/利用redis实现同步锁/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/12/利用redis实现同步锁/" itemprop="url">利用redis实现同步锁</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:43:00+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Redis/" itemprop="url" rel="index">
-                    <span itemprop="name">Redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/12/利用redis实现同步锁/" class="leancloud_visitors" data-flag-title="利用redis实现同步锁">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="利用redis实现同步锁"><a href="#利用redis实现同步锁" class="headerlink" title="利用redis实现同步锁"></a>利用redis实现同步锁</h1><p>RedisPool</p>
-<pre><code>package com.vdaoyun.hsapi.common.utils;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-
-public class RedisPool {
-
-    private static JedisPool pool;//jedis连接池  
-
-    private static int maxTotal = 20;//最大连接数  
-
-    private static int maxIdle = 10;//最大空闲连接数  
-
-    private static int minIdle = 5;//最小空闲连接数  
-
-    private static boolean testOnBorrow = true;//在取连接时测试连接的可用性  
-
-    private static boolean testOnReturn = false;//再还连接时不测试连接的可用性  
-
-    static {  
-        initPool();//初始化连接池  
-    }  
-
-    public static Jedis getJedis(){  
-        return pool.getResource();  
-    }  
-
-    public static void close(Jedis jedis){  
-        jedis.close();  
-    }  
-
-    private static void initPool(){  
-        JedisPoolConfig config = new JedisPoolConfig();  
-        config.setMaxTotal(maxTotal);  
-        config.setMaxIdle(maxIdle);  
-        config.setMinIdle(minIdle);  
-        config.setTestOnBorrow(testOnBorrow);  
-        config.setTestOnReturn(testOnReturn);  
-        config.setBlockWhenExhausted(true);  
-        pool = new JedisPool(config, &quot;data.hsybyh.com&quot;, 6379, 5000);  
-    }  
-
-}
-</code></pre><p>RedisUtil</p>
-<pre><code>package com.vdaoyun.hsapi.common.utils;
-
-import redis.clients.jedis.Jedis;
-
-public class RedisUtil {
-
-    private RedisUtil(){}  
-
-     private static RedisPool redisPool; 
-
-    public static String get(String key) {
-        Jedis jedis = null;
-        String result = null;
-        try {
-            jedis = RedisPool.getJedis();
-            result = jedis.get(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-            return result;
-        }
-    }
-
-    public static long setnx(String key, String value) {
-        Jedis jedis = null;
-        Long result = null;
-        try {
-            jedis = RedisPool.getJedis();
-            result = jedis.setnx(key, value);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-            }
-            return result;
-        }
-    }
-
-    public static String getSet(String key, String value){
-        Jedis jedis = null;  
-        String result = null;  
-        try {  
-                jedis = RedisPool.getJedis();
-            result = jedis.getSet(key, value);  
-        } catch (Exception e){  
-            e.printStackTrace();  
-        } finally {  
-            if (jedis != null) {  
-                jedis.close();  
-            }  
-            return result;  
-        }  
-    }  
-
-    public static Long expire(String key, int seconds){  
-        Jedis jedis = null;  
-        Long result = null;  
-        try {  
-                jedis = RedisPool.getJedis();
-            result = jedis.expire(key, seconds);  
-        } catch (Exception e){  
-            e.printStackTrace();  
-        } finally {  
-            if (jedis != null) {  
-                jedis.close();  
-            }  
-            return result;  
-        }  
-    }  
-
-    public static Long del(String key){  
-        Jedis jedis = null;  
-        Long result = null;  
-        try {  
-                jedis = RedisPool.getJedis();
-            result = jedis.del(key);  
-        } catch (Exception e){  
-            e.printStackTrace();  
-        } finally {  
-            if (jedis != null) {  
-                jedis.close();  
-            }  
-            return result;  
-        }  
-    }  
-
-}
-</code></pre><p>示例</p>
-<pre><code>package com.vdaoyun.hsapi.web.test;
-
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.vdaoyun.hsapi.common.utils.RedisUtil;
-import com.vdaoyun.hsapi.web.model.elective.ElectiveUser;
-import com.vdaoyun.hsapi.web.service.elective.ElectiveUserService;
-
-@RestController
-@RequestMapping(value = &quot;/redis&quot;)
-public class TextLocal {
-
-    private static final Logger log = LoggerFactory.getLogger(TextLocal.class);
-    @Autowired
-    private ElectiveUserService service;
-
-    @GetMapping
-    public void t(@RequestParam String lockName) {
-        log.info(&quot;System：&quot; + System.currentTimeMillis() + &quot;&quot;);
-        log.info(&quot;lockValueA：&quot; + String.valueOf(System.currentTimeMillis() + 5000));
-        Long result = RedisUtil.setnx(lockName, String.valueOf(System.currentTimeMillis() + 5000));
-        if (result != null &amp;&amp; result.intValue() == 1) {
-            log.info(Thread.currentThread() + &quot;加锁成功&quot;);
-            RedisUtil.expire(lockName, 5);
-            ElectiveUser entity = new ElectiveUser();
-            entity.setUserId(lockName);
-            List&lt;ElectiveUser&gt; list = service.selectByT(entity);
-            if (list != null &amp;&amp; list.size() &gt; 0) {
-                log.info(Thread.currentThread() + &quot;已存在&quot;);
-            } else {
-                log.info(Thread.currentThread() + &quot;开始执行业务&quot;);
-                entity.setHsElectiveConfigId(1);
-                service.insert(entity);
-            }
-            RedisUtil.del(lockName); 
-        } else {
-            String lockValueA = RedisUtil.get(lockName);
-            log.info(&quot;System：&quot; + System.currentTimeMillis());
-            log.info(&quot;lockValueA：&quot; + lockValueA);
-            if (lockValueA != null &amp;&amp; Long.parseLong(lockValueA) &gt;= System.currentTimeMillis()) {
-                String lockValueB = RedisUtil.getSet(lockName, String.valueOf(System.currentTimeMillis() + 5000));
-                if (lockValueB == null || lockValueB.equals(lockValueA)) { 
-                    log.info(Thread.currentThread() + &quot;加锁成功&quot;);
-                    RedisUtil.expire(lockName, 5);
-                    ElectiveUser entity = new ElectiveUser();
-                    entity.setUserId(lockName);
-                    List&lt;ElectiveUser&gt; list = service.selectByT(entity);
-                    if (list != null &amp;&amp; list.size() &gt; 0) {
-                        log.info(Thread.currentThread() + &quot;已存在&quot;);
-                    } else {
-                        entity.setHsElectiveConfigId(1);
-                        log.info(Thread.currentThread() + &quot;开始执行业务&quot;);
-                        service.insert(entity);
-                    }
-                    RedisUtil.del(lockName); 
-                }
-            }
-        }
-    }
-
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1856,26 +1505,26 @@ ce2qc5paxmfa2gxrtu320v5m6
 <li><p>删除容器 <code>docker rm ${CONTAINER ID}</code></p>
 </li>
 </ul>
-<h2 id="项目中如何编写Dockerfile"><a href="#项目中如何编写Dockerfile" class="headerlink" title="项目中如何编写Dockerfile"></a>项目中如何编写Dockerfile</h2><ol>
+<h2 id="项目中如何编写Dockerfile"><a href="#项目中如何编写Dockerfile" class="headerlink" title="项目中如何编写Dockerfile"></a>项目中如何编写Dockerfile</h2><ul>
 <li><p>FROM（指定基础image）</p>
-<p> 构建指令，必须指定且需要在Dockerfile其他指令的前面。后续的指令都依赖于该指令指定的image。FROM指令指定的基础image可以是官方远程仓库中的，也可以位于本地仓库。<br> 该指令有两种格式：</p>
-<p> <code>FROM &lt;image&gt;</code>  指定基础image为该image的最后修改的版本。或者：</p>
-<p> <code>FROM &lt;image&gt;:&lt;tag&gt;</code> 指定基础image为该image的一个tag版本。</p>
+<p>  构建指令，必须指定且需要在Dockerfile其他指令的前面。后续的指令都依赖于该指令指定的image。FROM指令指定的基础image可以是官方远程仓库中的，也可以位于本地仓库。<br>  该指令有两种格式：</p>
+<p>  <code>FROM &lt;image&gt;</code>  指定基础image为该image的最后修改的版本。或者：</p>
+<p>  <code>FROM &lt;image&gt;:&lt;tag&gt;</code> 指定基础image为该image的一个tag版本。</p>
 </li>
 <li><p>RUN（安装软件用）</p>
-<p> 构建指令，RUN可以运行任何被基础image支持的命令。如基础image选择了ubuntu，那么软件管理部分只能使用ubuntu的命令。<br> 该指令有两种格式：</p>
+<p>  构建指令，RUN可以运行任何被基础image支持的命令。如基础image选择了ubuntu，那么软件管理部分只能使用ubuntu的命令。<br>  该指令有两种格式：</p>
 <pre><code>RUN &lt;command&gt; (the command is run in a shell - `/bin/sh -c`)  
 RUN [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot; ... ]  (exec form)  
 </code></pre></li>
 <li><p>CMD（设置container启动时执行的操作）</p>
-<p> 设置指令，用于container启动时指定的操作。该操作可以是执行自定义脚本，也可以是执行系统命令。该指令只能在文件中存在一次，如果有多个，则只执行最后一条。<br> 该指令有三种格式：</p>
+<p>  设置指令，用于container启动时指定的操作。该操作可以是执行自定义脚本，也可以是执行系统命令。该指令只能在文件中存在一次，如果有多个，则只执行最后一条。<br>  该指令有三种格式：</p>
 <pre><code>CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;] (like an exec, this is the preferred form)  
 CMD command param1 param2 (as a shell)  
 当Dockerfile指定了ENTRYPOINT，那么使用下面的格式：
 CMD [&quot;param1&quot;,&quot;param2&quot;] (as default parameters to ENTRYPOINT)  
 </code></pre></li>
 <li><p>ADD（从src复制文件到container的dest路径）</p>
-<p> 构建指令，所有拷贝到container中的文件和文件夹权限为0755，uid和gid为0；如果是一个目录，那么会将该目录下的所有文件添加到container中，不包括目录；如果文件是可识别的压缩格式，则docker会帮忙解压缩（注意压缩格式）；如果<src>是文件且<dest>中不使用斜杠结束，则会将<dest>视为文件，<src>的内容会写入<dest>；如果<src>是文件且<dest>中使用斜杠结束，则会<src>文件拷贝到<dest>目录下。</dest></src></dest></src></dest></src></dest></dest></src></p>
+<p>  构建指令，所有拷贝到container中的文件和文件夹权限为0755，uid和gid为0；如果是一个目录，那么会将该目录下的所有文件添加到container中，不包括目录；如果文件是可识别的压缩格式，则docker会帮忙解压缩（注意压缩格式）；如果<src>是文件且<dest>中不使用斜杠结束，则会将<dest>视为文件，<src>的内容会写入<dest>；如果<src>是文件且<dest>中使用斜杠结束，则会<src>文件拷贝到<dest>目录下。</dest></src></dest></src></dest></src></dest></dest></src></p>
 <pre><code>格式:
 
 ADD &lt;src&gt; &lt;dest&gt;  
@@ -1884,7 +1533,7 @@ ADD &lt;src&gt; &lt;dest&gt;
 &lt;dest&gt; 是container中的绝对路径
 </code></pre></li>
 <li><p>VOLUME（指定挂载点)）</p>
-<p> 设置指令，使容器中的一个目录具有持久化存储数据的功能，该目录可以被容器本身使用，也可以共享给其他容器使用。我们知道容器使用的是AUFS，这种文件系统不能持久化数据，当容器关闭后，所有的更改都会丢失。当容器中的应用有持久化数据的需求时可以在Dockerfile中使用该指令。<br> 格式:</p>
+<p>  设置指令，使容器中的一个目录具有持久化存储数据的功能，该目录可以被容器本身使用，也可以共享给其他容器使用。我们知道容器使用的是AUFS，这种文件系统不能持久化数据，当容器关闭后，所有的更改都会丢失。当容器中的应用有持久化数据的需求时可以在Dockerfile中使用该指令。<br>  格式:</p>
 <pre><code>VOLUME [&quot;&lt;mountpoint&gt;&quot;]  
 
 FROM base  
@@ -1894,12 +1543,12 @@ docker run -t -i -rm -volumes-from container1 image2 bash
 container1为第一个容器的ID，image2为第二个容器运行image的名字。
 </code></pre></li>
 <li><p>WORKDIR（切换目录）</p>
-<p> 设置指令，可以多次切换(相当于cd命令)，对RUN,CMD,ENTRYPOINT生效。<br> 格式:</p>
+<p>  设置指令，可以多次切换(相当于cd命令)，对RUN,CMD,ENTRYPOINT生效。<br>  格式:</p>
 <pre><code>WORKDIR /path/to/workdir  
-</code></pre><p> 在/p1/p2 下执行 vim a.txt  </p>
+</code></pre><p>  在/p1/p2 下执行 vim a.txt  </p>
 <pre><code>WORKDIR /p1 WORKDIR p2 RUN vim a.txt 
 </code></pre></li>
-</ol>
+</ul>
 <h2 id="微道云的构建服务器Jenkins环境介绍"><a href="#微道云的构建服务器Jenkins环境介绍" class="headerlink" title="微道云的构建服务器Jenkins环境介绍"></a>微道云的构建服务器Jenkins环境介绍</h2><ol>
 <li>安装git <code>yum install git</code></li>
 <li>下载<a href="https://jenkins.io/download/" target="_blank" rel="external">Jenkins</a>，上传到服务器</li>
@@ -1931,6 +1580,357 @@ docker rmi registry.cn-beijing.aliyuncs.com/docker:0.0.1
 </code></pre><p>登录registry的用户名是您的阿里云账号全名，密码是您开通服务时设置的密码。</p>
 <p>你可以在镜像管理首页点击右上角按钮修改docker login密码。</p>
 
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/利用redis实现同步锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/12/利用redis实现同步锁/" itemprop="url">利用redis实现同步锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:43:00+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/12/利用redis实现同步锁/" class="leancloud_visitors" data-flag-title="利用redis实现同步锁">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="利用redis实现同步锁"><a href="#利用redis实现同步锁" class="headerlink" title="利用redis实现同步锁"></a>利用redis实现同步锁</h1><p>RedisPool</p>
+<pre><code>package com.vdaoyun.hsapi.common.utils;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
+public class RedisPool {
+
+    private static JedisPool pool;//jedis连接池  
+
+    private static int maxTotal = 20;//最大连接数  
+
+    private static int maxIdle = 10;//最大空闲连接数  
+
+    private static int minIdle = 5;//最小空闲连接数  
+
+    private static boolean testOnBorrow = true;//在取连接时测试连接的可用性  
+
+    private static boolean testOnReturn = false;//再还连接时不测试连接的可用性  
+
+    static {  
+        initPool();//初始化连接池  
+    }  
+
+    public static Jedis getJedis(){  
+        return pool.getResource();  
+    }  
+
+    public static void close(Jedis jedis){  
+        jedis.close();  
+    }  
+
+    private static void initPool(){  
+        JedisPoolConfig config = new JedisPoolConfig();  
+        config.setMaxTotal(maxTotal);  
+        config.setMaxIdle(maxIdle);  
+        config.setMinIdle(minIdle);  
+        config.setTestOnBorrow(testOnBorrow);  
+        config.setTestOnReturn(testOnReturn);  
+        config.setBlockWhenExhausted(true);  
+        pool = new JedisPool(config, &quot;data.hsybyh.com&quot;, 6379, 5000);  
+    }  
+
+}
+</code></pre><p>RedisUtil</p>
+<pre><code>package com.vdaoyun.hsapi.common.utils;
+
+import redis.clients.jedis.Jedis;
+
+public class RedisUtil {
+
+    private RedisUtil(){}  
+
+     private static RedisPool redisPool; 
+
+    public static String get(String key) {
+        Jedis jedis = null;
+        String result = null;
+        try {
+            jedis = RedisPool.getJedis();
+            result = jedis.get(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+            return result;
+        }
+    }
+
+    public static long setnx(String key, String value) {
+        Jedis jedis = null;
+        Long result = null;
+        try {
+            jedis = RedisPool.getJedis();
+            result = jedis.setnx(key, value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+            return result;
+        }
+    }
+
+    public static String getSet(String key, String value){
+        Jedis jedis = null;  
+        String result = null;  
+        try {  
+                jedis = RedisPool.getJedis();
+            result = jedis.getSet(key, value);  
+        } catch (Exception e){  
+            e.printStackTrace();  
+        } finally {  
+            if (jedis != null) {  
+                jedis.close();  
+            }  
+            return result;  
+        }  
+    }  
+
+    public static Long expire(String key, int seconds){  
+        Jedis jedis = null;  
+        Long result = null;  
+        try {  
+                jedis = RedisPool.getJedis();
+            result = jedis.expire(key, seconds);  
+        } catch (Exception e){  
+            e.printStackTrace();  
+        } finally {  
+            if (jedis != null) {  
+                jedis.close();  
+            }  
+            return result;  
+        }  
+    }  
+
+    public static Long del(String key){  
+        Jedis jedis = null;  
+        Long result = null;  
+        try {  
+                jedis = RedisPool.getJedis();
+            result = jedis.del(key);  
+        } catch (Exception e){  
+            e.printStackTrace();  
+        } finally {  
+            if (jedis != null) {  
+                jedis.close();  
+            }  
+            return result;  
+        }  
+    }  
+
+}
+</code></pre><p>示例</p>
+<pre><code>package com.vdaoyun.hsapi.web.test;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.vdaoyun.hsapi.common.utils.RedisUtil;
+import com.vdaoyun.hsapi.web.model.elective.ElectiveUser;
+import com.vdaoyun.hsapi.web.service.elective.ElectiveUserService;
+
+@RestController
+@RequestMapping(value = &quot;/redis&quot;)
+public class TextLocal {
+
+    private static final Logger log = LoggerFactory.getLogger(TextLocal.class);
+    @Autowired
+    private ElectiveUserService service;
+
+    @GetMapping
+    public void t(@RequestParam String lockName) {
+        log.info(&quot;System：&quot; + System.currentTimeMillis() + &quot;&quot;);
+        log.info(&quot;lockValueA：&quot; + String.valueOf(System.currentTimeMillis() + 5000));
+        Long result = RedisUtil.setnx(lockName, String.valueOf(System.currentTimeMillis() + 5000));
+        if (result != null &amp;&amp; result.intValue() == 1) {
+            log.info(Thread.currentThread() + &quot;加锁成功&quot;);
+            RedisUtil.expire(lockName, 5);
+            ElectiveUser entity = new ElectiveUser();
+            entity.setUserId(lockName);
+            List&lt;ElectiveUser&gt; list = service.selectByT(entity);
+            if (list != null &amp;&amp; list.size() &gt; 0) {
+                log.info(Thread.currentThread() + &quot;已存在&quot;);
+            } else {
+                log.info(Thread.currentThread() + &quot;开始执行业务&quot;);
+                entity.setHsElectiveConfigId(1);
+                service.insert(entity);
+            }
+            RedisUtil.del(lockName); 
+        } else {
+            String lockValueA = RedisUtil.get(lockName);
+            log.info(&quot;System：&quot; + System.currentTimeMillis());
+            log.info(&quot;lockValueA：&quot; + lockValueA);
+            if (lockValueA != null &amp;&amp; Long.parseLong(lockValueA) &gt;= System.currentTimeMillis()) {
+                String lockValueB = RedisUtil.getSet(lockName, String.valueOf(System.currentTimeMillis() + 5000));
+                if (lockValueB == null || lockValueB.equals(lockValueA)) { 
+                    log.info(Thread.currentThread() + &quot;加锁成功&quot;);
+                    RedisUtil.expire(lockName, 5);
+                    ElectiveUser entity = new ElectiveUser();
+                    entity.setUserId(lockName);
+                    List&lt;ElectiveUser&gt; list = service.selectByT(entity);
+                    if (list != null &amp;&amp; list.size() &gt; 0) {
+                        log.info(Thread.currentThread() + &quot;已存在&quot;);
+                    } else {
+                        entity.setHsElectiveConfigId(1);
+                        log.info(Thread.currentThread() + &quot;开始执行业务&quot;);
+                        service.insert(entity);
+                    }
+                    RedisUtil.del(lockName); 
+                }
+            }
+        }
+    }
+
+}
+</code></pre>
           
         
       
