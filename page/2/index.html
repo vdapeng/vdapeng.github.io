@@ -276,6 +276,516 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/Docker搭建Gitlab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/20/Docker搭建Gitlab/" itemprop="url">使用Docker搭建GitLab服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T10:30:00+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GitLab/" itemprop="url" rel="index">
+                    <span itemprop="name">GitLab</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/20/Docker搭建Gitlab/" class="leancloud_visitors" data-flag-title="使用Docker搭建GitLab服务器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用Docker搭建GitLab服务器"><a href="#使用Docker搭建GitLab服务器" class="headerlink" title="使用Docker搭建GitLab服务器"></a>使用Docker搭建GitLab服务器</h1><h3 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h3><pre><code>docker run -d
+--name gitlab  
+--link gitlab-postgresql:postgresql 
+--link gitlab-redis:redisio 
+--publish 10022:22 --publish 80:80 
+--env &apos;GITLAB_PORT=80&apos; --env &apos;GITLAB_SSH_PORT=10022&apos; 
+--env &apos;GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alpha-numeric-string&apos; 
+--env &apos;GITLAB_SECRETS_SECRET_KEY_BASE=long-and-random-alpha-numeric-string&apos; 
+--env &apos;GITLAB_SECRETS_OTP_KEY_BASE=long-and-random-alpha-numeric-string&apos; 
+--env &apos;GITLAB_HOST=gitlab.vdaoyun.com&apos; 
+--env &apos;SMTP_ENABLED=true&apos; --env &apos;SMTP_DOMAIN=www.qq.com&apos; 
+--env &apos;SMTP_HOST=smtp.qq.com&apos;  --env &apos;SMTP_USER=474607030@qq.com&apos; 
+--env &apos;SMTP_PASS=***&apos; 
+--volume /usr/gitlab/gitlab:/home/git/data sameersbn/gitlab:10.2.5
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/springboot应用war包部署tomcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/20/springboot应用war包部署tomcat/" itemprop="url">springboot应用war包部署tomcat</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T09:12:00+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">springboot</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/springboot/tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/20/springboot应用war包部署tomcat/" class="leancloud_visitors" data-flag-title="springboot应用war包部署tomcat">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="springboot应用war包部署tomcat"><a href="#springboot应用war包部署tomcat" class="headerlink" title="springboot应用war包部署tomcat"></a>springboot应用war包部署tomcat</h2><h3 id="1-将项目的启动类Application-java继承SpringBootServletInitializer并重写configure方法"><a href="#1-将项目的启动类Application-java继承SpringBootServletInitializer并重写configure方法" class="headerlink" title="1.将项目的启动类Application.java继承SpringBootServletInitializer并重写configure方法"></a>1.将项目的启动类Application.java继承SpringBootServletInitializer并重写configure方法</h3><pre><code>@SpringBootApplication
+public class Application extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+</code></pre><h3 id="2、在pom-xml文件中，project下面增加package标签"><a href="#2、在pom-xml文件中，project下面增加package标签" class="headerlink" title="2、在pom.xml文件中，project下面增加package标签"></a>2、在pom.xml文件中，project下面增加package标签</h3><pre><code>&lt;packaging&gt;war&lt;/packaging&gt;
+</code></pre><h3 id="3、还是在pom-xml文件中，dependencies下面添加"><a href="#3、还是在pom-xml文件中，dependencies下面添加" class="headerlink" title="3、还是在pom.xml文件中，dependencies下面添加"></a>3、还是在pom.xml文件中，dependencies下面添加</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
+    &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt; 
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/09/使用Docker搭建Ngrok服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/09/使用Docker搭建Ngrok服务器/" itemprop="url">使用Docker搭建Ngrok服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-09T15:49:00+08:00">
+                2017-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ngrok/" itemprop="url" rel="index">
+                    <span itemprop="name">ngrok</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/09/使用Docker搭建Ngrok服务器/" class="leancloud_visitors" data-flag-title="使用Docker搭建Ngrok服务器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用Docker搭建Ngrok服务器"><a href="#使用Docker搭建Ngrok服务器" class="headerlink" title="使用Docker搭建Ngrok服务器"></a>使用Docker搭建Ngrok服务器</h1><h3 id="docker-pull-hteen-ngrok"><a href="#docker-pull-hteen-ngrok" class="headerlink" title="docker pull hteen/ngrok"></a>docker pull hteen/ngrok</h3><h3 id="启动Ngrok-serve"><a href="#启动Ngrok-serve" class="headerlink" title="启动Ngrok serve"></a>启动Ngrok serve</h3><pre><code>root@iZ25f738hs2Z ngrok]# docker run -idt --name ngrok-server \
+-v /data/ngrok:/myfiles \
+-p 80:80 \
+-p 443:443 \
+-p 4443:4443 \
+-e DOMAIN=&apos;tunnel.hteen.cn&apos; hteen/ngrok /bin/sh /server.sh
+</code></pre><h3 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h3><p>首先创建一个ngrok.cfg配置文件</p>
+<pre><code>server_addr: &quot;tunnel.hteen.cn:4443&quot;
+trust_host_root_certs: false
+</code></pre><p>然后在命令行执行</p>
+<pre><code>./ngrok -config ./ngrok.cfg -subdomain wechat 192.168.99.100:80
+</code></pre><p>Nginx + Docker + Ngrok</p>
+<pre><code>server {
+ listen       80;
+ server_name  tunnel.hteen.cn *.tunnel.hteen.cn;
+ location / {
+         proxy_redirect off;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_pass http://localhost:8082;
+ }
+ }
+ server {
+     listen       443;
+     server_name  tunnel.hteen.cn *.tunnel.hteen.cn;
+     location / {
+             proxy_redirect off;
+             proxy_set_header Host $host;
+             proxy_set_header X-Real-IP $remote_addr;
+             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+             proxy_pass http://localhost:4432;
+     }
+ }
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/Swagger在线文档编写/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1144,224 +1654,6 @@ docker rmi $WORKSPACE/$NAMESPACE/$PROJECT:$OLD_TAG || true
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/12/Docker使用Swarm进行跨主机通信/" itemprop="url">Docker swarm 搭建及跨主机网络互联案例分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:43:00+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/12/Docker使用Swarm进行跨主机通信/" class="leancloud_visitors" data-flag-title="Docker swarm 搭建及跨主机网络互联案例分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Docker-swarm-搭建及跨主机网络互联案例分析"><a href="#Docker-swarm-搭建及跨主机网络互联案例分析" class="headerlink" title="Docker swarm 搭建及跨主机网络互联案例分析"></a>Docker swarm 搭建及跨主机网络互联案例分析</h1><p><a href="http://www.cnblogs.com/Javame/p/6739184.html" target="_blank" rel="external">原文地址：http://www.cnblogs.com/Javame/p/6739184.html</a></p>
-<h2 id="有关集群的Docker命令如下："><a href="#有关集群的Docker命令如下：" class="headerlink" title="有关集群的Docker命令如下："></a>有关集群的Docker命令如下：</h2><ol>
-<li>docker swarm：集群管理，子命令有init, join,join-token, leave, update</li>
-<li>docker node：节点管理，子命令有demote, inspect,ls, promote, rm, ps, update</li>
-<li>docker service：服务管理，子命令有create, inspect, ps, ls ,rm , scale, update</li>
-<li>docker stack/deploy：试验特性，用于多应用部署</li>
-</ol>
-<h2 id="创建swarm-集群"><a href="#创建swarm-集群" class="headerlink" title="创建swarm 集群"></a>创建swarm 集群</h2><h3 id="查看docker-swarm-命令说明"><a href="#查看docker-swarm-命令说明" class="headerlink" title="查看docker swarm 命令说明"></a>查看docker swarm 命令说明</h3><pre><code># docker swarm -h
-Flag shorthand -h has been deprecated, please use --help
-Usage:    docker swarm COMMAND
-Manage Docker Swarm
-Options:
-      --help   Print usage
-Commands:
-  init        Initialize a swarm
-  join        Join a swarm as a node and/or manager
-  join-token  Manage join tokens
-  update      Update the swarm
-  leave       Leave a swarm
-Run &apos;docker swarm COMMAND --help&apos; for more information on a command.
-</code></pre><h3 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h3><pre><code>#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;
-[root@centos-web ~]# docker swarm init --listen-addr 172.18.30.29:2377 
-Swarm initialized: current node (a60d5c3ttymvtozr46uvk17q4) is now a manager.
-docker swarm init --advertise-addr 122.62.24.161 --listen-addr 122.62.24.161:2377
-</code></pre><h3 id="查看集群"><a href="#查看集群" class="headerlink" title="查看集群"></a>查看集群</h3><pre><code># docker node ls
-ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
-a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
-</code></pre><h3 id="获取加入集群命令token"><a href="#获取加入集群命令token" class="headerlink" title="获取加入集群命令token"></a>获取加入集群命令token</h3><pre><code>#docker swarm join-token manager
-docker swarm join \
-    --token ********* \
-    172.18.30.29:2377
-</code></pre><h3 id="子节点加入集群"><a href="#子节点加入集群" class="headerlink" title="子节点加入集群"></a>子节点加入集群</h3><pre><code>docker swarm join \
---token ********* \
-172.18.30.29:2377
-</code></pre><h3 id="删除集群子节点"><a href="#删除集群子节点" class="headerlink" title="删除集群子节点"></a>删除集群子节点</h3><pre><code>docker node demote ***
-docker swarm leave --force(节点上)
-docker node rm --force（manager上）
-</code></pre><h2 id="创建一个overlay-跨主机网络"><a href="#创建一个overlay-跨主机网络" class="headerlink" title="创建一个overlay 跨主机网络"></a>创建一个overlay 跨主机网络</h2><h3 id="查看当前网络"><a href="#查看当前网络" class="headerlink" title="查看当前网络"></a>查看当前网络</h3><pre><code>[root@H-T-29 ~]# docker network ls
-NETWORK ID          NAME                DRIVER              SCOPE
-47d05fd82e77        bridge              bridge              local                             
-76e0302f7929        docker_gwbridge     bridge              local               
-81c22e7f1b48        host                host                local               
-4enpk54t9oy2        ingress             overlay             swarm               
-c80502ba134b        none                null                local 
-</code></pre><blockquote>
-<p>创建一个新的overlay网络</p>
-<p>swarm上默认已有一个名为ingress的overlay 网络</p>
-</blockquote>
-<pre><code> [root@centos-node4 ~]# docker network create --driver overlay docker-net
-2o223p435s5glx69dw211u5d2
- [root@centos-web ~]# docker network ls
-NETWORK ID          NAME                DRIVER              SCOPE
-abec77415f48        bridge              bridge              local
-aoqs3p835s5g        docker-net          overlay             swarm
-e2fff9d572a6        docker_gwbridge     bridge              local
-166bd71f7d0e        host                host                local
-9gr6bfff1rv9        ingress             overlay             swarm
-1d2bfc590294        none                null                local
-</code></pre><blockquote>
-<p>docker-net就是新创建的网络</p>
-</blockquote>
-<h3 id="在新的跨主机overlay-网络-docker-net-上创建应用"><a href="#在新的跨主机overlay-网络-docker-net-上创建应用" class="headerlink" title="在新的跨主机overlay 网络(docker-net)上创建应用"></a>在新的跨主机overlay 网络(docker-net)上创建应用</h3><h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><pre><code>docker service create --constraint=node.HOSTNAME==H-C-42 --replicas 2 --publish 2222:22 --name lvs --network=docker-net inits/lvs
-</code></pre><h4 id="指定一个节点部署应用"><a href="#指定一个节点部署应用" class="headerlink" title="指定一个节点部署应用"></a>指定一个节点部署应用</h4><pre><code># docker node ls
-ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
-a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
-#docker service create --constraint=node.HOSTNAME==centos-web --replicas 1 --publish 28152:22 --publish 8152:8080 --name web --network=docker-net  inits/source2.0.3
-ce2qc5paxmfa2gxrtu320v5m6
-</code></pre><blockquote>
-<p>–replicas 副本数量 </p>
-<p>–publish 服务发现，端口映射 </p>
-<p>–mount 挂载文件</p>
-<p>–mount type=bind,src=/home,dst=/home,readonly</p>
-<p>–name service名称</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Docker使用手册/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1579,6 +1871,224 @@ docker rmi registry.cn-beijing.aliyuncs.com/docker:0.0.1
 <pre><code>$ sudo docker login --username=username registry.cn-hangzhou.aliyuncs.com
 </code></pre><p>登录registry的用户名是您的阿里云账号全名，密码是您开通服务时设置的密码。</p>
 <p>你可以在镜像管理首页点击右上角按钮修改docker login密码。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Docker使用Swarm进行跨主机通信/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dapeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vdapeng's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/12/Docker使用Swarm进行跨主机通信/" itemprop="url">Docker swarm 搭建及跨主机网络互联案例分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T15:43:00+08:00">
+                2017-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/12/Docker使用Swarm进行跨主机通信/" class="leancloud_visitors" data-flag-title="Docker swarm 搭建及跨主机网络互联案例分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Docker-swarm-搭建及跨主机网络互联案例分析"><a href="#Docker-swarm-搭建及跨主机网络互联案例分析" class="headerlink" title="Docker swarm 搭建及跨主机网络互联案例分析"></a>Docker swarm 搭建及跨主机网络互联案例分析</h1><p><a href="http://www.cnblogs.com/Javame/p/6739184.html" target="_blank" rel="external">原文地址：http://www.cnblogs.com/Javame/p/6739184.html</a></p>
+<h2 id="有关集群的Docker命令如下："><a href="#有关集群的Docker命令如下：" class="headerlink" title="有关集群的Docker命令如下："></a>有关集群的Docker命令如下：</h2><ol>
+<li>docker swarm：集群管理，子命令有init, join,join-token, leave, update</li>
+<li>docker node：节点管理，子命令有demote, inspect,ls, promote, rm, ps, update</li>
+<li>docker service：服务管理，子命令有create, inspect, ps, ls ,rm , scale, update</li>
+<li>docker stack/deploy：试验特性，用于多应用部署</li>
+</ol>
+<h2 id="创建swarm-集群"><a href="#创建swarm-集群" class="headerlink" title="创建swarm 集群"></a>创建swarm 集群</h2><h3 id="查看docker-swarm-命令说明"><a href="#查看docker-swarm-命令说明" class="headerlink" title="查看docker swarm 命令说明"></a>查看docker swarm 命令说明</h3><pre><code># docker swarm -h
+Flag shorthand -h has been deprecated, please use --help
+Usage:    docker swarm COMMAND
+Manage Docker Swarm
+Options:
+      --help   Print usage
+Commands:
+  init        Initialize a swarm
+  join        Join a swarm as a node and/or manager
+  join-token  Manage join tokens
+  update      Update the swarm
+  leave       Leave a swarm
+Run &apos;docker swarm COMMAND --help&apos; for more information on a command.
+</code></pre><h3 id="创建集群"><a href="#创建集群" class="headerlink" title="创建集群"></a>创建集群</h3><pre><code>#命令格式: docker swarm init --listen-addr &lt;MANAGER-IP&gt;:&lt;PORT&gt;
+[root@centos-web ~]# docker swarm init --listen-addr 172.18.30.29:2377 
+Swarm initialized: current node (a60d5c3ttymvtozr46uvk17q4) is now a manager.
+docker swarm init --advertise-addr 122.62.24.161 --listen-addr 122.62.24.161:2377
+</code></pre><h3 id="查看集群"><a href="#查看集群" class="headerlink" title="查看集群"></a>查看集群</h3><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+</code></pre><h3 id="获取加入集群命令token"><a href="#获取加入集群命令token" class="headerlink" title="获取加入集群命令token"></a>获取加入集群命令token</h3><pre><code>#docker swarm join-token manager
+docker swarm join \
+    --token ********* \
+    172.18.30.29:2377
+</code></pre><h3 id="子节点加入集群"><a href="#子节点加入集群" class="headerlink" title="子节点加入集群"></a>子节点加入集群</h3><pre><code>docker swarm join \
+--token ********* \
+172.18.30.29:2377
+</code></pre><h3 id="删除集群子节点"><a href="#删除集群子节点" class="headerlink" title="删除集群子节点"></a>删除集群子节点</h3><pre><code>docker node demote ***
+docker swarm leave --force(节点上)
+docker node rm --force（manager上）
+</code></pre><h2 id="创建一个overlay-跨主机网络"><a href="#创建一个overlay-跨主机网络" class="headerlink" title="创建一个overlay 跨主机网络"></a>创建一个overlay 跨主机网络</h2><h3 id="查看当前网络"><a href="#查看当前网络" class="headerlink" title="查看当前网络"></a>查看当前网络</h3><pre><code>[root@H-T-29 ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+47d05fd82e77        bridge              bridge              local                             
+76e0302f7929        docker_gwbridge     bridge              local               
+81c22e7f1b48        host                host                local               
+4enpk54t9oy2        ingress             overlay             swarm               
+c80502ba134b        none                null                local 
+</code></pre><blockquote>
+<p>创建一个新的overlay网络</p>
+<p>swarm上默认已有一个名为ingress的overlay 网络</p>
+</blockquote>
+<pre><code> [root@centos-node4 ~]# docker network create --driver overlay docker-net
+2o223p435s5glx69dw211u5d2
+ [root@centos-web ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+abec77415f48        bridge              bridge              local
+aoqs3p835s5g        docker-net          overlay             swarm
+e2fff9d572a6        docker_gwbridge     bridge              local
+166bd71f7d0e        host                host                local
+9gr6bfff1rv9        ingress             overlay             swarm
+1d2bfc590294        none                null                local
+</code></pre><blockquote>
+<p>docker-net就是新创建的网络</p>
+</blockquote>
+<h3 id="在新的跨主机overlay-网络-docker-net-上创建应用"><a href="#在新的跨主机overlay-网络-docker-net-上创建应用" class="headerlink" title="在新的跨主机overlay 网络(docker-net)上创建应用"></a>在新的跨主机overlay 网络(docker-net)上创建应用</h3><h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><pre><code>docker service create --constraint=node.HOSTNAME==H-C-42 --replicas 2 --publish 2222:22 --name lvs --network=docker-net inits/lvs
+</code></pre><h4 id="指定一个节点部署应用"><a href="#指定一个节点部署应用" class="headerlink" title="指定一个节点部署应用"></a>指定一个节点部署应用</h4><pre><code># docker node ls
+ID                           HOSTNAME      MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
+a60d5c3ttymvtozr46uvk17q4 *  centos-web  Accepted    Ready   Active        Leader
+#docker service create --constraint=node.HOSTNAME==centos-web --replicas 1 --publish 28152:22 --publish 8152:8080 --name web --network=docker-net  inits/source2.0.3
+ce2qc5paxmfa2gxrtu320v5m6
+</code></pre><blockquote>
+<p>–replicas 副本数量 </p>
+<p>–publish 服务发现，端口映射 </p>
+<p>–mount 挂载文件</p>
+<p>–mount type=bind,src=/home,dst=/home,readonly</p>
+<p>–name service名称</p>
+</blockquote>
 
           
         
@@ -1964,532 +2474,6 @@ public class TextLocal {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/18/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T11:13:23+08:00">
-                2017-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/18/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/Docker常用指令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/17/Docker常用指令/" itemprop="url">Docker常用指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T17:15:30+08:00">
-                2017-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/17/Docker常用指令/" class="leancloud_visitors" data-flag-title="Docker常用指令">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Docker-基本使用教程"><a href="#Docker-基本使用教程" class="headerlink" title="Docker 基本使用教程"></a>Docker 基本使用教程</h1><p>原理：先用docker ps -a -q 输出所有容器的container id(-f 表示过滤参数或者输出格式)，然后作为docker rm 的参数进行批量删除</p>
-<ol>
-<li><p><strong>输出所有容器的name：</strong></p>
-<pre><code>docker ps --format=&apos;{{.Names}}&apos;
-test-env
-test-args
-test-run
-输出所有容器名包含test的容器，并打印容器名
-docker ps -f name=test --format=&apos;{{.Names}}&apos;
-test-env
-test-args
-test-run
-查看退出状态的容器，并打印容器名
-docker ps -f status=exited --format=&quot;{{.Names}}&quot;
-thirsty_brahmagupta
-clever_mestorf
-hopeful_morse
-stoic_morse
-elated_williams
-tender_jepsen
-reverent_mirzakhani
-</code></pre></li>
-<li><p><strong>删除所有容器：</strong></p>
-<pre><code>docker rm -f -v $(docker ps -a -q)
-删除/启动所有退出的容器：
-docker rm/start $(docker ps -qf status=exited)
-删除所有镜像：
-docker rmi $(docker images -q)
-</code></pre></li>
-<li><p><strong>其他：</strong></p>
-<pre><code>查看悬挂镜像:
-docker  images -qf dangling=true
-
-只查看镜像或者容器指定的信息(在docker1.10之后才支持的)
-
-只列出镜像的id以及仓库名称：
-docker images --format &quot;{{.ID}}: {{.Repository}}&quot;
-67591570dd29: centos
-0a18f1c0ead2: rancher/server
-
-只列出容器的相关id,image,status和name
-docker ps --format &quot;{{.ID}}: {{.Image}} : {{.Status}} : {{.Names}}&quot;
-66b60b72f00e: centos : Up 7 days : pensive_poincare
-或者自己重新定义列,就和原生差不多:
-docker ps --format &quot;table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}&quot;
-CONTAINER ID        IMAGE                                         STATUS              NAMES
-66b60b72f00e        centos                                        Up 7 days           pensive_poincare
-</code></pre></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/spring boot 读取配置文件（application.yml）中的属性值/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="dapeng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vdapeng's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/12/spring boot 读取配置文件（application.yml）中的属性值/" itemprop="url">Spring Boot 读取配置文件（application.yml）中的属性值</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T18:00:00+08:00">
-                2017-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Boot/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring Boot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/07/12/spring boot 读取配置文件（application.yml）中的属性值/" class="leancloud_visitors" data-flag-title="Spring Boot 读取配置文件（application.yml）中的属性值">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Spring-Boot-读取配置文件（application-yml）中的属性值"><a href="#Spring-Boot-读取配置文件（application-yml）中的属性值" class="headerlink" title="Spring Boot 读取配置文件（application.yml）中的属性值"></a>Spring Boot 读取配置文件（application.yml）中的属性值</h1><ol>
-<li><p>引入依赖：</p>
-<pre><code>&lt;!-- 支持 @ConfigurationProperties 注解 --&gt;  
-&lt;dependency&gt;  
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  
-    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;  
-    &lt;optional&gt;true&lt;/optional&gt;  
-&lt;/dependency&gt;  
-</code></pre></li>
-<li><p>配置文件（application.yml）中配置各个属性的值：</p>
-<pre><code>spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.1.202:3306/hs_dev?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull
-    username: root
-    password: 
-    driver-class-name: com.mysql.jdbc.Driver
-</code></pre></li>
-<li><p>创建一个bean来接收配置信息：</p>
-</li>
-</ol>
-<pre><code>@Component
-@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
-public class DateBaseBean implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private String url;
-
-    private String driverClassName;
-
-    private String username;
-
-    private String password;
-
-    &lt;!-- 此处省略set和get --&gt;
-
-}
-</code></pre><ol>
-<li><p>使用<code>@Autowired</code>进行使用，如下测试用例：</p>
-<pre><code>@RestController
-@SpringBootApplication
-public class EnrollApplication {
-
-    @Autowired
-    private DateBaseBean dateBaseBean;
-
-    public static void main(String[] args) {
-        SpringApplication.run(EnrollApplication.class, args);
-    }
-
-    @RequestMapping(value = &quot;&quot;, method = RequestMethod.GET)
-    public DateBaseBean dateBaseBean() {
-        return dateBaseBean;
-    }
-}
-</code></pre></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2540,7 +2524,7 @@ public class EnrollApplication {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2551,7 +2535,7 @@ public class EnrollApplication {
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2562,7 +2546,7 @@ public class EnrollApplication {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
